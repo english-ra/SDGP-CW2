@@ -15,17 +15,20 @@ public class LandingScreen extends JFrame {
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
 
-
         registerButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 RegisterScreen registerScreen = new RegisterScreen();
+                registerScreen.configureScreen();
             }
         });
         signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 SignInScreen signInScreen = new SignInScreen();
+                signInScreen.configureScreen();
+                setVisible(false);
+                signInScreen.setVisible(true);
             }
         });
     }
