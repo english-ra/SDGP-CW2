@@ -12,6 +12,6 @@ public class RegisterScreen extends JFrame {
         setTitle("Welcome");
         setSize(350, 750);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        setVisible(true);
+        setVisible(true);
     }
 }

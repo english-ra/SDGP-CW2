@@ -27,8 +27,6 @@ public class LandingScreen extends JFrame {
             public void actionPerformed(ActionEvent e) {
                 SignInScreen signInScreen = new SignInScreen();
                 signInScreen.configureScreen();
-                setVisible(false);
-                signInScreen.setVisible(true);
             }
         });
     }

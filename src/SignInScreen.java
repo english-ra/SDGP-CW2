@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 public class SignInScreen extends JFrame {
     public JPanel MainPanel;
+    private JButton button1;
 
     public SignInScreen() {
 
@@ -14,6 +15,6 @@ public class SignInScreen extends JFrame {
         setTitle("Welcome");
         setSize(350, 750);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//        setVisible(true);
+        setVisible(true);
     }
 }
