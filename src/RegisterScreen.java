@@ -9,7 +9,7 @@ public class RegisterScreen extends JFrame {
 
     public void configureScreen() {
         setContentPane(MainPanel);
-        setTitle("Welcome");
+        setTitle("Register Account");
         setSize(350, 750);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);

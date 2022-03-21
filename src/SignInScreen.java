@@ -12,7 +12,7 @@ public class SignInScreen extends JFrame {
 
     public void configureScreen() {
         setContentPane(MainPanel);
-        setTitle("Welcome");
+        setTitle("Sign in to Account");
         setSize(350, 750);
         setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setVisible(true);
