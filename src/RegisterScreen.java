@@ -1,17 +1,11 @@
 import javax.swing.*;
 
-public class RegisterScreen extends JFrame {
-    private JPanel MainPanel;
+public class RegisterScreen extends JPanel {
+    private JPanel mainPanel;
 
-    public RegisterScreen() {
+    public RegisterScreen() {}
 
-    }
+    public void configureScreen() {}
 
-    public void configureScreen() {
-        setContentPane(MainPanel);
-        setTitle("Register Account");
-        setSize(350, 750);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-    }
+    public JPanel getMainPanel() { return mainPanel; }
 }

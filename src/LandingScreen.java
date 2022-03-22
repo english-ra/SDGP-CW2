@@ -2,25 +2,26 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class LandingScreen extends JFrame {
-    private JPanel MainPanel;
+public class LandingScreen extends JPanel {
+    private JPanel mainPanel;
     private JLabel logoLabel;
     private JButton signInButton;
     private JButton registerButton;
 
-    public LandingScreen() {
+    private JFrame mainFrame;
+
+    public LandingScreen(JFrame mainFrame) {
+
+        this.mainFrame = mainFrame;
+
         // Configure UI
         configureScreen();
         configureButtonListeners();
     }
 
-    private void configureScreen() {
-        setContentPane(MainPanel);
-        setTitle("Language Practice");
-        setSize(350, 750);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-    }
+    private void configureScreen() {}
+
+    public JPanel getMainPanel() { return mainPanel; }
 
     private void configureButtonListeners() {
         registerButton.addActionListener(new ActionListener() {
@@ -39,13 +40,13 @@ public class LandingScreen extends JFrame {
 
     private void navigateToRegisterScreen() {
         RegisterScreen registerScreen = new RegisterScreen();
-        registerScreen.configureScreen();
-        dispose();
+        mainFrame.setContentPane(registerScreen.getMainPanel());
+        mainFrame.setVisible(true);
     }
 
     private void navigateToSignInScreen() {
         SignInScreen signInScreen = new SignInScreen();
-        signInScreen.configureScreen();
-        dispose();
+        mainFrame.setContentPane(signInScreen.getMainPanel());
+        mainFrame.setVisible(true);
     }
 }

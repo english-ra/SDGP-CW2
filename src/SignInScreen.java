@@ -1,20 +1,12 @@
 import javax.swing.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
-public class SignInScreen extends JFrame {
-    public JPanel MainPanel;
+public class SignInScreen extends JPanel {
+    private JPanel mainPanel;
     private JButton button1;
 
-    public SignInScreen() {
+    public SignInScreen() {}
 
-    }
+    public void configureScreen() {}
 
-    public void configureScreen() {
-        setContentPane(MainPanel);
-        setTitle("Sign in to Account");
-        setSize(350, 750);
-        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-        setVisible(true);
-    }
+    public JPanel getMainPanel() { return mainPanel; }
 }
