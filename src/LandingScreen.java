@@ -1,6 +1,7 @@
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class LandingScreen extends JPanel {
     private JPanel mainPanel;
@@ -9,10 +10,11 @@ public class LandingScreen extends JPanel {
     private JButton registerButton;
 
     private JFrame mainFrame;
+    private ArrayList uiFlow = new ArrayList<JPanel>();
 
     public LandingScreen(JFrame mainFrame) {
-
         this.mainFrame = mainFrame;
+        uiFlow.add(this.mainPanel);
 
         // Configure UI
         configureScreen();
@@ -39,13 +41,17 @@ public class LandingScreen extends JPanel {
     }
 
     private void navigateToRegisterScreen() {
-        RegisterScreen registerScreen = new RegisterScreen();
+        RegisterScreen registerScreen = new RegisterScreen(this.mainFrame, this.uiFlow);
+        uiFlow.add(registerScreen.getMainPanel());
+
         mainFrame.setContentPane(registerScreen.getMainPanel());
         mainFrame.setVisible(true);
     }
 
     private void navigateToSignInScreen() {
-        SignInScreen signInScreen = new SignInScreen();
+        SignInScreen signInScreen = new SignInScreen(this.mainFrame, this.uiFlow);
+        uiFlow.add(signInScreen.getMainPanel());
+
         mainFrame.setContentPane(signInScreen.getMainPanel());
         mainFrame.setVisible(true);
     }

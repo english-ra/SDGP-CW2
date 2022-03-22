@@ -1,12 +1,41 @@
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class SignInScreen extends JPanel {
     private JPanel mainPanel;
-    private JButton button1;
+    private JButton backButton;
 
-    public SignInScreen() {}
+    private JFrame mainFrame;
+    private ArrayList uiFlow;
+
+    public SignInScreen(JFrame mainFrame, ArrayList uiFlow) {
+        this.mainFrame  = mainFrame;
+        this.uiFlow     = uiFlow;
+
+        // Configure the UI
+        configureScreen();
+        configureButtonListeners();
+    }
 
     public void configureScreen() {}
+
+    private void configureButtonListeners() {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backButtonClicked();
+            }
+        });
+    }
+
+    private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        mainFrame.setContentPane((Container) uiFlow.get(uiFlow.size() - 1));
+        mainFrame.setVisible(true);
+    }
 
     public JPanel getMainPanel() { return mainPanel; }
 }

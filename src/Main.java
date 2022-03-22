@@ -24,7 +24,6 @@ public class Main {
         // Create the landing screen
         LandingScreen landingScreen = new LandingScreen(mainframe);
         mainframe.setContentPane(landingScreen.getMainPanel());
-
         mainframe.setVisible(true);
     }
 }
