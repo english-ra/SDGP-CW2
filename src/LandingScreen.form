@@ -20,25 +20,31 @@
           <text value="Language Practice"/>
         </properties>
       </component>
-      <component id="10060" class="javax.swing.JButton" binding="registerButton" default-binding="true">
-        <constraints>
-          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false"/>
-        </constraints>
-        <properties>
-          <text value="Register"/>
-        </properties>
-      </component>
       <component id="e915e" class="javax.swing.JButton" binding="signInButton" default-binding="true">
         <constraints>
           <grid row="1" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
-            <preferred-size width="50" height="177"/>
+            <preferred-size width="-1" height="50"/>
+            <maximum-size width="-1" height="50"/>
           </grid>
         </constraints>
         <properties>
+          <alignmentY value="0.0"/>
           <background color="-1271255"/>
           <foreground color="-16777216"/>
           <opaque value="false"/>
           <text value="Sign In"/>
+          <verticalAlignment value="0"/>
+        </properties>
+      </component>
+      <component id="10060" class="javax.swing.JButton" binding="registerButton" default-binding="true">
+        <constraints>
+          <grid row="2" column="0" row-span="1" col-span="1" vsize-policy="0" hsize-policy="3" anchor="0" fill="1" indent="0" use-parent-layout="false">
+            <preferred-size width="-1" height="50"/>
+            <maximum-size width="-1" height="50"/>
+          </grid>
+        </constraints>
+        <properties>
+          <text value="Register"/>
         </properties>
       </component>
     </children>
