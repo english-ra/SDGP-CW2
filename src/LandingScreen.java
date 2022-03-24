@@ -1,4 +1,5 @@
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -19,6 +20,10 @@ public class LandingScreen extends JPanel {
         // Configure UI
         configureScreen();
         configureButtonListeners();
+
+        registerButton.setBackground(Color.RED);
+        registerButton.setOpaque(true);
+        registerButton.setBorderPainted(false);
     }
 
     private void configureScreen() {}
