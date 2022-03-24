@@ -7,11 +7,11 @@ import java.util.ArrayList;
 public class Register_Screen extends JPanel {
     private JFrame mainFrame;
 
-    private JLabel titleLabel;
-    private JLabel subtitleLabel;
+    private TitleLabel titleLabel;
+    private SubtitleLabel subtitleLabel;
     private MainButton backButton;
 
-    private GridBagConstraints gridBagConstraints = new GridBagConstraints();
+    private SpringLayout layout;
 
     private ArrayList uiFlow;
 
@@ -30,36 +30,56 @@ public class Register_Screen extends JPanel {
 
     // MARK - Configure the UI
     private void configureRootPanel() {
-        setBackground(Colours.mainBG);
-        setLayout(new GridBagLayout());
+        this.setBackground(Colours.mainBG);
+        this.setPreferredSize(new Dimension(350, 750));
+
+        this.layout = new SpringLayout();
+        this.setLayout(layout);
     }
 
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new JLabel();
-        titleLabel.setText("Sign Up");
+        titleLabel = new TitleLabel("Sign Up");
+        add(titleLabel);
 
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 0;
-        add(titleLabel, gridBagConstraints);
+        layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
+        layout.putConstraint(SpringLayout.WEST, titleLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, titleLabel, -20, SpringLayout.EAST, this);
 
 
         // Configuring the subtitle label
-        subtitleLabel = new JLabel();
-        subtitleLabel.setText("We're glad to have you on board!");
+        subtitleLabel = new SubtitleLabel("We're glad to have you on board!");
+        add(subtitleLabel);
 
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 1;
-        add(subtitleLabel, gridBagConstraints);
+        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
 
     private void configureBackButton() {
         backButton = new MainButton("Back");
-        gridBagConstraints.gridx = 0;
-        gridBagConstraints.gridy = 50;
-        add(backButton, gridBagConstraints);
+        add(backButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     private void configureButtonListeners() {
         backButton.addActionListener(new ActionListener() {

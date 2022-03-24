@@ -1,7 +1,4 @@
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.RenderingHints;
+import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import javax.swing.JButton;
@@ -71,6 +68,8 @@ public class MainButton extends JButton {
         this.setBorderPainted(false);
         this.setRadius(50);
         setFocusPainted(false);
+
+        setPreferredSize(new Dimension(0, 50));
 
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
