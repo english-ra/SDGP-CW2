@@ -22,7 +22,7 @@ public class Main {
     private static void displayLandingScreen() {
 
         // Create the landing screen
-        LandingScreen landingScreen = new LandingScreen(mainframe);
+        Landing_Screen landingScreen = new Landing_Screen(mainframe);
         mainframe.setContentPane(landingScreen.getMainPanel());
         mainframe.setVisible(true);
     }
