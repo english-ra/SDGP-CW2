@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -58,15 +57,21 @@ public class MainButton extends JButton {
         this.radius = radius;
     }
 
-    public MainButton() {
-        //  Init Color
-
+    public MainButton(String text) {
         setColor(Color.WHITE);
         colorOver = new Color(179, 250, 160);
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
         setContentAreaFilled(false);
+
+        this.setText(text);
+        this.setColor(Colours.mainFG);
+        this.setBorderColor(Colours.mainFG);
+        this.setColorOver(Colours.mainFG);
+        this.setBorderPainted(false);
+        this.setRadius(50);
         setFocusPainted(false);
+
         //  Add event mouse
         addMouseListener(new MouseAdapter() {
             @Override
