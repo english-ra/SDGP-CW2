@@ -14,7 +14,7 @@ public class LandingScreen extends JPanel {
 
     public LandingScreen(JFrame mainFrame) {
         this.mainFrame = mainFrame;
-        uiFlow.add(this.mainPanel);
+        uiFlow.add(this);
 
         // Configure UI
         configureScreen();
@@ -23,7 +23,9 @@ public class LandingScreen extends JPanel {
 
     private void configureScreen() {}
 
+
     public JPanel getMainPanel() { return mainPanel; }
+
 
     private void configureButtonListeners() {
         registerButton.addActionListener(new ActionListener() {
@@ -40,17 +42,19 @@ public class LandingScreen extends JPanel {
         });
     }
 
+
     private void navigateToRegisterScreen() {
         RegisterScreen registerScreen = new RegisterScreen(this.mainFrame, this.uiFlow);
-        uiFlow.add(registerScreen.getMainPanel());
+        uiFlow.add(registerScreen);
 
         mainFrame.setContentPane(registerScreen.getMainPanel());
         mainFrame.setVisible(true);
     }
 
+
     private void navigateToSignInScreen() {
         SignInScreen signInScreen = new SignInScreen(this.mainFrame, this.uiFlow);
-        uiFlow.add(signInScreen.getMainPanel());
+        uiFlow.add(signInScreen);
 
         mainFrame.setContentPane(signInScreen.getMainPanel());
         mainFrame.setVisible(true);

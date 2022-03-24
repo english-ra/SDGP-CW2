@@ -1,5 +1,4 @@
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -33,7 +32,8 @@ public class RegisterScreen extends JPanel {
 
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
-        mainFrame.setContentPane((Container) uiFlow.get(uiFlow.size() - 1));
+        LandingScreen previousView = (LandingScreen) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView.getMainPanel());
         mainFrame.setVisible(true);
     }
 
