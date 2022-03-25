@@ -9,6 +9,11 @@ public class Register_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
+    private MainTextField usernameTextField;
+    private MainTextField passwordTextField;
+
+    private ErrorLabel errorLabel;
+    private MainButton submitButton;
     private MainButton backButton;
 
     private SpringLayout layout;
@@ -22,8 +27,9 @@ public class Register_Screen extends JPanel {
         // Configure the UI
         configureRootPanel();
         configureLabels();
-
+        configureTextFields();
         configureBackButton();
+        configureErrorLabel();
 
         configureButtonListeners();
     }
@@ -57,13 +63,54 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
 
+    private void configureTextFields() {
+
+        // Configure the user textfield
+        usernameTextField = new MainTextField("");
+        add(usernameTextField);
+
+        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, usernameTextField, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, usernameTextField, -20, SpringLayout.EAST, this);
+        usernameTextField.setPreferredSize(new Dimension(0, 50));
+
+
+        // Configure the password textfield
+        passwordTextField = new MainTextField("");
+        add(passwordTextField);
+
+        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
+        layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
+        passwordTextField.setPreferredSize(new Dimension(0, 50));
+    }
+
     private void configureBackButton() {
+        submitButton = new MainButton("Register");
+        add(submitButton);
+
         backButton = new MainButton("Back");
         add(backButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, submitButton, -10, SpringLayout.NORTH, backButton);
+        layout.putConstraint(SpringLayout.WEST, submitButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, submitButton, -20, SpringLayout.EAST, this);
+
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
+    }
+
+    private void configureErrorLabel() {
+        errorLabel = new ErrorLabel("Error");
+        add(errorLabel);
+
+        layout.putConstraint(SpringLayout.SOUTH, errorLabel, -5, SpringLayout.NORTH, submitButton);
+        layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
+
+        // Hide the error label by default
+        errorLabel.setVisible(false);
     }
 
 
@@ -82,12 +129,28 @@ public class Register_Screen extends JPanel {
 
 
     private void configureButtonListeners() {
+        submitButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { submitButtonClicked(); }
+        });
+
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 backButtonClicked();
             }
         });
+    }
+
+    private void submitButtonClicked() {
+        // Perform form validation
+        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
+            errorLabel.setText("Please ensure that all forms are filled out.");
+            errorLabel.setVisible(true);
+        } else {
+            // Ensure that the error label is hidden
+            errorLabel.setVisible(false);
+        }
     }
 
     private void backButtonClicked() {

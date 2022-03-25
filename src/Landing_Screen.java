@@ -80,19 +80,19 @@ public class Landing_Screen extends JPanel {
 
 
     private void navigateToRegisterScreen() {
-        Register_Screen registerScreen = new Register_Screen(this.mainFrame, this.uiFlow);
-        uiFlow.add(registerScreen);
+        Register_Screen register_Screen = new Register_Screen(this.mainFrame, this.uiFlow);
+        uiFlow.add(register_Screen);
 
-        mainFrame.setContentPane(registerScreen);
+        mainFrame.setContentPane(register_Screen);
         mainFrame.setVisible(true);
     }
 
 
     private void navigateToSignInScreen() {
-        SignIn_Screen signInScreen = new SignIn_Screen(this.mainFrame, this.uiFlow);
-        uiFlow.add(signInScreen);
+        SignIn_Screen signIn_Screen = new SignIn_Screen(this.mainFrame, this.uiFlow);
+        uiFlow.add(signIn_Screen);
 
-        mainFrame.setContentPane(signInScreen.getMainPanel());
+        mainFrame.setContentPane(signIn_Screen.getMainPanel());
         mainFrame.setVisible(true);
     }
 }
