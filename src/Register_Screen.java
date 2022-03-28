@@ -9,8 +9,18 @@ public class Register_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
+
+    private BodyLabel usernameTextFieldLabel;
     private MainTextField usernameTextField;
+    private BodyLabel passwordTextFieldLabel;
     private MainTextField passwordTextField;
+    private BodyLabel confirmPasswordTextFieldLabel;
+    private MainTextField confirmPasswordTextField;
+
+    private BodyLabel fnameTextFieldLabel;
+    private MainTextField fnameTextField;
+    private BodyLabel lnameTextFieldLabel;
+    private MainTextField lnameTextField;
 
     private ErrorLabel errorLabel;
     private MainButton submitButton;
@@ -28,6 +38,7 @@ public class Register_Screen extends JPanel {
         configureRootPanel();
         configureLabels();
         configureTextFields();
+        configureNameTextFields();
         configureBackButton();
         configureErrorLabel();
 
@@ -64,25 +75,83 @@ public class Register_Screen extends JPanel {
     }
 
     private void configureTextFields() {
-
         // Configure the user textfield
+        usernameTextFieldLabel = new BodyLabel("Username:");
+        add(usernameTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, usernameTextFieldLabel, 10, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, usernameTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, usernameTextFieldLabel, -20, SpringLayout.EAST, this);
+
         usernameTextField = new MainTextField("");
         add(usernameTextField);
 
-        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 5, SpringLayout.SOUTH, usernameTextFieldLabel);
         layout.putConstraint(SpringLayout.WEST, usernameTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, usernameTextField, -20, SpringLayout.EAST, this);
-        usernameTextField.setPreferredSize(new Dimension(0, 50));
 
 
         // Configure the password textfield
+        passwordTextFieldLabel = new BodyLabel("Password:");
+        add(passwordTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, passwordTextFieldLabel, 10, SpringLayout.SOUTH, usernameTextField);
+        layout.putConstraint(SpringLayout.WEST, passwordTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
+
         passwordTextField = new MainTextField("");
         add(passwordTextField);
 
-        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
+        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);
         layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
-        passwordTextField.setPreferredSize(new Dimension(0, 50));
+
+        // Configure the confirm password textfield
+        confirmPasswordTextFieldLabel = new BodyLabel("Confirm Password:");
+        add(confirmPasswordTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, confirmPasswordTextFieldLabel, 10, SpringLayout.SOUTH, passwordTextField);
+        layout.putConstraint(SpringLayout.WEST, confirmPasswordTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, confirmPasswordTextFieldLabel, -20, SpringLayout.EAST, this);
+
+        confirmPasswordTextField = new MainTextField("");
+        add(confirmPasswordTextField);
+
+        layout.putConstraint(SpringLayout.NORTH, confirmPasswordTextField, 5, SpringLayout.SOUTH, confirmPasswordTextFieldLabel);
+        layout.putConstraint(SpringLayout.WEST, confirmPasswordTextField, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, confirmPasswordTextField, -20, SpringLayout.EAST, this);
+    }
+
+    private void configureNameTextFields() {
+        // Configure the first name textfield
+        fnameTextFieldLabel = new BodyLabel("First Name:");
+        add(fnameTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, fnameTextFieldLabel, 10, SpringLayout.SOUTH, confirmPasswordTextField);
+        layout.putConstraint(SpringLayout.WEST, fnameTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, fnameTextFieldLabel, -20, SpringLayout.HORIZONTAL_CENTER, this);
+
+        fnameTextField = new MainTextField("");
+        add(fnameTextField);
+
+        layout.putConstraint(SpringLayout.NORTH, fnameTextField, 10, SpringLayout.SOUTH, fnameTextFieldLabel);
+        layout.putConstraint(SpringLayout.WEST, fnameTextField, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, fnameTextField, -10, SpringLayout.HORIZONTAL_CENTER, this);
+
+        // Configure the last name textfield
+        lnameTextFieldLabel = new BodyLabel("Last Name:");
+        add(lnameTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, lnameTextFieldLabel, 10, SpringLayout.SOUTH, confirmPasswordTextField);
+        layout.putConstraint(SpringLayout.EAST, lnameTextFieldLabel, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.WEST, lnameTextFieldLabel, 20, SpringLayout.HORIZONTAL_CENTER, this);
+
+        lnameTextField = new MainTextField("");
+        add(lnameTextField);
+
+        layout.putConstraint(SpringLayout.NORTH, lnameTextField, 10, SpringLayout.SOUTH, lnameTextFieldLabel);
+        layout.putConstraint(SpringLayout.EAST, lnameTextField, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.WEST, lnameTextField, 10, SpringLayout.HORIZONTAL_CENTER, this);
     }
 
     private void configureBackButton() {
@@ -142,14 +211,24 @@ public class Register_Screen extends JPanel {
         });
     }
 
-    private void submitButtonClicked() {
-        // Perform form validation
-        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
-            errorLabel.setText("Please ensure that all forms are filled out.");
-            errorLabel.setVisible(true);
+    private String validateTextFields() {
+        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || confirmPasswordTextField.getText().equals("") || fnameTextField.getText().equals("") || lnameTextField.getText().equals("")) {
+            return "Please ensure that all text fields are filled out.";
         } else {
-            // Ensure that the error label is hidden
-            errorLabel.setVisible(false);
+            // All the text fields are filled out
+            if (!passwordTextField.getText().equals(confirmPasswordTextField.getText())) { return "The passwords do not match."; }
+        }
+        return "";
+    }
+
+    private void submitButtonClicked() {
+        String error = validateTextFields();
+
+        // Perform form validation
+        if (error.equals("")) { errorLabel.setVisible(false); }
+        else {
+            errorLabel.setText(error);
+            errorLabel.setVisible(true);
         }
     }
 
