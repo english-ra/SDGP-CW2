@@ -37,7 +37,7 @@ public class Landing_Screen extends JPanel {
 
     private void configureLogoLabel() {
         // Configure the logo label
-        logoLabel = new TitleLabel("Language\nPractice");
+        logoLabel = new TitleLabel("PerriLingo");
         this.add(logoLabel);
 
         layout.putConstraint(SpringLayout.NORTH, logoLabel, 20, SpringLayout.NORTH, this);

@@ -14,7 +14,7 @@ public class Main {
     }
 
     private static void configureMainframe() {
-        mainframe.setTitle("Language Practice");
+        mainframe.setTitle("PerriLingo");
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
     }
