@@ -92,7 +92,8 @@ public class Landing_Screen extends JPanel {
         SignIn_Screen signIn_Screen = new SignIn_Screen(this.mainFrame, this.uiFlow);
         uiFlow.add(signIn_Screen);
 
-        mainFrame.setContentPane(signIn_Screen.getMainPanel());
+        //JOHN REMOVED .METHOD GET MAINPANEL()
+        mainFrame.setContentPane(signIn_Screen);
         mainFrame.setVisible(true);
     }
 }
