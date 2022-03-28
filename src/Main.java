@@ -28,3 +28,17 @@ public class Main {
         mainframe.setVisible(true);
     }
 }
+
+
+// Example code to run individual screen
+//    public static void main(String[] args) {
+//        JFrame mainframe = new JFrame();
+//
+//        mainframe.setTitle("PerriLingo");
+//        mainframe.setSize(350, 750);
+//        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//
+//        Register_Screen r = new Register_Screen(mainframe, new ArrayList());
+//        mainframe.setContentPane(r);
+//        mainframe.setVisible(true);
+//    }
