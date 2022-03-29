@@ -20,7 +20,41 @@ public class UserDatabaseApi {
     String useType;
     int teacherID;
 
+public void getLogin(String username, String password){
+    Connection con = ConnectDB.getConnection();
+    PreparedStatement pstmt = null;
 
+    try {
+        con.setAutoCommit(false);
+        pstmt = con.prepareStatement( "SELECT * from users WHERE username=? and password=?");
+        pstmt.setString(1,username);
+        pstmt.setString(2,password);
+
+
+        pstmt.executeUpdate();
+        pstmt.close();
+        con.commit();
+    }catch (SQLException ex) {
+        System.err.println("SQLException: " + ex.getMessage());
+
+    }finally {
+        if (pstmt != null) {
+            try {
+                pstmt.close();
+            } catch (SQLException e) {
+                System.err.println("SQLException: " + e.getMessage());
+            }
+        }
+        if (con != null){
+            try {
+                con.close();
+            } catch (SQLException e) {
+                System.err.println("SQLException: " + e.getMessage());
+            }
+        }
+    }
+
+}
 
 
     public static void main(String[] args) {
