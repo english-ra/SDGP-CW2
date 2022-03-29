@@ -1,9 +1,13 @@
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class GP_Language_Select_Screen extends JPanel {
     private JFrame mainframe;
     private SpringLayout layout;
+    private ArrayList uiFlow = new ArrayList<JPanel>();
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -15,12 +19,15 @@ public class GP_Language_Select_Screen extends JPanel {
 
     public GP_Language_Select_Screen(JFrame mainframe) {
         this.mainframe = mainframe;
+        uiFlow.add(this);
 
         // Configure the UI
         configureRootPanel();
         configureLabels();
         configureBackButton();
         configureLanguageList();
+
+        configureButtonListeners();
     }
 
 
@@ -94,5 +101,36 @@ public class GP_Language_Select_Screen extends JPanel {
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+    private void configureButtonListeners() {
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
+        });
+    }
+
+
+    private void nextButtonClicked() {
+        // TODO: Check to ensure that an option is selected
+
+        // Go to the level selection screen
+        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow);
+        uiFlow.add(levelSelectScreen);
+
+        mainframe.setContentPane(levelSelectScreen);
+        mainframe.setVisible(true);
     }
 }
