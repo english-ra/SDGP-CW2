@@ -122,7 +122,7 @@ public class GP_Context_Select_Screen extends JPanel {
     }
 
     private void nextButtonClicked() {
-        // TODO: Check to ensure that an option is selected
+
     }
 
     private void backButtonClicked() {
