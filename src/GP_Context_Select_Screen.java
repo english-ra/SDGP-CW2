@@ -25,7 +25,7 @@ public class GP_Context_Select_Screen extends JPanel {
         configureRootPanel();
         configureLabels();
         configureBackButton();
-        configureLanguageList();
+        configureContextList();
 
         configureButtonListeners();
     }
@@ -74,8 +74,8 @@ public class GP_Context_Select_Screen extends JPanel {
     }
 
 
-    private void configureLanguageList() {
-        String[] contexts = {};
+    private void configureContextList() {
+        String[] contexts = {"Eating", "Shopping", "Running"};
 
         contextList = new ScrollableList(contexts);
         add(contextList);
