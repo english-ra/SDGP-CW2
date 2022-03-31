@@ -112,7 +112,7 @@ public class GP_Logging_Feedback extends JPanel {
 
     private void configureNextButton(){
         //Configuring the next button
-        nextButton = new MainButton("Continue");
+        nextButton = new MainButton("Continue", Colours.mainFG);
         add(nextButton);
 
 
