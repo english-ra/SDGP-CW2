@@ -54,20 +54,20 @@ public class MainButton extends JButton {
         this.radius = radius;
     }
 
-    public MainButton(String text) {
+    public MainButton(String text, Color backgroundColour) {
         setColor(Color.WHITE);
         colorOver = new Color(179, 250, 160);
         colorClick = new Color(152, 184, 144);
         borderColor = new Color(30, 136, 56);
-        setContentAreaFilled(false);
+        this.setContentAreaFilled(false);
 
         this.setText(text);
-        this.setColor(Colours.mainFG);
-        this.setBorderColor(Colours.mainFG);
-        this.setColorOver(Colours.mainFG);
+        this.setColor(backgroundColour);
+        this.setBorderColor(backgroundColour);
+        this.setColorOver(Colours.lighterButton);
         this.setBorderPainted(false);
         this.setRadius(50);
-        setFocusPainted(false);
+        this.setFocusPainted(false);
 
         setPreferredSize(new Dimension(0, 50));
 

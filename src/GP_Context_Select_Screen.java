@@ -14,6 +14,7 @@ public class GP_Context_Select_Screen extends JPanel {
 
     private ScrollableList contextList;
 
+    private ErrorLabel errorLabel;
     private MainButton nextButton;
     private PlainButton backButton;
 
@@ -29,19 +30,6 @@ public class GP_Context_Select_Screen extends JPanel {
 
         configureButtonListeners();
     }
-
-
-//    public static void main(String[] args) {
-//        JFrame mainframe = new JFrame();
-//
-//        mainframe.setTitle("PerriLingo");
-//        mainframe.setSize(350, 750);
-//        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//
-//        GP_Context_Select_Screen r = new GP_Context_Select_Screen(mainframe);
-//        mainframe.setContentPane(r);
-//        mainframe.setVisible(true);
-//    }
 
 
     // MARK: - Configure the UI
@@ -83,16 +71,23 @@ public class GP_Context_Select_Screen extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, contextList, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, contextList, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, contextList, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, contextList, -20, SpringLayout.NORTH, nextButton);
+        layout.putConstraint(SpringLayout.SOUTH, contextList, -20, SpringLayout.NORTH, errorLabel);
     }
 
 
     private void configureBackButton() {
-        nextButton = new MainButton("Let's Begin");
+        errorLabel = new ErrorLabel("");
+        add(errorLabel);
+
+        nextButton = new MainButton("Let's Begin", Colours.mainFG);
         add(nextButton);
 
         backButton = new PlainButton("Back");
         add(backButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, errorLabel, -10, SpringLayout.NORTH, nextButton);
+        layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
 
         layout.putConstraint(SpringLayout.SOUTH, nextButton, -10, SpringLayout.NORTH, backButton);
         layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
@@ -122,7 +117,13 @@ public class GP_Context_Select_Screen extends JPanel {
     }
 
     private void nextButtonClicked() {
-
+        if (listHasItemSelected()) {
+            errorLabel.setVisible(false);
+        } else {
+            errorLabel.setText("Please ensure that you have selected an option");
+            errorLabel.setVisible(true);
+            return;
+        }
     }
 
     private void backButtonClicked() {
@@ -130,5 +131,11 @@ public class GP_Context_Select_Screen extends JPanel {
         JPanel previousView = uiFlow.get(uiFlow.size() - 1);
         mainframe.setContentPane(previousView);
         mainframe.setVisible(true);
+    }
+
+    private boolean listHasItemSelected() {
+        int selectedIndex = contextList.list.getSelectedIndex();
+        if (selectedIndex != -1) { return true; }
+        return false;
     }
 }

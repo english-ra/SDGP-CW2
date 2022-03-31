@@ -155,10 +155,10 @@ public class Register_Screen extends JPanel {
     }
 
     private void configureBackButton() {
-        submitButton = new MainButton("Register");
+        submitButton = new MainButton("Register", Colours.mainFG);
         add(submitButton);
 
-        backButton = new MainButton("Back");
+        backButton = new MainButton("Back", Colours.mainFG);
         add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, submitButton, -10, SpringLayout.NORTH, backButton);

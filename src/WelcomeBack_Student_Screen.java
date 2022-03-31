@@ -71,7 +71,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
         //Configure the three buttons
 
         //Configure Student "Track your progress" button
-        studenttrackprogressButton = new MainButton("Track Your Progress");
+        studenttrackprogressButton = new MainButton("Track Your Progress", Colours.mainFG);
         add(studenttrackprogressButton);
 
         layout.putConstraint(SpringLayout.NORTH, studenttrackprogressButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -80,7 +80,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
 
         //Configure Student "View your login activity" button
-        studentviewloginactivityButton = new MainButton("View Your login Activity");
+        studentviewloginactivityButton = new MainButton("View Your login Activity", Colours.mainFG);
         add(studentviewloginactivityButton);
 
         layout.putConstraint(SpringLayout.NORTH, studentviewloginactivityButton, 10, SpringLayout.SOUTH, studenttrackprogressButton);
@@ -89,11 +89,11 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
 
         //Configure Student "Get Started Learning!" button
-        studentgetstartedlearningButton = new MainButton("Get Started Learning!");
+        studentgetstartedlearningButton = new MainButton("Get Started Learning!", Colours.mainFG);
         add(studentgetstartedlearningButton);
-        studentgetstartedlearningButton.setColor(Colours.LighterButton);
-        studentgetstartedlearningButton.setBorderColor(Colours.LighterButton);
-        studentgetstartedlearningButton.setColorOver(Colours.LighterButton);
+        studentgetstartedlearningButton.setColor(Colours.lighterButton);
+        studentgetstartedlearningButton.setBorderColor(Colours.lighterButton);
+        studentgetstartedlearningButton.setColorOver(Colours.lighterButton);
 
 
         layout.putConstraint(SpringLayout.NORTH, studentgetstartedlearningButton, 50, SpringLayout.SOUTH, studentviewloginactivityButton);

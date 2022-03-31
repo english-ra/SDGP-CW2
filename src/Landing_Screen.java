@@ -49,11 +49,11 @@ public class Landing_Screen extends JPanel {
     private void configureButtons() {
 
         // Configure the sign-in button
-        signInButton = new MainButton("Sign In");
+        signInButton = new MainButton("Sign In", Colours.mainFG);
         this.add(signInButton);
 
         // Configure the register button
-        registerButton = new MainButton("Register");
+        registerButton = new MainButton("Register", Colours.mainFG);
         this.add(registerButton);
 
         layout.putConstraint(SpringLayout.SOUTH, registerButton, -50, SpringLayout.SOUTH, this);

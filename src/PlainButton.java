@@ -4,7 +4,7 @@ import java.awt.*;
 public class PlainButton extends MainButton {
 
     public PlainButton(String text) {
-        super(text);
+        super(text, Colours.mainBG);
         this.setPreferredSize(new Dimension(0, 30));
 
         this.setColor(Colours.mainBG);
