@@ -31,7 +31,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         // Configure the UI
         configureRootPanel();
         configureLabels();
-        configureThreeButtons();
+        configureTwoButtons();
         //configureErrorLabel();
 
         configureButtonListeners();
@@ -78,11 +78,11 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
 
-    private void configureThreeButtons() {
+    private void configureTwoButtons() {
 
-        //Configure the three buttons
+        //Configure the two buttons
 
-        //Configure Student "Track your progress" button
+        //Configure Admin "Reset password" button
         resetpasswordButton = new MainButton("Rest Passwords");
         add(resetpasswordButton);
 
@@ -91,7 +91,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, resetpasswordButton, -20, SpringLayout.EAST, this);
 
 
-        //Configure Student "View your login activity" button
+        //Configure Admin "View login activity" button
         adminviewloginactivityButton = new MainButton("View All Login Activity");
         add(adminviewloginactivityButton);
 
