@@ -132,7 +132,6 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
     private void nextButtonClicked() {
-        // TODO: Check to ensure that an option is selected
         if (listHasItemSelected()) {
             errorLabel.setVisible(false);
         } else {

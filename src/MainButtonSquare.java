@@ -7,7 +7,5 @@ public class MainButtonSquare extends MainButton {
         super(text, Colours.lightFG);
 
         this.setPreferredSize(new Dimension(125, 125));
-
-        // TODO: Change the colour and make them selectable
     }
 }
