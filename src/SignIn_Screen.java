@@ -86,10 +86,10 @@ public class SignIn_Screen extends JPanel {
     }
 
     private void configureBackButton() {
-        submitButton = new MainButton("Sign In");
+        submitButton = new MainButton("Sign In", Colours.mainFG);
         add(submitButton);
 
-        backButton = new MainButton("Back");
+        backButton = new MainButton("Back", Colours.mainFG);
         add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, submitButton, -10, SpringLayout.NORTH, backButton);

@@ -19,7 +19,6 @@ public class GP_Level_Select_Screen extends JPanel {
     private MainButtonSquare c1Button;
     private MainButtonSquare c2Button;
 
-    private MainButton nextButton;
     private PlainButton backButton;
 
     public GP_Level_Select_Screen(JFrame mainframe, ArrayList uiFlow) {
@@ -34,20 +33,6 @@ public class GP_Level_Select_Screen extends JPanel {
 
         configureButtonListeners();
     }
-
-
-//    public static void main(String[] args) {
-//        JFrame mainframe = new JFrame();
-//
-//        mainframe.setTitle("PerriLingo");
-//        mainframe.setSize(350, 750);
-//        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-//
-//        GP_Level_Select_Screen r = new GP_Level_Select_Screen(mainframe);
-//        mainframe.setContentPane(r);
-//        mainframe.setVisible(true);
-//    }
-
 
     // MARK: - Configure the UI
     private void configureRootPanel() {
@@ -85,14 +70,14 @@ public class GP_Level_Select_Screen extends JPanel {
         a1Button = new MainButtonSquare("A1");
         add(a1Button);
 
-        layout.putConstraint(SpringLayout.NORTH, a1Button, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.NORTH, a1Button, 40, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, a1Button, 35, SpringLayout.WEST, this);
 
         // Configure A2 Button
         a2Button = new MainButtonSquare("A2");
         add(a2Button);
 
-        layout.putConstraint(SpringLayout.NORTH, a2Button, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.NORTH, a2Button, 40, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.EAST, a2Button, -35, SpringLayout.EAST, this);
 
 
@@ -128,15 +113,8 @@ public class GP_Level_Select_Screen extends JPanel {
 
 
     private void configureBackButton() {
-        nextButton = new MainButton("Next");
-        add(nextButton);
-
         backButton = new PlainButton("Back");
         add(backButton);
-
-        layout.putConstraint(SpringLayout.SOUTH, nextButton, -10, SpringLayout.NORTH, backButton);
-        layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, nextButton, -20, SpringLayout.EAST, this);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
@@ -150,19 +128,25 @@ public class GP_Level_Select_Screen extends JPanel {
 
 
     private void configureButtonListeners() {
-        nextButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
-        });
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { backButtonClicked(); }
         });
+
+        ActionListener selectButtonListener = new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { selectionButtonClicked(e.getActionCommand()); }
+        };
+
+        a1Button.addActionListener(selectButtonListener);
+        a2Button.addActionListener(selectButtonListener);
+        b1Button.addActionListener(selectButtonListener);
+        b2Button.addActionListener(selectButtonListener);
+        c1Button.addActionListener(selectButtonListener);
+        c2Button.addActionListener(selectButtonListener);
     }
 
-    private void nextButtonClicked() {
-        // TODO: Check to ensure that an option is selected
-
+    private void selectionButtonClicked(String button) {
         // Go to the context selection screen
         GP_Context_Select_Screen contextSelectScreen = new GP_Context_Select_Screen(mainframe, uiFlow);
         uiFlow.add(contextSelectScreen);

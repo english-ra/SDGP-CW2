@@ -14,6 +14,7 @@ public class GP_Language_Select_Screen extends JPanel {
 
     private ScrollableList languageList;
 
+    private ErrorLabel errorLabel;
     private MainButton nextButton;
     private PlainButton backButton;
 
@@ -75,7 +76,7 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
     private void configureLanguageList() {
-        String[] languages = {"Spanish", "French", "German", "Spanish", "French", "German", "Spanish", "French", "German", "Spanish", "French", "German"};
+        String[] languages = {"Spanish", "French", "German"};
 
         languageList = new ScrollableList(languages);
         add(languageList);
@@ -83,16 +84,23 @@ public class GP_Language_Select_Screen extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, languageList, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, languageList, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, languageList, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, languageList, -20, SpringLayout.NORTH, nextButton);
+        layout.putConstraint(SpringLayout.SOUTH, languageList, -20, SpringLayout.NORTH, errorLabel);
     }
 
 
     private void configureBackButton() {
-        nextButton = new MainButton("Next");
+        errorLabel = new ErrorLabel("");
+        add(errorLabel);
+
+        nextButton = new MainButton("Next", Colours.mainFG);
         add(nextButton);
 
         backButton = new PlainButton("Back");
         add(backButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, errorLabel, -10, SpringLayout.NORTH, nextButton);
+        layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
 
         layout.putConstraint(SpringLayout.SOUTH, nextButton, -10, SpringLayout.NORTH, backButton);
         layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
@@ -124,7 +132,13 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
     private void nextButtonClicked() {
-        // TODO: Check to ensure that an option is selected
+        if (listHasItemSelected()) {
+            errorLabel.setVisible(false);
+        } else {
+            errorLabel.setText("Please ensure that you have selected an option");
+            errorLabel.setVisible(true);
+            return;
+        }
 
         // Go to the level selection screen
         GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow);
@@ -132,5 +146,12 @@ public class GP_Language_Select_Screen extends JPanel {
 
         mainframe.setContentPane(levelSelectScreen);
         mainframe.setVisible(true);
+    }
+
+
+    private boolean listHasItemSelected() {
+        int selectedIndex = languageList.list.getSelectedIndex();
+        if (selectedIndex != -1) { return true; }
+        return false;
     }
 }
