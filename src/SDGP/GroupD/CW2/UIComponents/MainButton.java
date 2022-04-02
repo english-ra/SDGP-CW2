@@ -57,24 +57,33 @@ public class MainButton extends JButton {
             @Override
             public void mouseEntered(MouseEvent me) {
                 setBackground(colorOver);
+                setBorderColor(colorOver);
                 over = true;
             }
 
             @Override
             public void mouseExited(MouseEvent me) {
                 setBackground(color);
+                setBorderColor(color);
                 over = false;
             }
 
             @Override
             public void mousePressed(MouseEvent me) {
                 setBackground(colorClick);
+                setBorderColor(colorClick);
             }
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                if (over) { setBackground(colorOver); }
-                else { setBackground(color); }
+                if (over) {
+                    setBackground(colorOver);
+                    setBorderColor(colorOver);
+                }
+                else {
+                    setBackground(color);
+                    setBorderColor(color);
+                }
             }
         });
     }
