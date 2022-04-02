@@ -9,7 +9,7 @@ public class MainTextField extends JTextField {
 
     public MainTextField(String text) {
         super(text);
-        this.setBackground(Colours.lightFG);
+        this.setBackground(Colours.offWhite);
         this.setPreferredSize(new Dimension(0, 50));
     }
 }

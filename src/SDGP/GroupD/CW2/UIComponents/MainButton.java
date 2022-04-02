@@ -21,8 +21,8 @@ public class MainButton extends JButton {
         this.setText(text);
         this.setColor(backgroundColour);
         this.setBorderColor(backgroundColour);
-        this.setColorOver(Colours.lighterButton);
-        this.setColorClick(Colours.lighterButton.darker());
+        this.setColorOver(Colours.mainFGLight);
+        this.setColorClick(Colours.mainFGLight.darker());
         this.setRadius(50);
 
         this.setContentAreaFilled(false);

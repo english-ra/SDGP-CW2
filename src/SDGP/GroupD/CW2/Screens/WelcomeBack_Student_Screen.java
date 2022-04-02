@@ -96,9 +96,9 @@ public class WelcomeBack_Student_Screen extends JPanel {
         //Configure Student "Get Started Learning!" button
         studentgetstartedlearningButton = new MainButton("Get Started Learning!", Colours.mainFG);
         add(studentgetstartedlearningButton);
-        studentgetstartedlearningButton.setColor(Colours.lighterButton);
-        studentgetstartedlearningButton.setBorderColor(Colours.lighterButton);
-        studentgetstartedlearningButton.setColorOver(Colours.lighterButton);
+        studentgetstartedlearningButton.setColor(Colours.mainFGLight);
+        studentgetstartedlearningButton.setBorderColor(Colours.mainFGLight);
+        studentgetstartedlearningButton.setColorOver(Colours.mainFGLight);
 
 
         layout.putConstraint(SpringLayout.NORTH, studentgetstartedlearningButton, 50, SpringLayout.SOUTH, studentviewloginactivityButton);
