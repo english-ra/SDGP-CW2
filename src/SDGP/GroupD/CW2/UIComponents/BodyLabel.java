@@ -11,7 +11,7 @@ public class BodyLabel extends JLabel {
         super();
 
         this.setText(text);
-        this.setForeground(Colours.offWhite);
+        this.setForeground(Colours.mainText);
         this.setFont(new Font("", Font.PLAIN, 12));
         this.setHorizontalAlignment(SwingConstants.LEADING);
     }
