@@ -5,16 +5,29 @@ import javax.swing.JButton;
 
 public class MainButton extends JButton {
 
-    public boolean isOver() {
-        return over;
-    }
+    private boolean over;
+    private Color color;
+    private Color colorOver;
+    private Color colorClick;
+    private Color borderColor;
+    private int radius = 0;
 
-    public void setOver(boolean over) {
-        this.over = over;
-    }
 
-    public Color getColor() {
-        return color;
+    public MainButton(String text, Color backgroundColour) {
+        this.setText(text);
+        this.setColor(backgroundColour);
+        this.setBorderColor(backgroundColour);
+        this.setColorOver(Colours.lighterButton);
+        this.setColorClick(Colours.lighterButton.darker());
+        this.setRadius(50);
+
+        this.setContentAreaFilled(false);
+        this.setBorderPainted(false);
+        this.setFocusPainted(false);
+
+        this.setPreferredSize(new Dimension(0, 50));
+
+        configureListeners();
     }
 
     public void setColor(Color color) {
@@ -22,57 +35,21 @@ public class MainButton extends JButton {
         setBackground(color);
     }
 
-    public Color getColorOver() {
-        return colorOver;
-    }
-
     public void setColorOver(Color colorOver) {
         this.colorOver = colorOver;
     }
-
-    public Color getColorClick() {
-        return colorClick;
-    }
-
     public void setColorClick(Color colorClick) {
         this.colorClick = colorClick;
     }
-
-    public Color getBorderColor() {
-        return borderColor;
-    }
-
     public void setBorderColor(Color borderColor) {
         this.borderColor = borderColor;
     }
-
-    public int getRadius() {
-        return radius;
-    }
-
     public void setRadius(int radius) {
         this.radius = radius;
     }
 
-    public MainButton(String text, Color backgroundColour) {
-        setColor(Color.WHITE);
-        colorOver = new Color(179, 250, 160);
-        colorClick = new Color(152, 184, 144);
-        borderColor = new Color(30, 136, 56);
-        this.setContentAreaFilled(false);
-
-        this.setText(text);
-        this.setColor(backgroundColour);
-        this.setBorderColor(backgroundColour);
-        this.setColorOver(Colours.lighterButton);
-        this.setBorderPainted(false);
-        this.setRadius(50);
-        this.setFocusPainted(false);
-
-        setPreferredSize(new Dimension(0, 50));
-
-        //  Add event mouse
-        addMouseListener(new MouseAdapter() {
+    private void configureListeners() {
+        this.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseEntered(MouseEvent me) {
                 setBackground(colorOver);
@@ -83,7 +60,6 @@ public class MainButton extends JButton {
             public void mouseExited(MouseEvent me) {
                 setBackground(color);
                 over = false;
-
             }
 
             @Override
@@ -93,32 +69,25 @@ public class MainButton extends JButton {
 
             @Override
             public void mouseReleased(MouseEvent me) {
-                if (over) {
-                    setBackground(colorOver);
-                } else {
-                    setBackground(color);
-                }
+                if (over) { setBackground(colorOver); }
+                else { setBackground(color); }
             }
         });
     }
 
-    private boolean over;
-    private Color color;
-    private Color colorOver;
-    private Color colorClick;
-    private Color borderColor;
-    private int radius = 0;
-
     @Override
-    protected void paintComponent(Graphics grphcs) {
-        Graphics2D g2 = (Graphics2D) grphcs;
-        g2.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    protected void paintComponent(Graphics graphics) {
+        Graphics2D graphic = (Graphics2D) graphics;
+        graphic.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
         //  Paint Border
-        g2.setColor(borderColor);
-        g2.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
-        g2.setColor(getBackground());
+        graphic.setColor(borderColor);
+        graphic.fillRoundRect(0, 0, getWidth(), getHeight(), radius, radius);
+        graphic.setColor(getBackground());
+
         //  Border set 2 Pix
-        g2.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius, radius);
-        super.paintComponent(grphcs);
+        graphic.fillRoundRect(2, 2, getWidth() - 4, getHeight() - 4, radius, radius);
+
+        super.paintComponent(graphics);
     }
 }
