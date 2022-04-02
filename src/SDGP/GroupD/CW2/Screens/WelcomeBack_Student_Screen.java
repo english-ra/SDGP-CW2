@@ -1,3 +1,8 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -9,12 +14,12 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    //private MainTextField usernameTextField;
-    //private MainTextField passwordTextField;
+    //private SDGP.GroupD.CW2.UIComponents.MainTextField usernameTextField;
+    //private SDGP.GroupD.CW2.UIComponents.MainTextField passwordTextField;
 
-    //private ErrorLabel errorLabel;
-    //private MainButton submitButton;
-    //private MainButton backButton;
+    //private SDGP.GroupD.CW2.UIComponents.ErrorLabel errorLabel;
+    //private SDGP.GroupD.CW2.UIComponents.MainButton submitButton;
+    //private SDGP.GroupD.CW2.UIComponents.MainButton backButton;
     private MainButton studenttrackprogressButton;
     private MainButton studentviewloginactivityButton;
     private MainButton studentgetstartedlearningButton;
@@ -106,7 +111,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 //    private void configureTextFields() {
 //
 //        // Configure the user textfield
-//        usernameTextField = new MainTextField("");
+//        usernameTextField = new SDGP.GroupD.CW2.UIComponents.MainTextField("");
 //        add(usernameTextField);
 //
 //        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
@@ -116,7 +121,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 //
 //
 //        // Configure the password textfield
-//        passwordTextField = new MainTextField("");
+//        passwordTextField = new SDGP.GroupD.CW2.UIComponents.MainTextField("");
 //        add(passwordTextField);
 //
 //        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
@@ -126,10 +131,10 @@ public class WelcomeBack_Student_Screen extends JPanel {
 //    }
 //
 //    private void configureBackButton() {
-//        submitButton = new MainButton("Sign In");
+//        submitButton = new SDGP.GroupD.CW2.UIComponents.MainButton("Sign In");
 //        add(submitButton);
 //
-//        backButton = new MainButton("Back");
+//        backButton = new SDGP.GroupD.CW2.UIComponents.MainButton("Back");
 //        add(backButton);
 //
 //        layout.putConstraint(SpringLayout.SOUTH, submitButton, -10, SpringLayout.NORTH, backButton);
@@ -142,7 +147,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 //    }
 //
 //    private void configureErrorLabel() {
-//        errorLabel = new ErrorLabel("Error");
+//        errorLabel = new SDGP.GroupD.CW2.UIComponents.ErrorLabel("Error");
 //        add(errorLabel);
 //
 //        layout.putConstraint(SpringLayout.SOUTH, errorLabel, -5, SpringLayout.NORTH, submitButton);
@@ -194,7 +199,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 }
 //    private void backButtonClicked() {
 //        uiFlow.remove(uiFlow.size() - 1);
-//        Landing_Screen previousView = (Landing_Screen) uiFlow.get(uiFlow.size() - 1);
+//        SDGP.GroupD.CW2.Screens.Landing_Screen previousView = (SDGP.GroupD.CW2.Screens.Landing_Screen) uiFlow.get(uiFlow.size() - 1);
 //        mainFrame.setContentPane(previousView);
 //        mainFrame.setVisible(true);
 //    }

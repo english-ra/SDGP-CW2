@@ -1,4 +1,7 @@
-import javax.swing.*;
+package SDGP.GroupD.CW2.UIComponents;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+
 import java.awt.*;
 
 public class MainButtonSquare extends MainButton {

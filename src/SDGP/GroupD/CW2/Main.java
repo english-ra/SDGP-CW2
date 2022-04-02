@@ -1,5 +1,8 @@
+package SDGP.GroupD.CW2;
+
+import SDGP.GroupD.CW2.Screens.Landing_Screen;
+
 import javax.swing.*;
-import java.util.ArrayList;
 
 public class Main {
 
@@ -38,7 +41,7 @@ public class Main {
 //        mainframe.setSize(350, 750);
 //        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 //
-//        Register_Screen r = new Register_Screen(mainframe, new ArrayList());
+//        SDGP.GroupD.CW2.Screens.Register_Screen r = new SDGP.GroupD.CW2.Screens.Register_Screen(mainframe, new ArrayList());
 //        mainframe.setContentPane(r);
 //        mainframe.setVisible(true);
 //    }

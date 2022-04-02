@@ -1,3 +1,8 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -161,20 +166,20 @@ public class SignIn_Screen extends JPanel {
     }
 }
 
-//public class SignIn_Screen extends JPanel {
+//public class SDGP.GroupD.CW2.Screens.SignIn_Screen extends JPanel {
 //    private JPanel mainPanel;
 //
-//    private TitleLabel titleLabel;
-//    private SubtitleLabel subtitleLabel;
-//    private MainTextField usernameTextField;
-//    private MainTextField passwordTextField;
+//    private SDGP.GroupD.CW2.UIComponents.TitleLabel titleLabel;
+//    private SDGP.GroupD.CW2.UIComponents.SubtitleLabel subtitleLabel;
+//    private SDGP.GroupD.CW2.UIComponents.MainTextField usernameTextField;
+//    private SDGP.GroupD.CW2.UIComponents.MainTextField passwordTextField;
 //
 //    private JButton backButton;
 //
 //    private JFrame mainFrame;
 //    private ArrayList uiFlow;
 //
-//    public SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
+//    public SDGP.GroupD.CW2.Screens.SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
 //        this.mainFrame  = mainFrame;
 //        this.uiFlow     = uiFlow;
 //

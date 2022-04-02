@@ -1,3 +1,8 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.*;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,8 +20,6 @@ public class GP_Change_Player_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-
-
 
     private MainButton nextButton;
 

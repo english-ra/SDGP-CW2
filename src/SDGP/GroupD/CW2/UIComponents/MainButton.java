@@ -1,3 +1,7 @@
+package SDGP.GroupD.CW2.UIComponents;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+
 import java.awt.*;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;

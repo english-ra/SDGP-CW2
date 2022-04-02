@@ -1,3 +1,5 @@
+package SDGP.GroupD.CW2.UIComponents;
+
 import javax.swing.*;
 import java.awt.*;
 

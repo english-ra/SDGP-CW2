@@ -1,3 +1,5 @@
+package SDGP.GroupD.CW2.Constants;
+
 import java.awt.*;
 
 public interface Colours {

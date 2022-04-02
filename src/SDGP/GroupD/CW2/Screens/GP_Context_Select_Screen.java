@@ -1,47 +1,39 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Constants.Colours;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class GP_Language_Select_Screen extends JPanel {
+public class GP_Context_Select_Screen extends JPanel {
     private JFrame mainframe;
     private SpringLayout layout;
-    private ArrayList uiFlow = new ArrayList<JPanel>();
+    private ArrayList<JPanel> uiFlow;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
 
-    private ScrollableList languageList;
+    private ScrollableList contextList;
 
     private ErrorLabel errorLabel;
     private MainButton nextButton;
     private PlainButton backButton;
 
-    public GP_Language_Select_Screen(JFrame mainframe) {
+    public GP_Context_Select_Screen(JFrame mainframe, ArrayList uiFlow) {
         this.mainframe = mainframe;
-        uiFlow.add(this);
+        this.uiFlow = uiFlow;
 
         // Configure the UI
         configureRootPanel();
         configureLabels();
         configureBackButton();
-        configureLanguageList();
+        configureContextList();
 
         configureButtonListeners();
-    }
-
-
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Language_Select_Screen r = new GP_Language_Select_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
     }
 
 
@@ -57,7 +49,7 @@ public class GP_Language_Select_Screen extends JPanel {
 
     private void configureLabels() {
         // Configuring the title label
-        titleLabel = new TitleLabel("Language");
+        titleLabel = new TitleLabel("Context");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -66,7 +58,7 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
         // Configuring the subtitle label
-        subtitleLabel = new SubtitleLabel("What language would you like to practice?");
+        subtitleLabel = new SubtitleLabel("What context would you like to practice?");
         add(subtitleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
@@ -75,16 +67,16 @@ public class GP_Language_Select_Screen extends JPanel {
     }
 
 
-    private void configureLanguageList() {
-        String[] languages = {"Spanish", "French", "German"};
+    private void configureContextList() {
+        String[] contexts = {"Eating", "Shopping", "Running"};
 
-        languageList = new ScrollableList(languages);
-        add(languageList);
+        contextList = new ScrollableList(contexts);
+        add(contextList);
 
-        layout.putConstraint(SpringLayout.NORTH, languageList, 20, SpringLayout.SOUTH, subtitleLabel);
-        layout.putConstraint(SpringLayout.WEST, languageList, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, languageList, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, languageList, -20, SpringLayout.NORTH, errorLabel);
+        layout.putConstraint(SpringLayout.NORTH, contextList, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, contextList, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, contextList, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, contextList, -20, SpringLayout.NORTH, errorLabel);
     }
 
 
@@ -92,7 +84,7 @@ public class GP_Language_Select_Screen extends JPanel {
         errorLabel = new ErrorLabel("");
         add(errorLabel);
 
-        nextButton = new MainButton("Next", Colours.mainFG);
+        nextButton = new MainButton("Let's Begin", Colours.mainFG);
         add(nextButton);
 
         backButton = new PlainButton("Back");
@@ -118,18 +110,16 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
 
-
-
-
-
-
     private void configureButtonListeners() {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
         });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
+        });
     }
-
 
     private void nextButtonClicked() {
         if (listHasItemSelected()) {
@@ -139,18 +129,17 @@ public class GP_Language_Select_Screen extends JPanel {
             errorLabel.setVisible(true);
             return;
         }
+    }
 
-        // Go to the level selection screen
-        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow);
-        uiFlow.add(levelSelectScreen);
-
-        mainframe.setContentPane(levelSelectScreen);
+    private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = uiFlow.get(uiFlow.size() - 1);
+        mainframe.setContentPane(previousView);
         mainframe.setVisible(true);
     }
 
-
     private boolean listHasItemSelected() {
-        int selectedIndex = languageList.list.getSelectedIndex();
+        int selectedIndex = contextList.list.getSelectedIndex();
         if (selectedIndex != -1) { return true; }
         return false;
     }
