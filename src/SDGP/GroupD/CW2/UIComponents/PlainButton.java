@@ -14,5 +14,6 @@ public class PlainButton extends MainButton {
         this.setBorderColor(Colours.mainBG);
         this.setColorOver(Colours.mainBG);
         this.setForeground(Color.WHITE);
+        this.setColorClick(Colours.fiftyPercent);
     }
 }

@@ -7,4 +7,6 @@ public interface Colours {
     Color mainFG        = new Color(236, 154, 41);
     Color mainFGLight   = new Color(236,186,34 );
     Color offWhite      = new Color(220,211,217);
+    Color transparent   = new Color(0, 0, 0, 0);
+    Color fiftyPercent  = new Color(0, 0, 0, 50);
 }
