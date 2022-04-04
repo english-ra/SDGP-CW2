@@ -20,6 +20,7 @@ public class Login_Activity extends JPanel {
         configureRootPanel();
         configureLabels();
         backButtonClicked();
+        configureJtable();
         //configureErrorLabel();
 
 
@@ -36,19 +37,6 @@ public class Login_Activity extends JPanel {
             Login_Activity r = new Login_Activity(mainframe, new ArrayList());
             mainframe.setContentPane(r);
             mainframe.setVisible(true);
-
-
-            String data[][] = {};
-            String column[] = {"Login Time", "Logout Time"};
-            JTable jt = new JTable(data, column);
-            jt.setBounds(500, 500, 200, 300);
-            JScrollPane sp = new JScrollPane(jt);
-            mainframe.add(sp);
-            mainframe.setSize(300, -200);
-            mainframe.setVisible(true);
-
-
-
 
         }
 
@@ -79,6 +67,22 @@ public class Login_Activity extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
+    }
+
+    private void configureJtable(){
+
+        String data[][] = {};
+        String column[] = {"Login Time", "Logout Time"};
+        JTable jt = new JTable(data, column);
+//        jt.setBounds(500, 500, 200, 300);
+        JScrollPane sp = new JScrollPane(jt);
+        this.add(sp);
+//        this.setSize(300, -200);
+
+        layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
     }
     private void backButtonClicked() {
 

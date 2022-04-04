@@ -36,6 +36,17 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
         configureButtonListeners();
     }
+    public static void main(String[] args) {
+        JFrame mainframe = new JFrame();
+
+        mainframe.setTitle("PerriLingo");
+        mainframe.setSize(350, 750);
+        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        WelcomeBack_Student_Screen r = new WelcomeBack_Student_Screen(mainframe, new ArrayList());
+        mainframe.setContentPane(r);
+        mainframe.setVisible(true);
+    }
 
     // MARK - Configure the UI
     private void configureRootPanel() {

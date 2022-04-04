@@ -22,6 +22,7 @@ public class Choose_user extends JPanel {
         // Configure the UI
         configureRootPanel();
         configureLabels();
+        configureJtable();
 
         //configureErrorLabel();
 
@@ -39,14 +40,6 @@ public class Choose_user extends JPanel {
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
 
-        String data[][] = {};
-        String column[] = {"User", "ID"};
-        JTable jt = new JTable(data, column);
-        jt.setBounds(500, 500, 200, 300);
-        JScrollPane sp = new JScrollPane(jt);
-        mainframe.add(sp);
-        mainframe.setSize(300, -200);
-        mainframe.setVisible(true);
     }
 
     // MARK - Configure the UI
@@ -56,6 +49,7 @@ public class Choose_user extends JPanel {
 
         this.layout = new SpringLayout();
         this.setLayout(layout);
+
     }
 
     private void configureLabels() {
@@ -76,5 +70,20 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
+    }
+    private void configureJtable(){
+
+        String data[][] = {};
+        String column[] = {"User", "ID"};
+        JTable jt = new JTable(data, column);
+//        jt.setBounds(500, 500, 200, 300);
+        JScrollPane sp = new JScrollPane(jt);
+        this.add(sp);
+//        this.setSize(300, -200);
+
+        layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
     }
 }
