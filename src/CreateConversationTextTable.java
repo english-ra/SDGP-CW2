@@ -2,29 +2,23 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- *
- * @author natty
- */
-public class Createusertable {
-
-    /**
-     * @param args the command line arguments
-     */
+public class CreateConversationTextTable {
     public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
+
         String createString;
-        createString = "CREATE TABLE if not exists Users ( \n"
-                + " userID INTEGER PRIMARY KEY,\n"
-                + " Fname VARCHAR (15),\n"
-                + " Lname VARCHAR (15),\n"
-                + " username VARCHAR (15) NOT NULL UNIQUE,\n"
-                + " password VARCHAR (100),\n"
-                + " useType VARCHAR (15),\n"
-                + "teacherID INTEGER,\n"
-                + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
+
+        //creates the conversation text table
+        createString = "CREATE TABLE if not exists ConversationText ( \n"
+                + " conversationTextID INTEGER PRIMARY KEY,\n"
+                + " text VARCHAR(3000),\n"
+                + " promp VARCHAR(3000) ,\n"
+                + " person VARCHAR(1) , \n"
+                + " posiionInConvo INTEGER, \n"
+                + " conversationsID INTEGER, \n"
+                + " CONSTRAINT fk_CO FOREIGN KEY(conversationsID) references Conversation(conversationID) \n"
+                + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -50,4 +44,3 @@ public class Createusertable {
         }
     }
 }
-

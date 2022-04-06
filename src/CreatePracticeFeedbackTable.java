@@ -2,29 +2,22 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- *
- * @author natty
- */
-public class Createusertable {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class CreatePracticeFeedbackTable {
+    public static void main(String args[]) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-        createString = "CREATE TABLE if not exists Users ( \n"
-                + " userID INTEGER PRIMARY KEY,\n"
-                + " Fname VARCHAR (15),\n"
-                + " Lname VARCHAR (15),\n"
-                + " username VARCHAR (15) NOT NULL UNIQUE,\n"
-                + " password VARCHAR (100),\n"
-                + " useType VARCHAR (15),\n"
-                + "teacherID INTEGER,\n"
-                + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
+        createString = "CREATE TABLE if not exists PracticeFeedback ( \n"
+                + " practiceFeedbackID INTEGER PRIMARY KEY,\n"
+                + " dateLogged DATETIME,\n"
+                + "notes VARCHAR(30000), \n"
+                + "score INTEGER, \n"
+                + "convoID INTEGER, \n"
+                + "userID INTEGER, \n"
+                + "loggedByID INTEGER, \n"
+                + " CONSTRAINT fk_CONVO FOREIGN KEY(convoID) references Conversation(conversationID)"
+                + " CONSTRAINT fk_USER_FEEDBACK_A FOREIGN KEY(userID) references users(userID)"
+                + " CONSTRAINT fk_USER_FEEDBACK_B FOREIGN KEY(loggedByID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -46,8 +39,7 @@ public class Createusertable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-
         }
+
     }
 }
-
