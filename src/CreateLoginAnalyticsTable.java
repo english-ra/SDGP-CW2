@@ -7,6 +7,7 @@ public class CreateLoginAnalyticsTable {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
+        // Creates the LoginAnalytics table
         createString = "CREATE TABLE if not exists LoginAnalytics ( \n"
                 + " loginAnalyticsID INTEGER PRIMARY KEY,\n"
                 + " login DATETIME,\n"

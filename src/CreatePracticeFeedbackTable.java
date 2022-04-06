@@ -7,6 +7,7 @@ public class CreatePracticeFeedbackTable {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
+        // Creates the PracticeFeedback table
         createString = "CREATE TABLE if not exists PracticeFeedback ( \n"
                 + " practiceFeedbackID INTEGER PRIMARY KEY,\n"
                 + " dateLogged DATETIME,\n"

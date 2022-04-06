@@ -7,6 +7,7 @@ import java.sql.Statement;
             Connection con = ConnectDB.getConnection();
             Statement stmt = null;
             String createString;
+            //creates the Administrator table
             createString = "CREATE TABLE if not exists Administrator ( \n"
                     + " userID INTEGER PRIMARY KEY,\n"
                     + " Firstname VARCHAR (15),\n"

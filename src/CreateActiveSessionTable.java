@@ -7,6 +7,7 @@ public class CreateActiveSessionTable {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
+        // Creates the ActiveSession table
         createString = "CREATE TABLE if not exists ActiveSession ( \n"
                 + " activeSessionID INTEGER PRIMARY KEY,\n"
                 + " dateCreated DATETIME,\n"
