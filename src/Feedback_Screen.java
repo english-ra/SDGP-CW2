@@ -85,7 +85,7 @@ public class Feedback_Screen extends JPanel {
         feedbackBox.setWrapStyleWord(true);
         feedbackBox.setBackground(Colours.feedBack);
         feedbackBox.setForeground(Colours.mainText);
-        feedbackBox.setFont(new Font("Arial", Font.ITALIC, 40));
+        feedbackBox.setFont(new Font("Arial", Font.ITALIC, 20));
         feedbackBox.setBorder(BorderFactory.createLineBorder(Colours.mainBG));
         add(feedbackBox);
 
@@ -96,21 +96,19 @@ public class Feedback_Screen extends JPanel {
     }
 
     private void configurescoreBox(){
-        JTextArea scoreBox = new JTextArea();
-        double height = 50;
-        double width = 1;
-        scoreBox.setPreferredSize(new Dimension((int)width, (int)height));
-        scoreBox.setLineWrap(true);
-        scoreBox.setWrapStyleWord(true);
+        String[] scoreToChoose = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
+        JComboBox scoreBox = new JComboBox(scoreToChoose);
+        scoreBox.setBounds(80, 50, 140, 20);
         scoreBox.setBackground(Colours.feedBack);
         scoreBox.setForeground(Colours.mainText);
-        scoreBox.setFont(new Font("Arial", Font.ITALIC, 40));
+        scoreBox.setFont(new Font("Arial", Font.ITALIC, 20));
         scoreBox.setBorder(BorderFactory.createLineBorder(Colours.mainBG));
         add(scoreBox);
 
         layout.putConstraint(SpringLayout.NORTH, scoreBox, 20, SpringLayout.SOUTH, ternarytitleLabel);
-        layout.putConstraint(SpringLayout.WEST, scoreBox, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, scoreBox, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.WEST, scoreBox, 100, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, scoreBox, -100, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.SOUTH, scoreBox, -200, SpringLayout.SOUTH, this);
 
     }
 

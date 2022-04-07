@@ -5,6 +5,6 @@ public interface Colours {
     Color mainFG = new Color(236, 154, 41);
     Color LighterButton = new Color(236,186,34 );
     Color lightFG = Color.decode("#DAD2D8");
-    Color feedBack= Color.decode("#FFFFFF");
+    Color feedBack= Color.decode("#DAD2D8");
     Color mainText= Color.decode("#020202");
 }
