@@ -183,20 +183,6 @@ public class Register_Screen extends JPanel {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void configureButtonListeners() {
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -239,3 +225,4 @@ public class Register_Screen extends JPanel {
         mainFrame.setVisible(true);
     }
 }
+

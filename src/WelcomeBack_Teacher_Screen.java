@@ -156,7 +156,6 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 // EMPTY BUTTON LISTENERS !!
 
-
     private void configureButtonListeners() {
         teachertrackprogressButton.addActionListener(new ActionListener() {
             @Override
