@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -249,8 +250,12 @@ public class Register_Screen extends JPanel {
             String firstNameText = fnameTextField.getText();
             String lastNameText = lnameTextField.getText();
 
+            // Hash the password
+            String salt = PasswordHasher.getSalt(100);
+            String securePassword = PasswordHasher.generateSecurePassword(passwordText, salt);
+
             // Create the user
-            User user = new User(0001, firstNameText, lastNameText, usernameText, passwordText, "student", 0);
+            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, "student", 0);
 
             // Add to the DB
             DatabaseAPI dbAPI = new DatabaseAPI();
