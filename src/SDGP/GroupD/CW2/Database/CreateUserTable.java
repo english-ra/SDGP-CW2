@@ -16,7 +16,7 @@ public class CreateUserTable {
                 + " username VARCHAR (15) NOT NULL UNIQUE,\n"
                 + " password VARCHAR (100),\n"
                 + " useType VARCHAR (15),\n"
-                + "teacherID INTEGER,\n"
+                + " teacherID INTEGER,\n"
                 + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();

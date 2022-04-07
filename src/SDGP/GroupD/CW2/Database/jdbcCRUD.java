@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-/**
- *
- * @author natty
- */
 public class jdbcCRUD {
    static int userID = 565767;
     static String Fname = "Billy";
