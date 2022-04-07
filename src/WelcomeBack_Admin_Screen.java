@@ -4,7 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class WelcomeBack_Student_Screen extends JPanel {
+public class WelcomeBack_Admin_Screen extends JPanel {
     private JFrame mainFrame;
 
     private TitleLabel titleLabel;
@@ -15,27 +15,28 @@ public class WelcomeBack_Student_Screen extends JPanel {
     //private ErrorLabel errorLabel;
     //private MainButton submitButton;
     //private MainButton backButton;
-    private MainButton studenttrackprogressButton;
-    private MainButton studentviewloginactivityButton;
-    private MainButton studentgetstartedlearningButton;
+    private MainButton resetpasswordButton;
+    private MainButton adminviewloginactivityButton;
+
 
     private SpringLayout layout;
 
     private ArrayList uiFlow;
 
 
-    public WelcomeBack_Student_Screen(JFrame mainFrame, ArrayList uiFlow) {
+    public WelcomeBack_Admin_Screen(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
 
         // Configure the UI
         configureRootPanel();
         configureLabels();
-        configureThreeButtons();
+        configureTwoButtons();
         //configureErrorLabel();
 
         configureButtonListeners();
     }
+
     public static void main(String[] args) {
         JFrame mainframe = new JFrame();
 
@@ -43,7 +44,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        WelcomeBack_Student_Screen r = new WelcomeBack_Student_Screen(mainframe, new ArrayList());
+        WelcomeBack_Admin_Screen r = new WelcomeBack_Admin_Screen(mainframe, new ArrayList());
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
     }
@@ -69,7 +70,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
 
         // Configuring the subtitle label
-        subtitleLabel = new SubtitleLabel("fname, lname, (userType)");
+        subtitleLabel = new SubtitleLabel("fname, lname, (Admin)");
         add(subtitleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
@@ -77,39 +78,26 @@ public class WelcomeBack_Student_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
 
-    private void configureThreeButtons() {
+    private void configureTwoButtons() {
 
-        //Configure the three buttons
+        //Configure the two buttons
 
-        //Configure Student "Track your progress" button
-        studenttrackprogressButton = new MainButton("Track Your Progress");
-        add(studenttrackprogressButton);
+        //Configure Admin "Reset password" button
+        resetpasswordButton = new MainButton("Rest Passwords");
+        add(resetpasswordButton);
 
-        layout.putConstraint(SpringLayout.NORTH, studenttrackprogressButton, 100, SpringLayout.SOUTH, subtitleLabel);
-        layout.putConstraint(SpringLayout.WEST, studenttrackprogressButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, studenttrackprogressButton, -20, SpringLayout.EAST, this);
-
-
-        //Configure Student "View your login activity" button
-        studentviewloginactivityButton = new MainButton("View Your login Activity");
-        add(studentviewloginactivityButton);
-
-        layout.putConstraint(SpringLayout.NORTH, studentviewloginactivityButton, 10, SpringLayout.SOUTH, studenttrackprogressButton);
-        layout.putConstraint(SpringLayout.WEST, studentviewloginactivityButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, studentviewloginactivityButton, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, 100, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, resetpasswordButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, resetpasswordButton, -20, SpringLayout.EAST, this);
 
 
-        //Configure Student "Get Started Learning!" button
-        studentgetstartedlearningButton = new MainButton("Get Started Learning!");
-        add(studentgetstartedlearningButton);
-        studentgetstartedlearningButton.setColor(Colours.LighterButton);
-        studentgetstartedlearningButton.setBorderColor(Colours.LighterButton);
-        studentgetstartedlearningButton.setColorOver(Colours.LighterButton);
+        //Configure Admin "View login activity" button
+        adminviewloginactivityButton = new MainButton("View All Login Activity");
+        add(adminviewloginactivityButton);
 
-
-        layout.putConstraint(SpringLayout.NORTH, studentgetstartedlearningButton, 50, SpringLayout.SOUTH, studentviewloginactivityButton);
-        layout.putConstraint(SpringLayout.WEST, studentgetstartedlearningButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, studentgetstartedlearningButton, -20, SpringLayout.EAST, this);
+        layout.putConstraint(SpringLayout.NORTH, adminviewloginactivityButton, 10, SpringLayout.SOUTH, resetpasswordButton);
+        layout.putConstraint(SpringLayout.WEST, adminviewloginactivityButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, adminviewloginactivityButton, -20, SpringLayout.EAST, this);
 
 
     }
@@ -169,39 +157,29 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
 
     private void configureButtonListeners() {
-        studenttrackprogressButton.addActionListener(new ActionListener() {
+        resetpasswordButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                studenttrackprogressButtonClicked();
+                resetpasswordButtonClicked();
             }
         });
 
-        studentviewloginactivityButton.addActionListener(new ActionListener() {
+        adminviewloginactivityButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                studentviewloginactivityButtonClicked();
-            }
-        });
-
-        studentgetstartedlearningButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                studentgetstartedlearningButtonClicked();
+                adminviewloginactivityButtonClicked();
             }
         });
     }
 
-    private void studenttrackprogressButtonClicked() {
+    private void resetpasswordButtonClicked() {
 
     }
 
-    private void studentviewloginactivityButtonClicked() {
+    private void adminviewloginactivityButtonClicked() {
 
     }
 
-    private void studentgetstartedlearningButtonClicked() {
-
-    }
 
 }
 //    private void backButtonClicked() {
@@ -211,5 +189,3 @@ public class WelcomeBack_Student_Screen extends JPanel {
 //        mainFrame.setVisible(true);
 //    }
 //}
-
-
