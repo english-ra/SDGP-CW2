@@ -4,14 +4,8 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- *
- * @author natty
- */
-public class Createusertable {
-
-    public  Createusertable(){
+public class CreateUserTable {
+    public CreateUserTable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -45,10 +39,6 @@ public class Createusertable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-
         }
     }
-    }
-
-
-
+}
