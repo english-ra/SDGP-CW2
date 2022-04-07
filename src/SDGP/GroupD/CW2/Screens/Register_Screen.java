@@ -3,6 +3,8 @@ package SDGP.GroupD.CW2.Screens;
 
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -232,10 +234,39 @@ public class Register_Screen extends JPanel {
         String error = validateTextFields();
 
         // Perform form validation
-        if (error.equals("")) { errorLabel.setVisible(false); }
-        else {
+        if (!error.equals("")) {
+            // There is an error
             errorLabel.setText(error);
             errorLabel.setVisible(true);
+        }
+        else {
+            // There is no error, you may proceed
+            errorLabel.setVisible(false);
+
+            // Get the textfield data
+            String usernameText = usernameTextField.getText();
+            String passwordText = passwordTextField.getText();
+            String firstNameText = fnameTextField.getText();
+            String lastNameText = lnameTextField.getText();
+
+            System.out.println(lastNameText);
+
+            // Create the user
+            User user = new User(0001, firstNameText, lastNameText, usernameText, passwordText, "student", 0);
+
+            // Add to the DB
+            DatabaseAPI dbAPI = new DatabaseAPI();
+            if (dbAPI.createUser(user)) {
+                // Write successful, go to the next screen
+                WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                mainFrame.setContentPane(screen);
+                mainFrame.setVisible(true);
+            }
+            else {
+                // Error
+                errorLabel.setText("DB Error"); // TODO: Add actual meaningful DB error
+                errorLabel.setVisible(true);
+            }
         }
     }
 

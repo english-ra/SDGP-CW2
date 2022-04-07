@@ -18,4 +18,12 @@ public class User {
         this.userType   = userType;
         this.teacherID  = teacherID;
     }
+
+    public int getUserID() { return userID; }
+    public String getFirstName() { return firstName; }
+    public String getLastName() { return lastName; }
+    public String getUserName() { return userName; }
+    public String getPassword() { return password; }
+    public String getUserType() { return userType; }
+    public int getTeacherID() { return teacherID; }
 }
