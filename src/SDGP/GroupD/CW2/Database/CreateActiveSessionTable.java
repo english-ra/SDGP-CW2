@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateActiveSessionTable {
-    public static void main(String[] args) {
+
+    public CreateActiveSessionTable() {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -38,7 +39,6 @@ public class CreateActiveSessionTable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-
         }
     }
 }

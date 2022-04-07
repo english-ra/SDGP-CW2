@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateConversationTextTable {
-    public static void main(String[] args) {
+
+    public CreateConversationTextTable() {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
 

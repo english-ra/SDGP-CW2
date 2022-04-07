@@ -37,7 +37,7 @@ public class jdbcCRUD {
             }catch (SQLException ex) {
                 System.err.println("SQLException: " + ex.getMessage());
 
-            }finally {
+            } finally {
                 if (stmt != null) {
                     try {
                         stmt.close();
