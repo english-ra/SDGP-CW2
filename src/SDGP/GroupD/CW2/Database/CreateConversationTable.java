@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class CreateConversationTable {
 
-    public static void main(String[] args) {
+    public CreateConversationTable() {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
 
@@ -45,10 +45,5 @@ public class CreateConversationTable {
             }
 
         }
-
-
-
-
-
     }
 }
