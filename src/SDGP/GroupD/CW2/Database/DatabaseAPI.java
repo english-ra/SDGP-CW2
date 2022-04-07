@@ -20,6 +20,16 @@ public class DatabaseAPI {
                 + user.getPassword() +"','"
                 + user.getUserType() + "', "
                 + user.getTeacherID() +")";
+
+        sqlString = "INSERT INTO users (firstName,lastName,username,password,userType,teacherID)\n" +
+                    "VALUES (" +
+                    "'" + user.getFirstName() + "'," +
+                    "'" + user.getLastName() + "'," +
+                    "'" + user.getUserName() + "'," +
+                    "'" + user.getPassword() + "'," +
+                    "'" + user.getUserType() + "'," +
+                    "" + user.getTeacherID() +
+                    ")";
         try {
             con.setAutoCommit(false);
             stmt = con.createStatement();

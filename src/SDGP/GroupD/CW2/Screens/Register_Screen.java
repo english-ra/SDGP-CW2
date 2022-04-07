@@ -249,8 +249,6 @@ public class Register_Screen extends JPanel {
             String firstNameText = fnameTextField.getText();
             String lastNameText = lnameTextField.getText();
 
-            System.out.println(lastNameText);
-
             // Create the user
             User user = new User(0001, firstNameText, lastNameText, usernameText, passwordText, "student", 0);
 
