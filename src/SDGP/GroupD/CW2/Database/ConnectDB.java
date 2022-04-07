@@ -1,5 +1,7 @@
 package SDGP.GroupD.CW2.Database;
 
+import SDGP.GroupD.CW2.Constants.Constants;
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import javax.swing.JOptionPane;
@@ -12,7 +14,7 @@ public class ConnectDB {
     public static Connection getConnection() {
         try {
             Class.forName("org.sqlite.JDBC");
-            String url = "jdbc:sqlite:test.db";
+            String url = Constants.databaseURL;
             Connection conn = DriverManager.getConnection(url);
             //JOptionPane.showMessageDialog(null, "Connection Established");
             return conn;
