@@ -1,24 +1,18 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateConversationTable {
-
+public class CreateLevelTable {
     public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
-
         String createString;
-
-        //creates the conversation table
-        createString = "CREATE TABLE if not exists Conversation ( \n"
-                + " conversationID INTEGER PRIMARY KEY,\n"
-                + " languageID INTEGER,\n"
-                + " levelID INTEGER ,\n"
-                + " contextID INTEGER ,\n"
-                + " CONSTRAINT fk_LEVEL FOREIGN KEY(levelID) references Level(levelID) , \n"
-                + " CONSTRAINT fk_CONTEXT FOREIGN KEY(contextID) references Context(contextID) , \n"
-                + " CONSTRAINT fk_LANGUAGE FOREIGN KEY(languageID) references Language(languageID) \n"
+        //creates the level table
+        createString = "CREATE TABLE if not exists Level ( \n"
+                + " levelID INTEGER PRIMARY KEY,\n"
+                + " level VARCHAR(15)\n"
                 + ") ;";
         try {
             stmt = con.createStatement();
@@ -43,10 +37,6 @@ public class CreateConversationTable {
             }
 
         }
-
-
-
-
 
     }
 }

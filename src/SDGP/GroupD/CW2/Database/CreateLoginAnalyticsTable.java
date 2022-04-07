@@ -1,23 +1,26 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateContextTable {
+public class CreateLoginAnalyticsTable {
     public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-        //creates the context table
-        createString = "CREATE TABLE if not exists Context ( \n"
-                + " contextID INTEGER PRIMARY KEY,\n"
-                + " context VARCHAR(15)\n"
-                + ") ;";
+        // Creates the LoginAnalytics table
+        createString = "CREATE TABLE if not exists LoginAnalytics ( \n"
+                + " loginAnalyticsID INTEGER PRIMARY KEY,\n"
+                + " login DATETIME,\n"
+                + " logout DATETIME ,\n"
+                + "userID INTEGER, \n"
+                + " CONSTRAINT fk_USER_ANALYTICS FOREIGN KEY(userID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
             con.commit();
-        } catch (
-                SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         } finally {
             if (stmt != null) {
@@ -36,7 +39,5 @@ public class CreateContextTable {
             }
 
         }
-
-
     }
 }

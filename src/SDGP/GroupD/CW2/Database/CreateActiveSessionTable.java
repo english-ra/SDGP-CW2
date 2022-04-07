@@ -1,30 +1,22 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- *
- * @author natty
- */
-public class Createusertable {
-
-    /**
-     * @param args the command line arguments
-     */
+public class CreateActiveSessionTable {
     public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-        createString = "CREATE TABLE if not exists Users ( \n"
-                + " userID INTEGER PRIMARY KEY,\n"
-                + " Fname VARCHAR (15),\n"
-                + " Lname VARCHAR (15),\n"
-                + " username VARCHAR (15) NOT NULL UNIQUE,\n"
-                + " password VARCHAR (100),\n"
-                + " useType VARCHAR (15),\n"
-                + "teacherID INTEGER,\n"
-                + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
+        // Creates the ActiveSession table
+        createString = "CREATE TABLE if not exists ActiveSession ( \n"
+                + " activeSessionID INTEGER PRIMARY KEY,\n"
+                + " dateCreated DATETIME,\n"
+                + "userAID INTEGER, \n"
+                + "userBID INTEGER, \n"
+                + " CONSTRAINT fk_USER_A FOREIGN KEY(userAID) references users(userID)"
+                + " CONSTRAINT fk_USER_B FOREIGN KEY(userBID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -50,4 +42,3 @@ public class Createusertable {
         }
     }
 }
-

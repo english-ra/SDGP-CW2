@@ -1,19 +1,26 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateLoginAnalyticsTable {
-    public static void main(String[] args) {
+public class CreatePracticeFeedbackTable {
+    public static void main(String args[]) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-        // Creates the LoginAnalytics table
-        createString = "CREATE TABLE if not exists LoginAnalytics ( \n"
-                + " loginAnalyticsID INTEGER PRIMARY KEY,\n"
-                + " login DATETIME,\n"
-                + " logout DATETIME ,\n"
+        // Creates the PracticeFeedback table
+        createString = "CREATE TABLE if not exists PracticeFeedback ( \n"
+                + " practiceFeedbackID INTEGER PRIMARY KEY,\n"
+                + " dateLogged DATETIME,\n"
+                + "notes VARCHAR(30000), \n"
+                + "score INTEGER, \n"
+                + "convoID INTEGER, \n"
                 + "userID INTEGER, \n"
-                + " CONSTRAINT fk_USER_ANALYTICS FOREIGN KEY(userID) references users(userID)  \n" + ") ;";
+                + "loggedByID INTEGER, \n"
+                + " CONSTRAINT fk_CONVO FOREIGN KEY(convoID) references Conversation(conversationID)"
+                + " CONSTRAINT fk_USER_FEEDBACK_A FOREIGN KEY(userID) references users(userID)"
+                + " CONSTRAINT fk_USER_FEEDBACK_B FOREIGN KEY(loggedByID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -35,7 +42,7 @@ public class CreateLoginAnalyticsTable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-
         }
+
     }
 }

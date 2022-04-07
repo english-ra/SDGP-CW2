@@ -1,3 +1,5 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;

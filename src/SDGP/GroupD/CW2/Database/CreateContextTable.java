@@ -1,25 +1,25 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateActiveSessionTable {
+public class CreateContextTable {
     public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-        // Creates the ActiveSession table
-        createString = "CREATE TABLE if not exists ActiveSession ( \n"
-                + " activeSessionID INTEGER PRIMARY KEY,\n"
-                + " dateCreated DATETIME,\n"
-                + "userAID INTEGER, \n"
-                + "userBID INTEGER, \n"
-                + " CONSTRAINT fk_USER_A FOREIGN KEY(userAID) references users(userID)"
-                + " CONSTRAINT fk_USER_B FOREIGN KEY(userBID) references users(userID)  \n" + ") ;";
+        //creates the context table
+        createString = "CREATE TABLE if not exists Context ( \n"
+                + " contextID INTEGER PRIMARY KEY,\n"
+                + " context VARCHAR(15)\n"
+                + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
             con.commit();
-        } catch (SQLException ex) {
+        } catch (
+                SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
         } finally {
             if (stmt != null) {
@@ -38,5 +38,7 @@ public class CreateActiveSessionTable {
             }
 
         }
+
+
     }
 }

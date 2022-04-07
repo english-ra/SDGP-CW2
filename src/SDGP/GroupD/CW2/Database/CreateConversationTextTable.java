@@ -1,24 +1,26 @@
+package SDGP.GroupD.CW2.Database;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreatePracticeFeedbackTable {
-    public static void main(String args[]) {
+public class CreateConversationTextTable {
+    public static void main(String[] args) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
+
         String createString;
-        // Creates the PracticeFeedback table
-        createString = "CREATE TABLE if not exists PracticeFeedback ( \n"
-                + " practiceFeedbackID INTEGER PRIMARY KEY,\n"
-                + " dateLogged DATETIME,\n"
-                + "notes VARCHAR(30000), \n"
-                + "score INTEGER, \n"
-                + "convoID INTEGER, \n"
-                + "userID INTEGER, \n"
-                + "loggedByID INTEGER, \n"
-                + " CONSTRAINT fk_CONVO FOREIGN KEY(convoID) references Conversation(conversationID)"
-                + " CONSTRAINT fk_USER_FEEDBACK_A FOREIGN KEY(userID) references users(userID)"
-                + " CONSTRAINT fk_USER_FEEDBACK_B FOREIGN KEY(loggedByID) references users(userID)  \n" + ") ;";
+
+        //creates the conversation text table
+        createString = "CREATE TABLE if not exists ConversationText ( \n"
+                + " conversationTextID INTEGER PRIMARY KEY,\n"
+                + " text VARCHAR(3000),\n"
+                + " promp VARCHAR(3000) ,\n"
+                + " person VARCHAR(1) , \n"
+                + " posiionInConvo INTEGER, \n"
+                + " conversationsID INTEGER, \n"
+                + " CONSTRAINT fk_CO FOREIGN KEY(conversationsID) references Conversation(conversationID) \n"
+                + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -40,7 +42,7 @@ public class CreatePracticeFeedbackTable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-        }
 
+        }
     }
 }
