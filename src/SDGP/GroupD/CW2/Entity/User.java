@@ -1,4 +1,4 @@
-package SDGP.GroupD.CW2;
+package SDGP.GroupD.CW2.Entity;
 
 public class User {
     private int     userID;
