@@ -6,7 +6,7 @@ import java.sql.Statement;
 
 public class CreateLanguageTable {
 
-    public static void main(String[] args) {
+    public CreateLanguageTable() {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -40,6 +40,6 @@ public class CreateLanguageTable {
 
         }
 
-
     }
+
 }

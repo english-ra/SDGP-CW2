@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateLevelTable {
-    public static void main(String[] args) {
+
+    public CreateLevelTable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -39,4 +40,4 @@ public class CreateLevelTable {
         }
 
     }
-}
+    }

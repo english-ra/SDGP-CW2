@@ -11,10 +11,7 @@ import java.sql.Statement;
  */
 public class Createusertable {
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+    public  Createusertable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -51,5 +48,7 @@ public class Createusertable {
 
         }
     }
-}
+    }
+
+
 
