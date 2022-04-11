@@ -43,7 +43,6 @@ public class PasswordHasher {
 
     public static String generateSecurePassword(String password, String salt) {
         String returnValue = null;
-        System.out.println("Password supplied is: " + password + " Salt: " + salt + "\n");
 
         byte[] securePassword = hash(password.toCharArray(), salt.getBytes());
         returnValue = Base64.getEncoder().encodeToString(securePassword);
