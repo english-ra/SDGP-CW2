@@ -8,25 +8,17 @@ import java.sql.Statement;
 
 public class DatabaseAPI {
 
-    public boolean createUser(User user) {
+    public String createUser(User user) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
 
-        String sqlString = "INSERT INTO users VALUES \n"
-                + "(" + user.getUserID() + ",'"
-                + user.getFirstName() + "','"
-                + user.getLastName() + "','"
-                + user.getUserName() + "','"
-                + user.getPassword() +"','"
-                + user.getUserType() + "', "
-                + user.getTeacherID() +")";
-
-        sqlString = "INSERT INTO users (firstName,lastName,username,password,userType,teacherID)\n" +
+        String sqlString = "INSERT INTO users (firstName,lastName,username,password,passwordSalt,userType,teacherID)\n" +
                     "VALUES (" +
                     "'" + user.getFirstName() + "'," +
                     "'" + user.getLastName() + "'," +
                     "'" + user.getUserName() + "'," +
                     "'" + user.getPassword() + "'," +
+                    "'" + user.getPasswordSalt() + "'," +
                     "'" + user.getUserType() + "'," +
                     "" + user.getTeacherID() +
                     ")";
@@ -36,15 +28,16 @@ public class DatabaseAPI {
             stmt.executeUpdate(sqlString);
             stmt.close();
             con.commit();
-        }catch (SQLException ex) {
+        } catch (SQLException ex) {
             System.err.println("SQLException: " + ex.getMessage());
-
+            return ex.getMessage();
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
                     System.err.println("SQLException: " + e.getMessage());
+                    return e.getMessage();
                 }
             }
             if (con != null){
@@ -52,12 +45,13 @@ public class DatabaseAPI {
                     con.close();
                 } catch (SQLException e) {
                     System.err.println("SQLException: " + e.getMessage());
+                    return e.getMessage();
                 }
             }
         }
 
         // TODO: Error handling
 
-        return true;
+        return "";
     }
 }

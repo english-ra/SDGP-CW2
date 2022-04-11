@@ -255,11 +255,12 @@ public class Register_Screen extends JPanel {
             String securePassword = PasswordHasher.generateSecurePassword(passwordText, salt);
 
             // Create the user
-            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, "student", 0);
+            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, "student", 0);
 
             // Add to the DB
             DatabaseAPI dbAPI = new DatabaseAPI();
-            if (dbAPI.createUser(user)) {
+            String writeError = dbAPI.createUser(user);
+            if (writeError == "") {
                 // Write successful, go to the next screen
                 WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
                 mainFrame.setContentPane(screen);
@@ -267,7 +268,7 @@ public class Register_Screen extends JPanel {
             }
             else {
                 // Error
-                errorLabel.setText("DB Error"); // TODO: Add actual meaningful DB error
+                errorLabel.setText(writeError); // TODO: Add actual meaningful DB error
                 errorLabel.setVisible(true);
             }
         }

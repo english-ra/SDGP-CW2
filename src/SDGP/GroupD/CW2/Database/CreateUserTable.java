@@ -15,6 +15,7 @@ public class CreateUserTable {
                 + " lastName VARCHAR (15),\n"
                 + " username VARCHAR (15) NOT NULL UNIQUE,\n"
                 + " password VARCHAR (100),\n"
+                + " passwordSalt VARCHAR (100) NOT NULL,"
                 + " userType VARCHAR (15),\n"
                 + " teacherID INTEGER,\n"
                 + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
