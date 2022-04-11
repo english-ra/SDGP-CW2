@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Screens;
 
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Constants.SwingActionCommands;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
@@ -32,6 +33,11 @@ public class Register_Screen extends JPanel {
     private BodyLabel lnameTextFieldLabel;
     private MainTextField lnameTextField;
 
+    private BodyLabel radioButtonLabel;
+    private MainRadioButton studentRadioButton;
+    private MainRadioButton teacherRadioButton;
+    private ButtonGroup radioButtonGroup;
+
     private ErrorLabel errorLabel;
     private MainButton submitButton;
     private MainButton backButton;
@@ -49,6 +55,7 @@ public class Register_Screen extends JPanel {
         configureLabels();
         configureTextFields();
         configureNameTextFields();
+        configureRadioButtons();
         configureBackButton();
         configureErrorLabel();
 
@@ -164,6 +171,33 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, lnameTextField, 10, SpringLayout.HORIZONTAL_CENTER, this);
     }
 
+    private void configureRadioButtons() {
+        radioButtonLabel = new BodyLabel("Please select your account type:");
+        add(radioButtonLabel);
+
+        radioButtonGroup = new ButtonGroup();
+
+        studentRadioButton = new MainRadioButton("Student");
+        studentRadioButton.setActionCommand(SwingActionCommands.registerScreenStudentRadioButton);
+        add(studentRadioButton);
+        radioButtonGroup.add(studentRadioButton);
+
+        teacherRadioButton = new MainRadioButton("Teacher");
+        teacherRadioButton.setActionCommand(SwingActionCommands.registerScreenTeacherRadioButton);
+        add(teacherRadioButton);
+        radioButtonGroup.add(teacherRadioButton);
+
+        layout.putConstraint(SpringLayout.NORTH, radioButtonLabel, 10, SpringLayout.SOUTH, fnameTextField);
+        layout.putConstraint(SpringLayout.WEST, radioButtonLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, radioButtonLabel, -20, SpringLayout.EAST, this);
+
+        layout.putConstraint(SpringLayout.NORTH, studentRadioButton, 10, SpringLayout.SOUTH, radioButtonLabel);
+        layout.putConstraint(SpringLayout.WEST, studentRadioButton, 20, SpringLayout.WEST, this);
+
+        layout.putConstraint(SpringLayout.NORTH, teacherRadioButton, 10, SpringLayout.SOUTH, radioButtonLabel);
+        layout.putConstraint(SpringLayout.WEST, teacherRadioButton, 40, SpringLayout.EAST, studentRadioButton);
+    }
+
     private void configureBackButton() {
         submitButton = new MainButton("Register", Colours.mainFG);
         add(submitButton);
@@ -222,8 +256,8 @@ public class Register_Screen extends JPanel {
     }
 
     private String validateTextFields() {
-        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || confirmPasswordTextField.getText().equals("") || fnameTextField.getText().equals("") || lnameTextField.getText().equals("")) {
-            return "Please ensure that all text fields are filled out.";
+        if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("") || confirmPasswordTextField.getText().equals("") || fnameTextField.getText().equals("") || lnameTextField.getText().equals("") || radioButtonGroup.getSelection() == null) {
+            return "Please ensure that all fields are filled out.";
         } else {
             // All the text fields are filled out
             if (!passwordTextField.getText().equals(confirmPasswordTextField.getText())) { return "The passwords do not match."; }
@@ -249,13 +283,14 @@ public class Register_Screen extends JPanel {
             String passwordText = passwordTextField.getText();
             String firstNameText = fnameTextField.getText();
             String lastNameText = lnameTextField.getText();
+            String accountType = radioButtonGroup.getSelection().getActionCommand();
 
             // Hash the password
             String salt = PasswordHasher.getSalt(100);
             String securePassword = PasswordHasher.generateSecurePassword(passwordText, salt);
 
             // Create the user
-            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, "student", 0);
+            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, accountType, 0);
 
             // Add to the DB
             DatabaseAPI dbAPI = new DatabaseAPI();
