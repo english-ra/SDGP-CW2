@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreateLoginAnalyticsTable {
-    public static void main(String[] args) {
+
+    public CreateLoginAnalyticsTable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -40,4 +41,6 @@ public class CreateLoginAnalyticsTable {
 
         }
     }
-}
+
+    }
+

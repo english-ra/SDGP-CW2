@@ -1,5 +1,6 @@
 package SDGP.GroupD.CW2;
 
+import SDGP.GroupD.CW2.Database.CreateDatabase;
 import SDGP.GroupD.CW2.Screens.Landing_Screen;
 
 import javax.swing.*;
@@ -9,6 +10,9 @@ public class Main {
     static JFrame mainframe = new JFrame();
 
     public static void main(String[] args) {
+
+        // Create the database
+        createDatabase();
 
         // Configure the mainframe
         configureMainframe();
@@ -29,6 +33,10 @@ public class Main {
         Landing_Screen landingScreen = new Landing_Screen(mainframe);
         mainframe.setContentPane(landingScreen);
         mainframe.setVisible(true);
+    }
+
+    private static void createDatabase() {
+        new CreateDatabase();
     }
 }
 

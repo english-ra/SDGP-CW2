@@ -4,28 +4,20 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-
-/**
- *
- * @author natty
- */
-public class Createusertable {
-
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
+public class CreateUserTable {
+    public CreateUserTable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
         createString = "CREATE TABLE if not exists Users ( \n"
-                + " userID INTEGER PRIMARY KEY,\n"
-                + " Fname VARCHAR (15),\n"
-                + " Lname VARCHAR (15),\n"
+                + " userID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " firstName VARCHAR (15),\n"
+                + " lastName VARCHAR (15),\n"
                 + " username VARCHAR (15) NOT NULL UNIQUE,\n"
                 + " password VARCHAR (100),\n"
-                + " useType VARCHAR (15),\n"
-                + "teacherID INTEGER,\n"
+                + " passwordSalt VARCHAR (100) NOT NULL,"
+                + " userType VARCHAR (15),\n"
+                + " teacherID INTEGER,\n"
                 + " CONSTRAINT fk_teachers FOREIGN KEY(teacherID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
@@ -48,8 +40,6 @@ public class Createusertable {
                     System.err.println("SQLException: " + e.getMessage());
                 }
             }
-
         }
     }
 }
-

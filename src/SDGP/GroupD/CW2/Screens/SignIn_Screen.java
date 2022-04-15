@@ -1,7 +1,10 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +28,13 @@ public class SignIn_Screen extends JPanel {
 
     private ArrayList uiFlow;
 
+    private DatabaseAPI db;
+
+
     public SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame  = mainFrame;
         this.uiFlow = uiFlow;
+        this.db = new DatabaseAPI();
 
         // Configure the UI
         configureRootPanel();
@@ -152,11 +159,48 @@ public class SignIn_Screen extends JPanel {
         if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             errorLabel.setText("Please ensure that all forms are filled out.");
             errorLabel.setVisible(true);
+
         } else {
             // Ensure that the error label is hidden
             errorLabel.setVisible(false);
-        }
-    }
+
+            String username = usernameTextField.getText();
+            String password = passwordTextField.getText();
+
+        //call database to check if user exists
+        //if user exists, check if password is correct
+        //if password is correct, go to main menu
+        //if password is incorrect, show error message
+        //if user does not exist, show error message
+            User user = db.getUser(username);
+            if (user == null) {
+                errorLabel.setText("This user does not exist in the database.");
+                errorLabel.setVisible(true);
+            }
+            else {
+                //make sure error label hidden as user exists
+                errorLabel.setVisible(false);
+                if (PasswordHasher.verifyPassword(password, user.getPassword(), user.getPasswordSalt())) {
+                    //login successful
+                    //System.out.println("Login successful");
+                    WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                    mainFrame.setContentPane(screen);
+                    mainFrame.setVisible(true);
+                }
+                else{
+                    errorLabel.setText("Incorrect password.");
+                    errorLabel.setVisible(true);
+                }
+
+                }
+            }
+
+
+
+
+
+   }
+
 
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
@@ -165,49 +209,3 @@ public class SignIn_Screen extends JPanel {
         mainFrame.setVisible(true);
     }
 }
-
-//public class SDGP.GroupD.CW2.Screens.SignIn_Screen extends JPanel {
-//    private JPanel mainPanel;
-//
-//    private SDGP.GroupD.CW2.UIComponents.TitleLabel titleLabel;
-//    private SDGP.GroupD.CW2.UIComponents.SubtitleLabel subtitleLabel;
-//    private SDGP.GroupD.CW2.UIComponents.MainTextField usernameTextField;
-//    private SDGP.GroupD.CW2.UIComponents.MainTextField passwordTextField;
-//
-//    private JButton backButton;
-//
-//    private JFrame mainFrame;
-//    private ArrayList uiFlow;
-//
-//    public SDGP.GroupD.CW2.Screens.SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
-//        this.mainFrame  = mainFrame;
-//        this.uiFlow     = uiFlow;
-//
-//        // Configure the UI
-//        configureRootPanel();
-////        configureButtonListeners();
-//    }
-//
-//    public void configureRootPanel() {
-//        mainPanel = new JPanel();
-//        mainPanel.setBackground(new Color(20, 54, 66));
-//    }
-//
-//    private void configureButtonListeners() {
-//        backButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                backButtonClicked();
-//            }
-//        });
-//    }
-//
-//    private void backButtonClicked() {
-////        uiFlow.remove(uiFlow.size() - 1);
-////        LandingScreen previousView = (LandingScreen) uiFlow.get(uiFlow.size() - 1);
-////        mainFrame.setContentPane(previousView.getMainPanel());
-////        mainFrame.setVisible(true);
-//    }
-//
-//    public JPanel getMainPanel() { return mainPanel; }
-//}

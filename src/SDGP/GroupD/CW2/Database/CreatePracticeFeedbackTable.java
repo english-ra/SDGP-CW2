@@ -5,7 +5,8 @@ import java.sql.SQLException;
 import java.sql.Statement;
 
 public class CreatePracticeFeedbackTable {
-    public static void main(String args[]) {
+
+    public CreatePracticeFeedbackTable() {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
@@ -45,4 +46,5 @@ public class CreatePracticeFeedbackTable {
         }
 
     }
-}
+
+    }
