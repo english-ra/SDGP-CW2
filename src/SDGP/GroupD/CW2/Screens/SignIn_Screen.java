@@ -152,11 +152,13 @@ public class SignIn_Screen extends JPanel {
         if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             errorLabel.setText("Please ensure that all forms are filled out.");
             errorLabel.setVisible(true);
+            //get data currently in text fields, call API function to check if user exists, if so, call API function to check if password is correct
         } else {
             // Ensure that the error label is hidden
             errorLabel.setVisible(false);
         }
-    }
+   }
+
 
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);

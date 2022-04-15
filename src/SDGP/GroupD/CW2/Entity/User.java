@@ -10,6 +10,7 @@ public class User {
     private String  userType;
     private int     teacherID;
 
+    public User(){}
     public User(int userID, String firstName, String lastName, String userName, String password, String passwordSalt, String userType, int teacherID) {
         this.userID         = userID;
         this.firstName      = firstName;
@@ -29,4 +30,15 @@ public class User {
     public String getPasswordSalt() { return passwordSalt; }
     public String getUserType() { return userType; }
     public int getTeacherID() { return teacherID; }
+
+    public void setUserID(int userID) { this.userID = userID;}
+    public void setFirstName(String firstName) { this.firstName = firstName; }
+    public void setLastName(String lastName) { this.lastName = lastName; }
+    public void setUserName(String userName) { this.userName = userName; }
+    public void setPassword(String password) { this.password = password; }
+    public void setPasswordSalt(String passwordSalt) { this.passwordSalt = passwordSalt; }
+    public void setUserType(String userType) { this.userType = userType; }
+    public void setTeacherID(int teacherID) { this.teacherID = teacherID; }
 }
+
+
