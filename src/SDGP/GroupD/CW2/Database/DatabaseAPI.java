@@ -12,11 +12,11 @@ import java.sql.ResultSetMetaData;
 public class DatabaseAPI {
 
     //USE THIS TO TEST
-//    public static void main(String[] args) {
-//        DatabaseAPI db = new DatabaseAPI();
-//        User u = db.getUser("reece");
-//        System.out.println(u.getFirstName());
-//    }
+    public static void main(String[] args) {
+        DatabaseAPI db = new DatabaseAPI();
+        User u = db.getUser("reece");
+        System.out.println(u.getFirstName());
+    }
 
     public String createUser(User user) {
         Connection con = ConnectDB.getConnection();

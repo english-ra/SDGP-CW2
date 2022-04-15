@@ -1,7 +1,10 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,9 +28,13 @@ public class SignIn_Screen extends JPanel {
 
     private ArrayList uiFlow;
 
+    private DatabaseAPI db;
+
+
     public SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame  = mainFrame;
         this.uiFlow = uiFlow;
+        this.db = new DatabaseAPI();
 
         // Configure the UI
         configureRootPanel();
@@ -152,11 +159,46 @@ public class SignIn_Screen extends JPanel {
         if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             errorLabel.setText("Please ensure that all forms are filled out.");
             errorLabel.setVisible(true);
-            //get data currently in text fields, call API function to check if user exists, if so, call API function to check if password is correct
+
         } else {
             // Ensure that the error label is hidden
             errorLabel.setVisible(false);
-        }
+
+            String username = usernameTextField.getText();
+            String password = passwordTextField.getText();
+
+        //call database to check if user exists
+        //if user exists, check if password is correct
+        //if password is correct, go to main menu
+        //if password is incorrect, show error message
+        //if user does not exist, show error message
+            User user = db.getUser(username);
+            if (user == null) {
+                errorLabel.setText("This user does not exist in the database.");
+                errorLabel.setVisible(true);
+            }
+            else {
+                //make sure error label hidden as user exists
+                errorLabel.setVisible(false);
+                if (PasswordHasher.verifyPassword(password, user.getPassword(), user.getPasswordSalt())) {
+                    //login successful
+                    //System.out.println("Login successful");
+                    WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                    mainFrame.setContentPane(screen);
+                    mainFrame.setVisible(true);
+                }
+                else{
+                    errorLabel.setText("Incorrect password.");
+                    errorLabel.setVisible(true);
+                }
+
+                }
+            }
+
+
+
+
+
    }
 
 
