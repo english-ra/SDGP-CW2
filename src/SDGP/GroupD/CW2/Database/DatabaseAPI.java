@@ -65,6 +65,12 @@ public class DatabaseAPI {
         return "";
     }
 
+
+    public Boolean createConversation() {
+
+    }
+
+
     public User getUser(String username) {
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
