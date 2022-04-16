@@ -152,6 +152,9 @@ public class SignIn_Screen extends JPanel {
         if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
             errorLabel.setText("Please ensure that all forms are filled out.");
             errorLabel.setVisible(true);
+
+
+
         } else {
             // Ensure that the error label is hidden
             errorLabel.setVisible(false);
