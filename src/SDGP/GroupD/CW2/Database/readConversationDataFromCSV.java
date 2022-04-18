@@ -1,5 +1,8 @@
 package SDGP.GroupD.CW2.Database;
 
+import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.ConversationText;
+
 import java.io.BufferedReader;
 import java.io.DataInputStream;
 import java.io.FileInputStream;
@@ -10,6 +13,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 
 public class readConversationDataFromCSV {
+
+    DatabaseAPI db = new DatabaseAPI();
 
     public static void main(String[] args) {
         readConversationDataFromCSV r = new readConversationDataFromCSV();
@@ -36,6 +41,11 @@ public class readConversationDataFromCSV {
 
             list.remove(0);
             Iterator itr;
+
+            Conversation c = null;
+            ConversationText ct = null;
+            int textPosition = 0;
+
             for (itr = list.iterator(); itr.hasNext();) {
                 String str = itr.next().toString();
                 String[] splitSt = str.split(",");
@@ -56,31 +66,45 @@ public class readConversationDataFromCSV {
 //                    System.out.println("EXCEPTION CAUGHT!");
                 }
 
+                // Find the start of the conversation
+                if (level != "" && context != "") {
+                    // It's the start of a new conversation
+                    c = new Conversation("Spanish", level, context);
+                    textPosition = 0;
 
+                    if (db.createConversation(c)) {
+                        // The write was successful
+                        System.out.println("The write was successful. Primary key: " + c.getConversationID());
+                    } else {
+                        // The write failed
+                        System.out.println("The write failed!");
+                    }
 
+                    ct = new ConversationText(text, prompt, textPosition, person, c.getConversationID());
+                    if (db.createConversationText(ct)) {
+                        // The write was successful
+                        System.out.println("The write was successful");
+                    } else {
+                        // The write failed
+                        System.out.println("The write failed!");
+                    }
 
-
-
-//                if (!IdChecker.contains(splitSt[0])) {
-//                    IdChecker.add(splitSt[0]);
-//                    int empID = Integer.parseInt(splitSt[0]);
-//                    String empName = splitSt[1];
-//                    String empJob = splitSt[2];
-//                    int empSal = Integer.parseInt(splitSt[3]);
-//                    String sqlString = "INSERT INTO employee (empName, empID, empSal, empJob) VALUES \n" + "('" + empName + "'," + empID + "," + empSal + ",'" + empJob + "')";
-//                    con.setAutoCommit(false);
-//                    stmt = con.createStatement();
-//                    stmt.executeUpdate(sqlString);
-//                    stmt.close();
-//                    con.commit();
-//                } else {
-//                    System.out.println("duplicate record, with pk :" + splitSt[0]);
-//                }
+                } else {
+                    // It is a text in a conversation
+                    ct = new ConversationText(text, prompt, textPosition, person, c.getConversationID());
+                    if (db.createConversationText(ct)) {
+                        // The write was successful
+                        System.out.println("The write was successful");
+                    } else {
+                        // The write failed
+                        System.out.println("The write failed!");
+                    }
+                }
+                textPosition++;
             }
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
-//        jdbcCrud.showAll();
     }
 }
