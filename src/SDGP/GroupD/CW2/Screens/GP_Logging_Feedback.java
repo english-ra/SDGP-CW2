@@ -166,6 +166,7 @@ public class GP_Logging_Feedback extends JPanel {
         String notes = "";
         Integer score = -1;
 
+
         //if textfield and or textarea is empty then show error label
         if (textField.getText().equals("") || textArea.getText().equals("")) {
             errorLabel.setText("Please Enter the Field Correctly");
