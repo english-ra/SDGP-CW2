@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Entity.User;
 
 import java.sql.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 
 public class DatabaseAPI {
@@ -15,8 +16,6 @@ public class DatabaseAPI {
         DatabaseAPI db = new DatabaseAPI();
 //        User u = db.getUser("reece");
 //        System.out.println(u.getFirstName());
-
-        System.out.println(db.getConversationLanguages());
     }
 
     public String createUser(User user) {
@@ -219,9 +218,7 @@ public class DatabaseAPI {
             stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                languages.add(rs.getString("language"));
-            }
+            while (rs.next()) { languages.add(rs.getString("language")); }
 
             stmt.close();
             con.commit();
@@ -229,21 +226,14 @@ public class DatabaseAPI {
             System.out.println(e);
         } finally {
             if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
             }
             if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
             }
         }
-
         return languages.toArray(new String[0]);
     }
 
@@ -262,9 +252,7 @@ public class DatabaseAPI {
             stmt.setString(2, level);
             ResultSet rs = stmt.executeQuery();
 
-            while (rs.next()) {
-                contexts.add(rs.getString("context"));
-            }
+            while (rs.next()) { contexts.add(rs.getString("context")); }
 
             stmt.close();
             con.commit();
@@ -272,18 +260,12 @@ public class DatabaseAPI {
             System.out.println(e);
         } finally {
             if (stmt != null) {
-                try {
-                    stmt.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
             }
             if (con != null) {
-                try {
-                    con.close();
-                } catch (SQLException e) {
-                    System.err.println("SQLException: " + e.getMessage());
-                }
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
             }
         }
         return contexts.toArray(new String[0]);
