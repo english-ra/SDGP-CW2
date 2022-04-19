@@ -12,8 +12,8 @@ public class CreatePracticeFeedbackTable {
         String createString;
         // Creates the PracticeFeedback table
         createString = "CREATE TABLE if not exists PracticeFeedback ( \n"
-                + " practiceFeedbackID INTEGER PRIMARY KEY,\n"
-                + " dateLogged DATETIME,\n"
+                + " practiceFeedbackID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " dateLogged VARCHAR(50),\n"
                 + "notes VARCHAR(30000), \n"
                 + "score INTEGER, \n"
                 + "convoID INTEGER, \n"
