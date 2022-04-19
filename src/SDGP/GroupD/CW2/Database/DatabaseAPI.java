@@ -17,6 +17,7 @@ public class DatabaseAPI {
         DatabaseAPI db = new DatabaseAPI();
 //        User u = db.getUser("reece");
 //        System.out.println(u.getFirstName());
+
     }
 
     public String createUser(User user) {
