@@ -1,7 +1,9 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Entity.UserFeedback;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
@@ -10,6 +12,9 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.text.SimpleDateFormat;
+import java.text.ParseException;
+import java.util.Date;
 
 
 public class GP_Logging_Feedback extends JPanel {
@@ -45,6 +50,7 @@ public class GP_Logging_Feedback extends JPanel {
 
 
     public static void main(String[] args) {
+
         JFrame mainframe = new JFrame();
 
         mainframe.setTitle("PerriLingo");
@@ -157,23 +163,53 @@ public class GP_Logging_Feedback extends JPanel {
 
     }
     private void nextButtonClicked() {
+        String notes = "";
+        Integer score = -1;
+
 
         //if textfield and or textarea is empty then show error label
-        if(textField.getText().equals("") || textArea.getText().equals("")){
+        if (textField.getText().equals("") || textArea.getText().equals("")) {
             errorLabel.setText("Please Enter the Field Correctly");
             errorLabel.setVisible(true);
-        }
-        else {
+        } else {
             errorLabel.setVisible(false);
             // Get the textfield & TextArea data
-            String feedbackText = textArea.getText();
+            notes = textArea.getText();
             try {
-                Integer scoreText = Integer.parseInt(textField.getText());
-            }
-            catch (NumberFormatException e){
+                score = Integer.parseInt(textField.getText());
+            } catch (NumberFormatException e) {
                 errorLabel.setText("Please Enter A number");
                 errorLabel.setVisible(true);
             }
+
+
+            //GETTING CURRENT DATE AND SETTING IT AS DATELOGGED
+            Date date = new Date();
+            SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
+            String dateLogged = formatter.format(date);
+
+            // Create the user feedback object
+            //EVENTUALLY implement all the FKs properly
+            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, 0, 0, 0);
+
+            //add the user feedback to the database
+            DatabaseAPI db = new DatabaseAPI();
+            if (db.createUserFeedback(userFeedback)) {
+                //if we are in here then write has been succesfully saved
+                System.out.println("User feedback saved");
+            }else{
+                //if we are in here then write has not been succesfully saved
+                System.out.println("User feedback not saved");
+            }
+
+
+
+
+
+        }
+    }
+}
+
 
 
 
@@ -181,9 +217,3 @@ public class GP_Logging_Feedback extends JPanel {
 //
 //            // Create the user
 //            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, accountType, 0);
-
-        }
-    }
-
-
-}

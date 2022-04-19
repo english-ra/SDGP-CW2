@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Database;
 import SDGP.GroupD.CW2.Entity.Conversation;
 import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Entity.UserFeedback;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -269,6 +270,49 @@ public class DatabaseAPI {
             }
         }
         return contexts.toArray(new String[0]);
+    }
+
+    public boolean createUserFeedback(UserFeedback userFeedback) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO PracticeFeedback VALUES(?,?,?,?,?,?,?)");
+            stmt.setString(2, userFeedback.getDateLogged());
+            stmt.setString(3, userFeedback.getNotes());
+            stmt.setInt(4, userFeedback.getScore());
+            stmt.setInt(5, userFeedback.getConversationID());
+            stmt.setInt(6, userFeedback.getUserID());
+            stmt.setInt(7, userFeedback.getLoggedByID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 

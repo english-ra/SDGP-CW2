@@ -1,9 +1,11 @@
 package SDGP.GroupD.CW2.Entity;
 
+import java.util.Date;
+
 public class UserFeedback {
 
     private int progressID; //PK
-    private int dateLogged;
+    private String dateLogged;
     private String notes;
     private int score;
     private int conversationID; //FK
@@ -13,7 +15,7 @@ public class UserFeedback {
     //commented out two out of three constructors as they are not needed currently.
 //    public UserFeedback() {}
 
-    public UserFeedback(int dateLogged, String notes, int score, int conversationID, int userID, int loggedByID) {
+    public UserFeedback(String dateLogged, String notes, int score, int conversationID, int userID, int loggedByID) {
         this.progressID = 0;
         this.dateLogged = dateLogged;
         this.notes = notes;
@@ -31,7 +33,7 @@ public class UserFeedback {
 //    }
 
     public int getProgressID() { return progressID; }
-    public int getDateLogged() { return dateLogged; }
+    public String getDateLogged() { return dateLogged; }
     public String getNotes() { return notes; }
     public int getScore() { return score; }
     public int getConversationID() { return conversationID; }
@@ -39,11 +41,10 @@ public class UserFeedback {
     public int getLoggedByID() { return loggedByID; }
 
     public void setProgressID(int progressID) { this.progressID = progressID; }
-    public void setDateLogged(int dateLogged) { this.dateLogged = dateLogged; }
+    public void setDateLogged(String dateLogged) { this.dateLogged = dateLogged; }
     public void setNotes(String notes) { this.notes = notes; }
     public void setScore(int score) { this.score = score; }
     public void setConversationID(int conversationID) { this.conversationID = conversationID; }
     public void setUserID(int userID) { this.userID = userID; }
     public void setLoggedByID(int loggedByID) { this.loggedByID = loggedByID; }
 }
-
