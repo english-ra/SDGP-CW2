@@ -210,7 +210,7 @@ public class DatabaseAPI {
     public String[] getConversationLanguages() {
         Connection con = null;
         PreparedStatement stmt = null;
-        ArrayList<String> languages = null;
+        ArrayList<String> languages = new ArrayList<String>();
 
         try {
             con = ConnectDB.getConnection();
@@ -219,7 +219,6 @@ public class DatabaseAPI {
             stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
             ResultSet rs = stmt.executeQuery();
 
-            languages = new ArrayList<String>();
             while (rs.next()) {
                 languages.add(rs.getString("language"));
             }
@@ -228,14 +227,12 @@ public class DatabaseAPI {
             con.commit();
         } catch (SQLException e) {
             System.out.println(e);
-            return null;
         } finally {
             if (stmt != null) {
                 try {
                     stmt.close();
                 } catch (SQLException e) {
                     System.err.println("SQLException: " + e.getMessage());
-                    return null;
                 }
             }
             if (con != null) {
@@ -243,7 +240,6 @@ public class DatabaseAPI {
                     con.close();
                 } catch (SQLException e) {
                     System.err.println("SQLException: " + e.getMessage());
-                    return null;
                 }
             }
         }
@@ -252,48 +248,45 @@ public class DatabaseAPI {
     }
 
 
-//    public String[] getConversationContexts() {
-//        Connection con = null;
-//        PreparedStatement stmt = null;
-//        ArrayList<String> contexts = null;
-//
-//        try {
-//            con = ConnectDB.getConnection();
-//            con.setAutoCommit(false);
-//
-//            stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
-//            ResultSet rs = stmt.executeQuery();
-//
-//            languages = new ArrayList<String>();
-//            while (rs.next()) {
-//                languages.add(rs.getString("language"));
-//            }
-//
-//            stmt.close();
-//            con.commit();
-//        } catch (SQLException e) {
-//            System.out.println(e);
-//            return null;
-//        } finally {
-//            if (stmt != null) {
-//                try {
-//                    stmt.close();
-//                } catch (SQLException e) {
-//                    System.err.println("SQLException: " + e.getMessage());
-//                    return null;
-//                }
-//            }
-//            if (con != null) {
-//                try {
-//                    con.close();
-//                } catch (SQLException e) {
-//                    System.err.println("SQLException: " + e.getMessage());
-//                    return null;
-//                }
-//            }
-//        }
-//
-//        return languages.toArray(new String[0]);
-//    }
+    public String[] getConversationContexts(String language, String level) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<String> contexts = new ArrayList<String>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT DISTINCT context FROM Conversation WHERE language = ? AND level = ? ORDER BY context");
+            stmt.setString(1, language);
+            stmt.setString(2, level);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                contexts.add(rs.getString("context"));
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+        return contexts.toArray(new String[0]);
+    }
 }
 

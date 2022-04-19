@@ -145,8 +145,12 @@ public class GP_Language_Select_Screen extends JPanel {
             return;
         }
 
+        // Get the selected language
+        int selectedIndex = languageList.list.getSelectedIndex();
+        String selectedLanguage = listData[selectedIndex];
+
         // Go to the level selection screen
-        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow);
+        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow, selectedLanguage);
         uiFlow.add(levelSelectScreen);
 
         mainframe.setContentPane(levelSelectScreen);

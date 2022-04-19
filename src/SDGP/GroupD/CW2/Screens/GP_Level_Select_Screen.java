@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 public class GP_Level_Select_Screen extends JPanel {
     private JFrame mainframe;
+    private String language;
     private SpringLayout layout;
     private ArrayList<JPanel> uiFlow;
 
@@ -26,9 +27,10 @@ public class GP_Level_Select_Screen extends JPanel {
 
     private PlainButton backButton;
 
-    public GP_Level_Select_Screen(JFrame mainframe, ArrayList uiFlow) {
+    public GP_Level_Select_Screen(JFrame mainframe, ArrayList uiFlow, String language) {
         this.mainframe = mainframe;
         this.uiFlow = uiFlow;
+        this.language = language;
 
         // Configure the UI
         configureRootPanel();
@@ -151,9 +153,9 @@ public class GP_Level_Select_Screen extends JPanel {
         c2Button.addActionListener(selectButtonListener);
     }
 
-    private void selectionButtonClicked(String button) {
+    private void selectionButtonClicked(String level) {
         // Go to the context selection screen
-        GP_Context_Select_Screen contextSelectScreen = new GP_Context_Select_Screen(mainframe, uiFlow);
+        GP_Context_Select_Screen contextSelectScreen = new GP_Context_Select_Screen(mainframe, uiFlow, language, level);
         uiFlow.add(contextSelectScreen);
 
         mainframe.setContentPane(contextSelectScreen);

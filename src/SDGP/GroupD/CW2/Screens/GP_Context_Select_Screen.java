@@ -1,5 +1,6 @@
 package SDGP.GroupD.CW2.Screens;
 
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Constants.Colours;
 
@@ -23,9 +24,14 @@ public class GP_Context_Select_Screen extends JPanel {
     private MainButton nextButton;
     private PlainButton backButton;
 
-    public GP_Context_Select_Screen(JFrame mainframe, ArrayList uiFlow) {
+    private String language;
+    private String level;
+
+    public GP_Context_Select_Screen(JFrame mainframe, ArrayList uiFlow, String language, String level) {
         this.mainframe = mainframe;
         this.uiFlow = uiFlow;
+        this.language = language;
+        this.level = level;
 
         // Configure the UI
         configureRootPanel();
@@ -68,7 +74,8 @@ public class GP_Context_Select_Screen extends JPanel {
 
 
     private void configureContextList() {
-        String[] contexts = {"Eating", "Shopping", "Running"};
+        DatabaseAPI db = new DatabaseAPI();
+        String[] contexts = db.getConversationContexts(language, level);
 
         contextList = new ScrollableList(contexts);
         add(contextList);
