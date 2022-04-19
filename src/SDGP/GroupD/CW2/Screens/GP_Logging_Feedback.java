@@ -1,7 +1,9 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
 import java.awt.*;
@@ -96,7 +98,6 @@ public class GP_Logging_Feedback extends JPanel {
 
         //CONFIGURING THE TEXT FIELD LABEL
         textField_label = new BodyLabel("What would you rate user out of 10?");
-
         add(textField_label);
 
         layout.putConstraint(SpringLayout.NORTH, textField_label, 20, SpringLayout.SOUTH, textArea);
@@ -157,12 +158,30 @@ public class GP_Logging_Feedback extends JPanel {
     }
     private void nextButtonClicked() {
 
-        if (textField.getText().equals("")) {
-            errorLabel.setText("please enter a number between 1 and 10");
+        //if textfield and or textarea is empty then show error label
+        if(textField.getText().equals("") || textArea.getText().equals("")){
+            errorLabel.setText("Please Enter the Field Correctly");
             errorLabel.setVisible(true);
         }
         else {
             errorLabel.setVisible(false);
+            // Get the textfield & TextArea data
+            String feedbackText = textArea.getText();
+            try {
+                Integer scoreText = Integer.parseInt(textField.getText());
+            }
+            catch (NumberFormatException e){
+                errorLabel.setText("Please Enter A number");
+                errorLabel.setVisible(true);
+            }
+
+
+
+
+//
+//            // Create the user
+//            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, accountType, 0);
+
         }
     }
 
