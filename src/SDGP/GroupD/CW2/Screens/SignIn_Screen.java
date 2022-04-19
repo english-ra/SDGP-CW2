@@ -18,7 +18,9 @@ public class SignIn_Screen extends JPanel {
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
     private MainTextField usernameTextField;
+    private BodyLabel usernameTextFieldLabel;
     private MainTextField passwordTextField;
+    private BodyLabel passwordTextFieldLabel;
 
     private ErrorLabel errorLabel;
     private MainButton submitButton;
@@ -77,21 +79,38 @@ public class SignIn_Screen extends JPanel {
 
     private void configureTextFields() {
 
-        // Configure the user textfield
+        //Configure the Username Label above the username text field below the title label
+        usernameTextFieldLabel = new BodyLabel("Username:");
+        add(usernameTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, usernameTextFieldLabel, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.WEST, usernameTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, usernameTextFieldLabel, -20, SpringLayout.EAST, this);
+
+
+        // Configure the user textfield below the textfieldlabel
         usernameTextField = new MainTextField("");
         add(usernameTextField);
 
-        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 5, SpringLayout.SOUTH, usernameTextFieldLabel);
         layout.putConstraint(SpringLayout.WEST, usernameTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, usernameTextField, -20, SpringLayout.EAST, this);
         usernameTextField.setPreferredSize(new Dimension(0, 50));
 
 
-        // Configure the password textfield
+        //Configure the PasswordTextFieldLabel above the password text field, below the username text field
+        passwordTextFieldLabel = new BodyLabel("Password:");
+        add(passwordTextFieldLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, passwordTextFieldLabel, 20, SpringLayout.SOUTH, usernameTextField);
+        layout.putConstraint(SpringLayout.WEST, passwordTextFieldLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
+
+        // Configure the password textfield below the password textfieldlabel
         passwordTextField = new MainTextField("");
         add(passwordTextField);
 
-        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
+        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);
         layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
         passwordTextField.setPreferredSize(new Dimension(0, 50));
