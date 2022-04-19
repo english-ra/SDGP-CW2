@@ -5,6 +5,7 @@ import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 
 public class DatabaseAPI {
@@ -12,8 +13,10 @@ public class DatabaseAPI {
     //USE THIS TO TEST
     public static void main(String[] args) {
         DatabaseAPI db = new DatabaseAPI();
-        User u = db.getUser("reece");
-        System.out.println(u.getFirstName());
+//        User u = db.getUser("reece");
+//        System.out.println(u.getFirstName());
+
+        System.out.println(db.getConversationLanguages());
     }
 
     public String createUser(User user) {
@@ -202,5 +205,95 @@ public class DatabaseAPI {
 
         return user;
     }
+
+
+    public String[] getConversationLanguages() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<String> languages = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
+            ResultSet rs = stmt.executeQuery();
+
+            languages = new ArrayList<String>();
+            while (rs.next()) {
+                languages.add(rs.getString("language"));
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+            return null;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return null;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return null;
+                }
+            }
+        }
+
+        return languages.toArray(new String[0]);
+    }
+
+
+//    public String[] getConversationContexts() {
+//        Connection con = null;
+//        PreparedStatement stmt = null;
+//        ArrayList<String> contexts = null;
+//
+//        try {
+//            con = ConnectDB.getConnection();
+//            con.setAutoCommit(false);
+//
+//            stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
+//            ResultSet rs = stmt.executeQuery();
+//
+//            languages = new ArrayList<String>();
+//            while (rs.next()) {
+//                languages.add(rs.getString("language"));
+//            }
+//
+//            stmt.close();
+//            con.commit();
+//        } catch (SQLException e) {
+//            System.out.println(e);
+//            return null;
+//        } finally {
+//            if (stmt != null) {
+//                try {
+//                    stmt.close();
+//                } catch (SQLException e) {
+//                    System.err.println("SQLException: " + e.getMessage());
+//                    return null;
+//                }
+//            }
+//            if (con != null) {
+//                try {
+//                    con.close();
+//                } catch (SQLException e) {
+//                    System.err.println("SQLException: " + e.getMessage());
+//                    return null;
+//                }
+//            }
+//        }
+//
+//        return languages.toArray(new String[0]);
+//    }
 }
 
