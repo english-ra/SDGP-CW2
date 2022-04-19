@@ -5,6 +5,8 @@ import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.Date;
 
 
 public class DatabaseAPI {
@@ -12,8 +14,8 @@ public class DatabaseAPI {
     //USE THIS TO TEST
     public static void main(String[] args) {
         DatabaseAPI db = new DatabaseAPI();
-        User u = db.getUser("reece");
-        System.out.println(u.getFirstName());
+//        User u = db.getUser("reece");
+//        System.out.println(u.getFirstName());
     }
 
     public String createUser(User user) {
@@ -201,6 +203,72 @@ public class DatabaseAPI {
         }
 
         return user;
+    }
+
+
+    public String[] getConversationLanguages() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<String> languages = new ArrayList<String>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT DISTINCT language FROM Conversation ORDER BY language");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) { languages.add(rs.getString("language")); }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return languages.toArray(new String[0]);
+    }
+
+
+    public String[] getConversationContexts(String language, String level) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<String> contexts = new ArrayList<String>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT DISTINCT context FROM Conversation WHERE language = ? AND level = ? ORDER BY context");
+            stmt.setString(1, language);
+            stmt.setString(2, level);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) { contexts.add(rs.getString("context")); }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return contexts.toArray(new String[0]);
     }
 }
 

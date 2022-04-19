@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -18,6 +19,7 @@ public class GP_Language_Select_Screen extends JPanel {
     private SubtitleLabel subtitleLabel;
 
     private ScrollableList languageList;
+    private String[] listData;
 
     private ErrorLabel errorLabel;
     private MainButton nextButton;
@@ -81,9 +83,10 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
     private void configureLanguageList() {
-        String[] languages = {"Spanish", "French", "German"};
+        DatabaseAPI db = new DatabaseAPI();
+        listData = db.getConversationLanguages();
 
-        languageList = new ScrollableList(languages);
+        languageList = new ScrollableList(listData);
         add(languageList);
 
         layout.putConstraint(SpringLayout.NORTH, languageList, 20, SpringLayout.SOUTH, subtitleLabel);
@@ -125,9 +128,6 @@ public class GP_Language_Select_Screen extends JPanel {
 
 
 
-
-
-
     private void configureButtonListeners() {
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -145,8 +145,12 @@ public class GP_Language_Select_Screen extends JPanel {
             return;
         }
 
+        // Get the selected language
+        int selectedIndex = languageList.list.getSelectedIndex();
+        String selectedLanguage = listData[selectedIndex];
+
         // Go to the level selection screen
-        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow);
+        GP_Level_Select_Screen levelSelectScreen = new GP_Level_Select_Screen(mainframe, uiFlow, selectedLanguage);
         uiFlow.add(levelSelectScreen);
 
         mainframe.setContentPane(levelSelectScreen);
