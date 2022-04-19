@@ -14,14 +14,14 @@ public class CreateConversationTable {
 
         //creates the conversation table
         createString = "CREATE TABLE if not exists Conversation ( \n"
-                + " conversationID INTEGER PRIMARY KEY,\n"
-                + " languageID INTEGER,\n"
-                + " levelID INTEGER ,\n"
-                + " contextID INTEGER ,\n"
-                + " CONSTRAINT fk_LEVEL FOREIGN KEY(levelID) references Level(levelID) , \n"
-                + " CONSTRAINT fk_CONTEXT FOREIGN KEY(contextID) references Context(contextID) , \n"
-                + " CONSTRAINT fk_LANGUAGE FOREIGN KEY(languageID) references Language(languageID) \n"
-                + ") ;";
+                + " conversationID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " language VARCHAR (100),\n"
+                + " level VARCHAR (100),\n"
+                + " context VARCHAR (100)\n"
+//                + " CONSTRAINT fk_LEVEL FOREIGN KEY(levelID) references Level(levelID) , \n"
+//                + " CONSTRAINT fk_CONTEXT FOREIGN KEY(contextID) references Context(contextID) , \n"
+//                + " CONSTRAINT fk_LANGUAGE FOREIGN KEY(languageID) references Language(languageID) \n"
+                + ");";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);

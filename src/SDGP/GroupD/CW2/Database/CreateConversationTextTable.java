@@ -14,13 +14,13 @@ public class CreateConversationTextTable {
 
         //creates the conversation text table
         createString = "CREATE TABLE if not exists ConversationText ( \n"
-                + " conversationTextID INTEGER PRIMARY KEY,\n"
+                + " conversationTextID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " text VARCHAR(3000),\n"
-                + " promp VARCHAR(3000) ,\n"
+                + " prompt VARCHAR(3000) ,\n"
                 + " person VARCHAR(1) , \n"
-                + " posiionInConvo INTEGER, \n"
-                + " conversationsID INTEGER, \n"
-                + " CONSTRAINT fk_CO FOREIGN KEY(conversationsID) references Conversation(conversationID) \n"
+                + " positionInConvo INTEGER, \n"
+                + " conversationID INTEGER, \n"
+                + " CONSTRAINT fk_CO FOREIGN KEY(conversationID) references Conversation(conversationID) \n"
                 + ") ;";
         try {
             stmt = con.createStatement();

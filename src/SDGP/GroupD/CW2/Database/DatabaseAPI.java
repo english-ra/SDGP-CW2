@@ -1,12 +1,10 @@
 package SDGP.GroupD.CW2.Database;
 
+import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
 
-import java.sql.Connection;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
+import java.sql.*;
 
 
 public class DatabaseAPI {
@@ -64,6 +62,97 @@ public class DatabaseAPI {
 
         return "";
     }
+
+
+    public boolean createConversation(Conversation conversation) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO Conversation VALUES(?,?,?,?)");
+            stmt.setString(2, conversation.getLanguage());
+            stmt.setString(3, conversation.getLevel());
+            stmt.setString(4, conversation.getContext());
+
+            stmt.executeUpdate();
+
+            int primaryKey = stmt.getGeneratedKeys().getInt(1);
+            conversation.setConversationID(primaryKey);
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+
+    public boolean createConversationText(ConversationText conversationText) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO ConversationText VALUES(?,?,?,?,?,?)");
+            stmt.setString(2, conversationText.getText());
+            stmt.setString(3, conversationText.getPrompt());
+            stmt.setString(4, conversationText.getPerson());
+            stmt.setInt(5, conversationText.getPositionInConvo());
+            stmt.setInt(6, conversationText.getConversationID());
+
+            stmt.executeUpdate();
+
+            int primaryKey = stmt.getGeneratedKeys().getInt(1);
+            conversationText.setConversationTextID(primaryKey);
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
 
     public User getUser(String username) {
         Connection con = ConnectDB.getConnection();
