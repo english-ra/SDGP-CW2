@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -9,10 +11,11 @@ public class Choose_user extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    //private MainButton backButton;
+    private MainButton backButton;
     private SpringLayout layout;
 
     private ArrayList uiFlow;
+
 
 
     public Choose_user(JFrame mainFrame, ArrayList uiFlow) {
@@ -23,6 +26,8 @@ public class Choose_user extends JPanel {
         configureRootPanel();
         configureLabels();
         configureJtable();
+        configureBackButton();
+        configureButtonListener();
 
         //configureErrorLabel();
 
@@ -71,7 +76,8 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
-    private void configureJtable(){
+
+    private void configureJtable() {
 
         String data[][] = {};
         String column[] = {"User", "ID"};
@@ -79,6 +85,8 @@ public class Choose_user extends JPanel {
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
         this.add(sp);
+        Border roundedBorder = new LineBorder(Color.gray, 5, true);
+        sp.setBorder(roundedBorder);
 //        this.setSize(300, -200);
 
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
@@ -86,4 +94,28 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
     }
+
+    private void configureBackButton() {
+
+        backButton = new MainButton("< Back");
+        add(backButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
+    }
+
+    private void configureButtonListener() {
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backButtonClicked();
+            }
+        });
+
+    }
+    private void backButtonClicked() {
+
+    }
 }
+
