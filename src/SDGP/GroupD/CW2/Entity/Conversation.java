@@ -1,10 +1,13 @@
 package SDGP.GroupD.CW2.Entity;
 
+import java.util.ArrayList;
+
 public class Conversation {
     private int conversationID;
     private String language;
     private String level;
     private String context;
+    private ArrayList<ConversationText> texts;
 
     public Conversation() {}
 
@@ -13,6 +16,7 @@ public class Conversation {
         this.language = language;
         this.level = level;
         this.context = context;
+        this.texts = new ArrayList<>();
     }
 
     public Conversation(int conversationID, String language, String level, String context) {
@@ -20,6 +24,7 @@ public class Conversation {
         this.language = language;
         this.level = level;
         this.context = context;
+        this.texts = new ArrayList<>();
     }
 
     public int getConversationID() { return conversationID; }

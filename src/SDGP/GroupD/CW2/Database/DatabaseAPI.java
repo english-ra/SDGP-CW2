@@ -61,9 +61,6 @@ public class DatabaseAPI {
                 }
             }
         }
-
-        // TODO: Error handling
-
         return "";
     }
 

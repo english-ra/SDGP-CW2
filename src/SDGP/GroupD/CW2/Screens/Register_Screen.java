@@ -303,7 +303,7 @@ public class Register_Screen extends JPanel {
             }
             else {
                 // Error
-                errorLabel.setText(writeError); // TODO: Add actual meaningful DB error
+                errorLabel.setText(writeError);
                 errorLabel.setVisible(true);
             }
         }
