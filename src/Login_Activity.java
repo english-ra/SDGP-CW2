@@ -1,6 +1,8 @@
 import javax.swing.*;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.*;
 import java.util.ArrayList;
 
 public class Login_Activity extends JPanel {

@@ -1,5 +1,7 @@
 import javax.swing.*;
 import java.awt.*;
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
@@ -80,24 +82,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
     private void configureTwoButtons() {
 
-        //Configure the two buttons
 
-        //Configure Admin "Reset password" button
-        resetpasswordButton = new MainButton("Rest Passwords");
-        add(resetpasswordButton);
-
-        layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, 100, SpringLayout.SOUTH, subtitleLabel);
-        layout.putConstraint(SpringLayout.WEST, resetpasswordButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, resetpasswordButton, -20, SpringLayout.EAST, this);
-
-
-        //Configure Admin "View login activity" button
-        adminviewloginactivityButton = new MainButton("View All Login Activity");
-        add(adminviewloginactivityButton);
-
-        layout.putConstraint(SpringLayout.NORTH, adminviewloginactivityButton, 10, SpringLayout.SOUTH, resetpasswordButton);
-        layout.putConstraint(SpringLayout.WEST, adminviewloginactivityButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, adminviewloginactivityButton, -20, SpringLayout.EAST, this);
 
 
     }

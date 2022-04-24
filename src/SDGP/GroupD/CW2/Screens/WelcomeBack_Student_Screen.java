@@ -14,12 +14,6 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    //private SDGP.GroupD.CW2.UIComponents.MainTextField usernameTextField;
-    //private SDGP.GroupD.CW2.UIComponents.MainTextField passwordTextField;
-
-    //private SDGP.GroupD.CW2.UIComponents.ErrorLabel errorLabel;
-    //private SDGP.GroupD.CW2.UIComponents.MainButton submitButton;
-    //private SDGP.GroupD.CW2.UIComponents.MainButton backButton;
     private MainButton studenttrackprogressButton;
     private MainButton studentviewloginactivityButton;
     private MainButton studentgetstartedlearningButton;
