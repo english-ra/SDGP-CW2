@@ -486,7 +486,7 @@ public class DatabaseAPI {
     public Integer getUserIDFromLocalAppDB() {
         Connection con = null;
         PreparedStatement stmt = null;
-        int userID = -1;
+        Integer userID = null;
 
         try {
             con = ConnectDB.getConnection();
