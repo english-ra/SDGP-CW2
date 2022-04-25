@@ -37,6 +37,18 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         configureButtonListeners();
     }
 
+    public static void main(String[] args) {
+        JFrame mainframe = new JFrame();
+
+        mainframe.setTitle("PerriLingo");
+        mainframe.setSize(350, 750);
+        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        WelcomeBack_Student_Screen r = new WelcomeBack_Student_Screen(mainframe, new ArrayList());
+        mainframe.setContentPane(r);
+        mainframe.setVisible(true);
+    }
+
     // MARK - Configure the UI
     private void configureRootPanel() {
         this.setBackground(Colours.mainBG);
@@ -106,7 +118,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 //    private void configureTextFields() {
 //
 //        // Configure the user textfield
-//        usernameTextField = new MainTextField("");
+//        usernameTextField = new M ainTextField("");
 //        add(usernameTextField);
 //
 //        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);

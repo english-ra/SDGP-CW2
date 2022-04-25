@@ -1,7 +1,7 @@
 import javax.swing.*;
 import java.util.ArrayList;
 
-public class Main {
+public class  Main {
 
     static JFrame mainframe = new JFrame();
 
