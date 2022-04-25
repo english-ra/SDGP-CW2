@@ -16,26 +16,27 @@ public class Partner_Selection_Screen extends JPanel {
     private MainButton registerButton;
     private MainButton signInButton;
     private SubtitleLabel subtitleLabel;
-    private TitleLabel titleLabel;
+    //private TitleLabel titleLabel;
 
-
+    private PlainButton backButton;
     private SpringLayout layout;
 
     private ArrayList uiFlow;
     private ConversationGameplayManager convoGPManager;
 
+
     public Partner_Selection_Screen(JFrame mainFrame, ArrayList<JPanel> uiFlow, ConversationGameplayManager convoGPManager) {
+       
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
         this.convoGPManager = convoGPManager;
-        
+
         // Configure UI
         configureRootPanel();
         configureLogoLabel();
         configureButtons();
         configureButtonListeners();
     }
-   
 
     private void configureRootPanel() {
         this.setBackground(new Color(20, 54, 66));
@@ -76,6 +77,9 @@ public class Partner_Selection_Screen extends JPanel {
         registerButton = new MainButton("Register", Colours.mainFG);
         this.add(registerButton);
 
+        backButton = new PlainButton("Back");
+        add(backButton);
+
         layout.putConstraint(SpringLayout.SOUTH, registerButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, registerButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, registerButton, -20, SpringLayout.EAST, this);
@@ -83,6 +87,10 @@ public class Partner_Selection_Screen extends JPanel {
         layout.putConstraint(SpringLayout.SOUTH, signInButton, -10, SpringLayout.NORTH, registerButton);
         layout.putConstraint(SpringLayout.WEST, signInButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, signInButton, -20, SpringLayout.EAST, this);
+
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
 
 
