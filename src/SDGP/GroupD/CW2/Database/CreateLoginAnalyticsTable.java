@@ -12,10 +12,10 @@ public class CreateLoginAnalyticsTable {
         String createString;
         // Creates the LoginAnalytics table
         createString = "CREATE TABLE if not exists LoginAnalytics ( \n"
-                + " loginAnalyticsID INTEGER PRIMARY KEY,\n"
-                + " login DATETIME,\n"
-                + " logout DATETIME ,\n"
-                + "userID INTEGER, \n"
+                + " loginAnalyticsID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
+                + " date VARCHAR(50),\n"
+                + " action VARCHAR(50) ,\n"
+                + " userID INTEGER, \n"
                 + " CONSTRAINT fk_USER_ANALYTICS FOREIGN KEY(userID) references users(userID)  \n" + ") ;";
         try {
             stmt = con.createStatement();
