@@ -9,11 +9,9 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    //private MainTextField usernameTextField;
-    //private MainTextField passwordTextField;
+
 
     //private ErrorLabel errorLabel;
-    //private MainButton submitButton;
     //private MainButton backButton;
     private MainButton resetpasswordButton;
     private MainButton adminviewloginactivityButton;
@@ -61,7 +59,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new TitleLabel("Welcome!");
+        titleLabel = new TitleLabel("Welcome Back!");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -102,28 +100,6 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
     }
 
-//    private void configureTextFields() {
-//
-//        // Configure the user textfield
-//        usernameTextField = new MainTextField("");
-//        add(usernameTextField);
-//
-//        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
-//        layout.putConstraint(SpringLayout.WEST, usernameTextField, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, usernameTextField, -20, SpringLayout.EAST, this);
-//        usernameTextField.setPreferredSize(new Dimension(0, 50));
-//
-//
-//        // Configure the password textfield
-//        passwordTextField = new MainTextField("");
-//        add(passwordTextField);
-//
-//        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
-//        layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
-//        passwordTextField.setPreferredSize(new Dimension(0, 50));
-//    }
-//
 //    private void configureBackButton() {
 //        submitButton = new MainButton("Sign In");
 //        add(submitButton);
