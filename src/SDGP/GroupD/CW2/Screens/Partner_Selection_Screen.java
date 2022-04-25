@@ -117,7 +117,7 @@ public class Partner_Selection_Screen extends JPanel {
 
 
     private void navigateToSignInScreen() {
-        SignIn_Screen signIn_Screen = new SignIn_Screen(this.mainFrame, this.uiFlow);
+        SignIn_Screen signIn_Screen = new SignIn_Screen(this.mainFrame, this.uiFlow, this.convoGPManager);
         uiFlow.add(signIn_Screen);
 
         //JOHN REMOVED .METHOD GET MAINPANEL()
