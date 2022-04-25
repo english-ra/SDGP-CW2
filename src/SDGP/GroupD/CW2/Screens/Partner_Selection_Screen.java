@@ -25,6 +25,18 @@ public class Partner_Selection_Screen extends JPanel {
     private ConversationGameplayManager convoGPManager;
 
 
+//    public static void main(String[] args) {
+//        JFrame mainframe = new JFrame();
+//
+//        mainframe.setTitle("PerriLingo");
+//        mainframe.setSize(350, 750);
+//        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//
+//        Partner_Selection_Screen r = new Partner_Selection_Screen(mainframe,new ArrayList<>(),null);
+//        mainframe.setContentPane(r);
+//        mainframe.setVisible(true);
+//    }
+
     public Partner_Selection_Screen(JFrame mainFrame, ArrayList<JPanel> uiFlow, ConversationGameplayManager convoGPManager) {
        
         this.mainFrame = mainFrame;
@@ -35,6 +47,7 @@ public class Partner_Selection_Screen extends JPanel {
         configureRootPanel();
         configureLogoLabel();
         configureButtons();
+        configureBackButton();
         configureButtonListeners();
     }
 
@@ -77,9 +90,6 @@ public class Partner_Selection_Screen extends JPanel {
         registerButton = new MainButton("Register", Colours.mainFG);
         this.add(registerButton);
 
-        backButton = new PlainButton("Back");
-        this.add(backButton);
-
         layout.putConstraint(SpringLayout.SOUTH, registerButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, registerButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, registerButton, -20, SpringLayout.EAST, this);
@@ -87,11 +97,18 @@ public class Partner_Selection_Screen extends JPanel {
         layout.putConstraint(SpringLayout.SOUTH, signInButton, -10, SpringLayout.NORTH, registerButton);
         layout.putConstraint(SpringLayout.WEST, signInButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, signInButton, -20, SpringLayout.EAST, this);
+        
+    }
+    private void configureBackButton() {
+        backButton = new PlainButton("Back");
+        this.add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -10, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
+    
+    
 
 
     private void configureButtonListeners() {
@@ -103,6 +120,11 @@ public class Partner_Selection_Screen extends JPanel {
         signInButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { navigateToSignInScreen(); }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
         });
     }
 
@@ -123,5 +145,13 @@ public class Partner_Selection_Screen extends JPanel {
         //JOHN REMOVED .METHOD GET MAINPANEL()
         mainFrame.setContentPane(signIn_Screen);
         mainFrame.setVisible(true);
+    }
+
+    private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+        System.out.println("Back button clicked");
     }
 }
