@@ -394,5 +394,44 @@ public class DatabaseAPI {
         }
         return true;
     }
+
+
+    public boolean createUserIDInLocalAppDB(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO LocalAppData VALUES(?)");
+            stmt.setString(1, user.getUserID();
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
 }
 
