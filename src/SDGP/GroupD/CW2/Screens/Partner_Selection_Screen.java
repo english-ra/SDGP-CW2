@@ -20,11 +20,11 @@ public class Partner_Selection_Screen extends JPanel {
 
     private SpringLayout layout;
 
-    private ArrayList uiFlow = new ArrayList<JPanel>();
+    private ArrayList uiFlow;
 
-    public Partner_Selection_Screen(JFrame mainFrame) {
+    public Partner_Selection_Screen(JFrame mainFrame, ArrayList<JPanel> uiFlow) {
         this.mainFrame = mainFrame;
-        uiFlow.add(this);
+        this.uiFlow = uiFlow;
 
         // Configure UI
         configureRootPanel();

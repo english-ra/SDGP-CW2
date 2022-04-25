@@ -160,12 +160,12 @@ public class GP_Context_Select_Screen extends JPanel {
             // Now let's create the manager
             ConversationGameplayManager convoGPManager = new ConversationGameplayManager(conversation);
 
-            // TODO: We will navigate to player 2's signin / up screen
-//            Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow);
-//            uiFlow.add(partnerSelectionScreen);
-//
-//            mainframe.setContentPane(partnerSelectionScreen);
-//            mainframe.setVisible(true);
+            // We will navigate to player 2's signin / up screen
+            Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow);
+            uiFlow.add(partnerSelectionScreen);
+
+            mainframe.setContentPane(partnerSelectionScreen);
+            mainframe.setVisible(true);
         } else {
             // There is an error
             errorLabel.setText("Please ensure that you have selected an option");
