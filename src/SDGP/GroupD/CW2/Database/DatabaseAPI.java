@@ -312,5 +312,87 @@ public class DatabaseAPI {
         }
         return true;
     }
+
+    public ArrayList getConversations(String context) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<Conversation> conversations = new ArrayList<Conversation>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT * FROM Conversation WHERE context = ?");
+            stmt.setString(1, context);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Conversation conversation = new Conversation();
+                conversation.setConversationID(rs.getInt("conversationID"));
+                conversation.setLanguage(rs.getString("language"));
+                conversation.setLevel("level");
+                conversation.setContext("context");
+                conversations.add(conversation);
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return conversations;
+    }
+
+    public boolean getConversationTexts(Conversation conversation) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<ConversationText> texts = new ArrayList<ConversationText>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT * FROM ConversationText WHERE conversationID = ? ORDER BY positionInConvo");
+            stmt.setInt(1, conversation.getConversationID());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                ConversationText conversationText = new ConversationText();
+                conversationText.setConversationTextID(rs.getInt("conversationTextID"));
+                conversationText.setText(rs.getString("text"));
+                conversationText.setPrompt(rs.getString("prompt"));
+                conversationText.setPositionInConvo(rs.getInt("positionInConvo"));
+                conversationText.setPerson(rs.getString("person"));
+                conversationText.setConversationID(rs.getInt("conversationID"));
+                texts.add(conversationText);
+            }
+
+            conversation.setTexts(texts);
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return true;
+    }
 }
 

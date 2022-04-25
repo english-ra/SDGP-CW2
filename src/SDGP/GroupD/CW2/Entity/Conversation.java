@@ -32,8 +32,12 @@ public class Conversation {
     public String getLevel() { return level; }
     public String getContext() { return context; }
 
+    public ArrayList<ConversationText> getTexts() { return texts; }
+
     public void setConversationID(int conversationID) { this.conversationID = conversationID; }
     public void setLanguage(String language) { this.language = language; }
     public void setLevel(String level) { this.level = level; }
     public void setContext(String context) { this.context = context; }
+
+    public void setTexts(ArrayList<ConversationText> texts) { this.texts = texts; }
 }

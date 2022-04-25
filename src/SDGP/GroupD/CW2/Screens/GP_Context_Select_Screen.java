@@ -1,6 +1,9 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.ConversationText;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Constants.Colours;
 
@@ -9,11 +12,13 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Random;
 
 public class GP_Context_Select_Screen extends JPanel {
     private JFrame mainframe;
     private SpringLayout layout;
     private ArrayList<JPanel> uiFlow;
+    private DatabaseAPI db;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -27,9 +32,12 @@ public class GP_Context_Select_Screen extends JPanel {
     private String language;
     private String level;
 
+    private String[] contexts;
+
     public GP_Context_Select_Screen(JFrame mainframe, ArrayList uiFlow, String language, String level) {
         this.mainframe = mainframe;
         this.uiFlow = uiFlow;
+        this.db = new DatabaseAPI();
         this.language = language;
         this.level = level;
 
@@ -74,8 +82,7 @@ public class GP_Context_Select_Screen extends JPanel {
 
 
     private void configureContextList() {
-        DatabaseAPI db = new DatabaseAPI();
-        String[] contexts = db.getConversationContexts(language, level);
+        contexts = db.getConversationContexts(language, level);
 
         contextList = new ScrollableList(contexts);
         add(contextList);
@@ -130,8 +137,37 @@ public class GP_Context_Select_Screen extends JPanel {
 
     private void nextButtonClicked() {
         if (listHasItemSelected()) {
+            // There is an option selected
             errorLabel.setVisible(false);
+
+            // Get the selected context
+            int selectedIndex = contextList.list.getSelectedIndex();
+            String selectedContext = contexts[selectedIndex];
+
+            // Get the conversation with conversation texts
+            ArrayList<Conversation> conversations = db.getConversations(selectedContext);
+
+            // Get a random conversation
+            Random r = new Random();
+            int randomIndex = r.nextInt((conversations.size() - 0) + 1) + 0;
+
+            Conversation conversation = conversations.get(randomIndex);
+
+            // Add the texts to the conversation
+            db.getConversationTexts(conversation);
+
+            // We now know the conversation that the user wants to practice
+            // Now let's create the manager
+            ConversationGameplayManager convoGPManager = new ConversationGameplayManager(conversation);
+
+            // TODO: We will navigate to player 2's signin / up screen
+//            Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow);
+//            uiFlow.add(partnerSelectionScreen);
+//
+//            mainframe.setContentPane(partnerSelectionScreen);
+//            mainframe.setVisible(true);
         } else {
+            // There is an error
             errorLabel.setText("Please ensure that you have selected an option");
             errorLabel.setVisible(true);
             return;
