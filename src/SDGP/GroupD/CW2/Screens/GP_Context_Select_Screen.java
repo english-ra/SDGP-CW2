@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Screens;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.Conversation;
 import SDGP.GroupD.CW2.Entity.ConversationText;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Constants.Colours;
 
@@ -143,7 +144,7 @@ public class GP_Context_Select_Screen extends JPanel {
             int selectedIndex = contextList.list.getSelectedIndex();
             String selectedContext = contexts[selectedIndex];
 
-            // TODO: Get the conversation with conversation texts
+            // Get the conversation with conversation texts
             ArrayList<Conversation> conversations = db.getConversations(selectedContext);
 
             // Get a random conversation
@@ -155,10 +156,16 @@ public class GP_Context_Select_Screen extends JPanel {
             // Add the texts to the conversation
             db.getConversationTexts(conversation);
 
-            ArrayList<ConversationText> ts = conversation.getTexts();
-            for (int i = 0 ; i < ts.size(); i++) {
-                System.out.println(ts.get(i).getText());
-            }
+            // We now know the conversation that the user wants to practice
+            // Now let's create the manager
+            ConversationGameplayManager convoGPManager = new ConversationGameplayManager(conversation);
+
+            // TODO: We will navigate to player 2's signin / up screen
+//            Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow);
+//            uiFlow.add(partnerSelectionScreen);
+//
+//            mainframe.setContentPane(partnerSelectionScreen);
+//            mainframe.setVisible(true);
         } else {
             // There is an error
             errorLabel.setText("Please ensure that you have selected an option");
