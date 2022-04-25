@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2;
 
 import SDGP.GroupD.CW2.Database.CreateDatabase;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Screens.Landing_Screen;
 
 import javax.swing.*;
@@ -17,8 +18,14 @@ public class Main {
         // Configure the mainframe
         configureMainframe();
 
-        // Display the landing screen
-        displayLandingScreen();
+        //Check if user is signed in
+        if (userSignedIn()) {
+            //TODO: DISPLAY WELCOME SCREEN HERE
+        } else{
+            // Display the landing screen
+            displayLandingScreen();
+        }
+
     }
 
     private static void configureMainframe() {
@@ -38,8 +45,22 @@ public class Main {
     private static void createDatabase() {
         new CreateDatabase();
     }
-}
 
+
+    private static Boolean userSignedIn() {
+        DatabaseAPI db = new DatabaseAPI();
+
+        if (db.getUserIDFromLocalAppDB() == null) {
+            System.out.println("No user signed in");
+            return false;
+
+        } else {
+            System.out.println("User signed in");
+            return true;
+
+        }
+    }
+}
 
 ////Example code to run individual screen
 //    public static void main(String[] args) {
