@@ -163,7 +163,6 @@ public class GP_Context_Select_Screen extends JPanel {
             // We will navigate to player 2's signin / up screen
             Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow, convoGPManager);
             uiFlow.add(partnerSelectionScreen);
-
             mainframe.setContentPane(partnerSelectionScreen);
             mainframe.setVisible(true);
         } else {
