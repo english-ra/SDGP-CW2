@@ -78,7 +78,7 @@ public class Partner_Selection_Screen extends JPanel {
         this.add(registerButton);
 
         backButton = new PlainButton("Back");
-        add(backButton);
+        this.add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, registerButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, registerButton, 20, SpringLayout.WEST, this);
@@ -88,7 +88,7 @@ public class Partner_Selection_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, signInButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, signInButton, -20, SpringLayout.EAST, this);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -10, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
