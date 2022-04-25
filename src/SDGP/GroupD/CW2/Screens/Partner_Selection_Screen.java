@@ -9,17 +9,20 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Landing_Screen extends JPanel {
+public class Partner_Selection_Screen extends JPanel {
     private JFrame mainFrame;
     private TitleLabel logoLabel;
     private MainButton registerButton;
     private MainButton signInButton;
+    private SubtitleLabel subtitleLabel;
+    private TitleLabel titleLabel;
+
 
     private SpringLayout layout;
 
     private ArrayList uiFlow = new ArrayList<JPanel>();
 
-    public Landing_Screen(JFrame mainFrame) {
+    public Partner_Selection_Screen(JFrame mainFrame) {
         this.mainFrame = mainFrame;
         uiFlow.add(this);
 
@@ -28,6 +31,18 @@ public class Landing_Screen extends JPanel {
         configureLogoLabel();
         configureButtons();
         configureButtonListeners();
+    }
+
+    public static void main(String[] args) {
+        JFrame mainframe = new JFrame();
+
+        mainframe.setTitle("PerriLingo");
+        mainframe.setSize(350, 750);
+        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+        Partner_Selection_Screen r = new Partner_Selection_Screen(mainframe);
+        mainframe.setContentPane(r);
+        mainframe.setVisible(true);
     }
 
     private void configureRootPanel() {
@@ -41,13 +56,22 @@ public class Landing_Screen extends JPanel {
 
     private void configureLogoLabel() {
         // Configure the logo label
-        logoLabel = new TitleLabel("PerriLingo");
+        logoLabel = new TitleLabel("Who's your partner?");
         this.add(logoLabel);
 
         layout.putConstraint(SpringLayout.NORTH, logoLabel, 20, SpringLayout.NORTH, this);
         layout.putConstraint(SpringLayout.WEST, logoLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, logoLabel, -20, SpringLayout.EAST, this);
+
+        subtitleLabel = new SubtitleLabel("Select your partner");
+        add(subtitleLabel);
+
+        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
+
+
 
 
     private void configureButtons() {
