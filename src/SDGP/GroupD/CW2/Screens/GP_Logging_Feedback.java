@@ -183,6 +183,7 @@ public class GP_Logging_Feedback extends JPanel {
             }
 
 
+
             //GETTING CURRENT DATE AND SETTING IT AS DATELOGGED
             Date date = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");

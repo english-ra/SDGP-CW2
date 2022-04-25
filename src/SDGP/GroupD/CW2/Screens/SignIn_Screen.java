@@ -205,6 +205,13 @@ public class SignIn_Screen extends JPanel {
                     //login successful
                     //System.out.println("Login successful");
                     if (convoGPManager == null) {
+
+                        // Save the userID to the LocalAppDB
+                        db.createUserIDInLocalAppDB(user);
+
+                        // TODO: Determine whether it's a student or teacher and navigate accordingly
+
+                        // Navigate to the welcome back screen
                         WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
                         mainFrame.setContentPane(screen);
                         mainFrame.setVisible(true);
@@ -213,6 +220,12 @@ public class SignIn_Screen extends JPanel {
 
                         // Set the user in the manager
                         convoGPManager.setPlayer2(user);
+
+                        // TEMP
+                        System.out.println("MANAGER:");
+                        System.out.println(convoGPManager.getPlayer1().getUserName());
+                        System.out.println(convoGPManager.getPlayer2().getUserName());
+                        System.out.println(convoGPManager.getConversation().getContext());
 
                         // Go to gameplay start screen
                         GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame);

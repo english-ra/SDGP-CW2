@@ -204,6 +204,55 @@ public class DatabaseAPI {
         return user;
     }
 
+    public User getUser(int userID) {
+        Connection con = ConnectDB.getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        User user = null;
+
+        String sqlString = "SELECT * FROM users WHERE userID = '" + userID + "'";
+        try {
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sqlString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) {
+                user = new User();
+                user.setUserID(rs.getInt("userID"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setPasswordSalt(rs.getString("passwordSalt"));
+                user.setUserType(rs.getString("userType"));
+                user.setTeacherID(rs.getInt("teacherID"));
+            }
+            rs.close();
+            stmt.close();
+            con.commit();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+
+        return user;
+    }
+
 
     public String[] getConversationLanguages() {
         Connection con = null;
@@ -270,7 +319,7 @@ public class DatabaseAPI {
         return contexts.toArray(new String[0]);
     }
 
-    public boolean createUserFeedback(UserFeedback userFeedback) {
+    public Boolean createUserFeedback(UserFeedback userFeedback) {
         Connection con = null;
         PreparedStatement stmt = null;
 
@@ -352,7 +401,7 @@ public class DatabaseAPI {
         return conversations;
     }
 
-    public boolean getConversationTexts(Conversation conversation) {
+    public Boolean getConversationTexts(Conversation conversation) {
         Connection con = null;
         PreparedStatement stmt = null;
         ArrayList<ConversationText> texts = new ArrayList<ConversationText>();
@@ -393,6 +442,79 @@ public class DatabaseAPI {
             }
         }
         return true;
+    }
+
+
+    public Boolean createUserIDInLocalAppDB(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO LocalAppData VALUES(?)");
+            stmt.setInt(1, user.getUserID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public Integer getUserIDFromLocalAppDB() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        int userID = -1;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT userID FROM LocalAppData");
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                userID = rs.getInt("userID");
+                System.out.println(userID);
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return userID;
     }
 }
 
