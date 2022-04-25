@@ -32,18 +32,7 @@ public class Partner_Selection_Screen extends JPanel {
         configureButtons();
         configureButtonListeners();
     }
-
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Partner_Selection_Screen r = new Partner_Selection_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
+   
 
     private void configureRootPanel() {
         this.setBackground(new Color(20, 54, 66));
@@ -66,7 +55,7 @@ public class Partner_Selection_Screen extends JPanel {
         subtitleLabel = new SubtitleLabel("Select your partner");
         add(subtitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, logoLabel);
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
