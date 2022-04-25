@@ -1,9 +1,6 @@
 package SDGP.GroupD.CW2.Database;
 
-import SDGP.GroupD.CW2.Entity.Conversation;
-import SDGP.GroupD.CW2.Entity.ConversationText;
-import SDGP.GroupD.CW2.Entity.User;
-import SDGP.GroupD.CW2.Entity.UserFeedback;
+import SDGP.GroupD.CW2.Entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -515,6 +512,46 @@ public class DatabaseAPI {
             }
         }
         return userID;
+    }
+
+    public Boolean createLoginAnalytic(LoginAnalytic loginAnalytic) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("INSERT INTO LoginAnalytics VALUES(?, ?, ?, ?)");
+            stmt.setString(2, loginAnalytic.getDateLogged());
+            stmt.setString(3, loginAnalytic.getAction());
+            stmt.setInt(4, loginAnalytic.getUserID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
     }
 }
 
