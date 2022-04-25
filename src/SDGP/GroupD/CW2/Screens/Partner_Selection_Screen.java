@@ -32,17 +32,7 @@ public class Partner_Selection_Screen extends JPanel {
         configureButtons();
         configureButtonListeners();
     }
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        Partner_Selection_Screen r = new Partner_Selection_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
+   
 
     private void configureRootPanel() {
         this.setBackground(new Color(20, 54, 66));
