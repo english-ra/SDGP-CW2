@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -21,11 +22,13 @@ public class Partner_Selection_Screen extends JPanel {
     private SpringLayout layout;
 
     private ArrayList uiFlow;
+    private ConversationGameplayManager convoGPManager;
 
-    public Partner_Selection_Screen(JFrame mainFrame, ArrayList<JPanel> uiFlow) {
+    public Partner_Selection_Screen(JFrame mainFrame, ArrayList<JPanel> uiFlow, ConversationGameplayManager convoGPManager) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
-
+        this.convoGPManager = convoGPManager;
+        
         // Configure UI
         configureRootPanel();
         configureLogoLabel();
