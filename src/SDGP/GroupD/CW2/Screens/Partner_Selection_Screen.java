@@ -32,7 +32,6 @@ public class Partner_Selection_Screen extends JPanel {
         configureButtons();
         configureButtonListeners();
     }
-
     public static void main(String[] args) {
         JFrame mainframe = new JFrame();
 
@@ -66,7 +65,7 @@ public class Partner_Selection_Screen extends JPanel {
         subtitleLabel = new SubtitleLabel("Select your partner");
         add(subtitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
+        layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, logoLabel);
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
