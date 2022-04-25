@@ -319,7 +319,7 @@ public class DatabaseAPI {
         return contexts.toArray(new String[0]);
     }
 
-    public boolean createUserFeedback(UserFeedback userFeedback) {
+    public Boolean createUserFeedback(UserFeedback userFeedback) {
         Connection con = null;
         PreparedStatement stmt = null;
 
@@ -401,7 +401,7 @@ public class DatabaseAPI {
         return conversations;
     }
 
-    public boolean getConversationTexts(Conversation conversation) {
+    public Boolean getConversationTexts(Conversation conversation) {
         Connection con = null;
         PreparedStatement stmt = null;
         ArrayList<ConversationText> texts = new ArrayList<ConversationText>();
@@ -445,7 +445,7 @@ public class DatabaseAPI {
     }
 
 
-    public boolean createUserIDInLocalAppDB(User user) {
+    public Boolean createUserIDInLocalAppDB(User user) {
         Connection con = null;
         PreparedStatement stmt = null;
 
@@ -483,7 +483,7 @@ public class DatabaseAPI {
         return true;
     }
 
-    public int getUserIDFromLocalAppDB() {
+    public Integer getUserIDFromLocalAppDB() {
         Connection con = null;
         PreparedStatement stmt = null;
         int userID = -1;
