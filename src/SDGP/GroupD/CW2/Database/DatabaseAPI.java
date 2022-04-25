@@ -405,7 +405,7 @@ public class DatabaseAPI {
             con.setAutoCommit(false);
 
             stmt = con.prepareStatement("INSERT INTO LocalAppData VALUES(?)");
-            stmt.setString(1, user.getUserID();
+            stmt.setInt(1, user.getUserID());
 
             stmt.executeUpdate();
 
