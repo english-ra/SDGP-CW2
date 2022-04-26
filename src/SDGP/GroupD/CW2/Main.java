@@ -23,9 +23,9 @@ public class Main {
             //TODO: DISPLAY WELCOME SCREEN HERE
         } else{
             // Display the landing screen
-            displayLandingScreen();
+//            displayLandingScreen();
         }
-
+        displayLandingScreen();
     }
 
     private static void configureMainframe() {

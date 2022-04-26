@@ -14,7 +14,7 @@ public class DatabaseAPI {
         DatabaseAPI db = new DatabaseAPI();
 //        User u = db.getUser("reece");
 //        System.out.println(u.getFirstName());
-
+        db.clearLocalAppDB();
     }
 
     public String createUser(User user) {
@@ -529,6 +529,8 @@ public class DatabaseAPI {
             con.setAutoCommit(false);
 
             stmt = con.prepareStatement("DELETE FROM LocalAppData");
+
+            stmt.executeUpdate();
 
             stmt.close();
             con.commit();
