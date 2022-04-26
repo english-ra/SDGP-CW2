@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -9,6 +10,7 @@ import java.util.ArrayList;
 
 public class GP_Start_Screen extends JPanel {
     private JFrame mainframe;
+    private ConversationGameplayManager convoGPManager;
     private SpringLayout layout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
 
@@ -18,20 +20,9 @@ public class GP_Start_Screen extends JPanel {
     private MainButton beginButton;
     private PlainButton backButton;
 
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Start_Screen r = new GP_Start_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
-
-    public GP_Start_Screen(JFrame mainframe) {
+    public GP_Start_Screen(JFrame mainframe, ConversationGameplayManager convoGPManager) {
         this.mainframe = mainframe;
+        this.convoGPManager = convoGPManager;
 
         // Configure the UI
         configureRootPanel();

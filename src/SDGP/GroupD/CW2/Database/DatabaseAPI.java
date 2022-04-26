@@ -500,7 +500,6 @@ public class DatabaseAPI {
 
             while (rs.next()) {
                 userID = rs.getInt("userID");
-                System.out.println(userID);
             }
 
             stmt.close();

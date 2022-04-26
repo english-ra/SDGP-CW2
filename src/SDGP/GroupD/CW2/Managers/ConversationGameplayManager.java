@@ -36,6 +36,14 @@ public class ConversationGameplayManager {
     }
 
 
+    public void printState() {
+        System.out.println("Conversation Gameplay Manager - Current state:");
+        System.out.println(this.getPlayer1().getUserName());
+        System.out.println(this.getPlayer2().getUserName());
+        System.out.println(this.getConversation().getContext());
+    }
+
+
     public void setPlayer1(User player1) { this.player1 = player1; }
     public void setPlayer2(User player2) { this.player2 = player2; }
 

@@ -32,7 +32,7 @@ public class SignIn_Screen extends JPanel {
 
     private SpringLayout layout;
 
-    private ArrayList uiFlow;
+    private ArrayList<JPanel> uiFlow;
 
     private DatabaseAPI db;
 
@@ -216,19 +216,16 @@ public class SignIn_Screen extends JPanel {
                         WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
                         mainFrame.setContentPane(screen);
                     } else {
-                        // It is a second player signing in
+                        // It is a second player signing in, inside the gameplay flow
 
-                        // Set the user in the manager
+                        // Set the second user in the manager
                         convoGPManager.setPlayer2(user);
 
                         // TEMP
-                        System.out.println("MANAGER:");
-                        System.out.println(convoGPManager.getPlayer1().getUserName());
-                        System.out.println(convoGPManager.getPlayer2().getUserName());
-                        System.out.println(convoGPManager.getConversation().getContext());
+                        convoGPManager.printState();
 
                         // Go to gameplay start screen
-                        GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame);
+                        GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame, this.convoGPManager);
                         mainFrame.setContentPane(screen);
                     }
                     mainFrame.setVisible(true);
@@ -244,7 +241,7 @@ public class SignIn_Screen extends JPanel {
 
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
-        Landing_Screen previousView = (Landing_Screen) uiFlow.get(uiFlow.size() - 1);
+        JPanel previousView = uiFlow.get(uiFlow.size() - 1);
         mainFrame.setContentPane(previousView);
         mainFrame.setVisible(true);
     }
