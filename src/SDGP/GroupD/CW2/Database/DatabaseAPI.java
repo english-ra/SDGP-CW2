@@ -382,8 +382,8 @@ public class DatabaseAPI {
                 Conversation conversation = new Conversation();
                 conversation.setConversationID(rs.getInt("conversationID"));
                 conversation.setLanguage(rs.getString("language"));
-                conversation.setLevel("level");
-                conversation.setContext("context");
+                conversation.setLevel(rs.getString("level"));
+                conversation.setContext(rs.getString("context"));
                 conversations.add(conversation);
             }
 
