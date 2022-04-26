@@ -35,6 +35,11 @@ public class DatabaseAPI {
             con.setAutoCommit(false);
             stmt = con.createStatement();
             stmt.executeUpdate(sqlString);
+
+            // Add the generated primary key to the object
+            int primaryKey = stmt.getGeneratedKeys().getInt(1);
+            user.setUserID(primaryKey);
+
             stmt.close();
             con.commit();
         } catch (SQLException ex) {
@@ -77,6 +82,7 @@ public class DatabaseAPI {
 
             stmt.executeUpdate();
 
+            // Add the generated primary key to the object
             int primaryKey = stmt.getGeneratedKeys().getInt(1);
             conversation.setConversationID(primaryKey);
 
@@ -512,6 +518,33 @@ public class DatabaseAPI {
             }
         }
         return userID;
+    }
+
+    public Boolean clearLocalAppDB() {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("DELETE FROM LocalAppData");
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return true;
     }
 
     public Boolean createLoginAnalytic(LoginAnalytic loginAnalytic) {

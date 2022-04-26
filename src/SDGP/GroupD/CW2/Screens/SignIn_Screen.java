@@ -5,6 +5,7 @@ import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -207,14 +208,13 @@ public class SignIn_Screen extends JPanel {
                     if (convoGPManager == null) {
 
                         // Save the userID to the LocalAppDB
-                        db.createUserIDInLocalAppDB(user);
+                        AuthenticationUtilities.persistUserSignIn(user);
 
                         // TODO: Determine whether it's a student or teacher and navigate accordingly
 
                         // Navigate to the welcome back screen
                         WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
                         mainFrame.setContentPane(screen);
-                        mainFrame.setVisible(true);
                     } else {
                         // It is a second player signing in
 
@@ -230,8 +230,8 @@ public class SignIn_Screen extends JPanel {
                         // Go to gameplay start screen
                         GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame);
                         mainFrame.setContentPane(screen);
-                        mainFrame.setVisible(true);
                     }
+                    mainFrame.setVisible(true);
                 }
                 else{
                     errorLabel.setText("Incorrect password.");

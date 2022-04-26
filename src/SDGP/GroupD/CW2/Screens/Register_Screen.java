@@ -7,6 +7,7 @@ import SDGP.GroupD.CW2.Constants.SwingActionCommands;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -227,20 +228,6 @@ public class Register_Screen extends JPanel {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void configureButtonListeners() {
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -278,7 +265,7 @@ public class Register_Screen extends JPanel {
             // There is no error, you may proceed
             errorLabel.setVisible(false);
 
-            // Get the textfield data
+            // Get the text field data
             String usernameText = usernameTextField.getText();
             String passwordText = passwordTextField.getText();
             String firstNameText = fnameTextField.getText();
@@ -296,7 +283,12 @@ public class Register_Screen extends JPanel {
             DatabaseAPI dbAPI = new DatabaseAPI();
             String writeError = dbAPI.createUser(user);
             if (writeError == "") {
-                // Write successful, go to the next screen
+                // Write successful
+
+                // Persist the users sign in
+                AuthenticationUtilities.persistUserSignIn(user);
+
+                // Go to the next screen
                 WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
                 mainFrame.setContentPane(screen);
                 mainFrame.setVisible(true);
