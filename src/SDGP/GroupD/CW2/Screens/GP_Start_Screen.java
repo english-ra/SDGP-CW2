@@ -6,6 +6,8 @@ import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GP_Start_Screen extends JPanel {
@@ -28,6 +30,7 @@ public class GP_Start_Screen extends JPanel {
         configureRootPanel();
         configureLabels();
         configureButtons();
+        configureButtonListeners();
     }
 
 
@@ -75,4 +78,27 @@ public class GP_Start_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
+
+    private void configureButtonListeners() {
+        beginButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { beginButtonClicked(); }
+        });
+
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backButtonClicked();
+            }
+        });
+    }
+
+
+    private void beginButtonClicked() {
+
+        // Start the conversation
+        convoGPManager.startConversation();
+    }
+
+    private void backButtonClicked() {}
 }

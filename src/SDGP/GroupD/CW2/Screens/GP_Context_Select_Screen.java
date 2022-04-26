@@ -158,7 +158,7 @@ public class GP_Context_Select_Screen extends JPanel {
 
             // We now know the conversation that the user wants to practice
             // Now let's create the manager
-            ConversationGameplayManager convoGPManager = new ConversationGameplayManager(conversation);
+            ConversationGameplayManager convoGPManager = new ConversationGameplayManager(mainframe, conversation);
 
             // We will navigate to player 2's signin / up screen
             Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow, convoGPManager);
