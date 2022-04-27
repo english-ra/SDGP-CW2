@@ -2,9 +2,13 @@ package SDGP.GroupD.CW2.Managers;
 
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Screens.GP_Change_Player_Screen;
+import SDGP.GroupD.CW2.Screens.GP_Conversation_Screen;
 
 import javax.swing.*;
+import java.util.ArrayList;
 
 public class ConversationGameplayManager {
     private JFrame mainframe;
@@ -13,6 +17,13 @@ public class ConversationGameplayManager {
     private User player1;
     private User player2;
     private Conversation conversation;
+
+    // Screens
+    GP_Change_Player_Screen changePlayerScreen;
+    GP_Conversation_Screen conversationScreen;
+
+    // Conversation gameplay logic
+    int currentTextIndex = 0;
 
 
     public ConversationGameplayManager(JFrame mainframe, Conversation conversation) {
@@ -32,11 +43,28 @@ public class ConversationGameplayManager {
         // Ensure that all the data is available
         if (player1 != null && player2 != null && conversation != null) {
             // All the data is available, let's proceed with the game
+
+            // TODO: Create a session in the database
+
+            // Create the alternating screens
+            changePlayerScreen = new GP_Change_Player_Screen();
+            conversationScreen = new GP_Conversation_Screen(this);
+
+            // Display the first change player screen
+
         }
+    }
 
-        // TODO: Create a session in the database
+
+    // The change player screen continue button has been tapped
+    public void cpsButtonClicked() {
+        // Display the next conversation screen, with the next conversation text
+    }
 
 
+    // The conversation screen continue button has been tapped
+    public void convoButtonClicked() {
+        // Display the next change player screen
     }
 
 

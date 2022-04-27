@@ -11,7 +11,6 @@ import java.util.ArrayList;
 
 
 public class GP_Change_Player_Screen extends JPanel {
-    private JFrame mainframe;
     private SpringLayout layout;
     private SpringLayout changePanelLayout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
@@ -23,8 +22,7 @@ public class GP_Change_Player_Screen extends JPanel {
 
     private MainButton nextButton;
 
-    public GP_Change_Player_Screen(JFrame mainframe) {
-        this.mainframe = mainframe;
+    public GP_Change_Player_Screen() {
         uiFlow.add(this);
 
         // Configure the UI
@@ -46,7 +44,7 @@ public class GP_Change_Player_Screen extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        GP_Change_Player_Screen r = new GP_Change_Player_Screen(mainframe);
+        GP_Change_Player_Screen r = new GP_Change_Player_Screen();
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
     }
