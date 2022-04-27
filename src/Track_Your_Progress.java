@@ -83,6 +83,8 @@ public class Track_Your_Progress extends JPanel {
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+
+
     }
     private void backButtonClicked() {
 

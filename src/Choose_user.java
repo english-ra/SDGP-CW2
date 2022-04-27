@@ -92,7 +92,7 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -150, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -100,7 +100,7 @@ public class Choose_user extends JPanel {
         backButton = new MainButton("< Back");
         add(backButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -65, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
@@ -115,6 +115,10 @@ public class Choose_user extends JPanel {
 
     }
     private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        WelcomeBack_Admin_Screen previousView = (WelcomeBack_Admin_Screen) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
 
     }
 }

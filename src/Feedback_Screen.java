@@ -1,4 +1,6 @@
 import javax.swing.*;
+import javax.swing.border.Border;
+import javax.swing.border.LineBorder;
 import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
@@ -23,6 +25,7 @@ public class Feedback_Screen extends JPanel {
         backButtonClicked();
         configurefeedBackBox();
         configurescoreBox();
+        submitButtonClicked();
 
         //configureErrorLabel();
     }
@@ -71,6 +74,7 @@ public class Feedback_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
 
+        // Configuring the ter label
         ternarytitleLabel= new TernarytitleLabel("Score");
         add(ternarytitleLabel);
 
@@ -92,7 +96,6 @@ public class Feedback_Screen extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, feedbackBox, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, feedbackBox, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, feedbackBox, -20, SpringLayout.EAST, this);
-
     }
 
     private void configurescoreBox(){

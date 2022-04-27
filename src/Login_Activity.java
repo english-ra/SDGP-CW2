@@ -4,10 +4,13 @@ import javax.swing.border.LineBorder;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.AdjustmentEvent;
+import java.awt.event.AdjustmentListener;
 import java.util.ArrayList;
 
 public class Login_Activity extends JPanel {
     private JFrame mainFrame;
+
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -29,6 +32,8 @@ public class Login_Activity extends JPanel {
         configureBackButton();
         configureButtonListener();
 
+
+
     }
     public static void main(String[] args) {
         JFrame mainframe = new JFrame();
@@ -37,10 +42,10 @@ public class Login_Activity extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Login_Activity r = new Login_Activity(mainframe, new ArrayList());
+
+        Login_Activity r = new Login_Activity(mainframe,new ArrayList());
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
-
     }
 
     private void configureRootPanel() {
@@ -74,7 +79,7 @@ public class Login_Activity extends JPanel {
         quaternarytitleLabel = new QuaternarytitleLabel("Your Teacher is - (teacher name)");
         add(quaternarytitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , 50, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, quaternarytitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, quaternarytitleLabel, -20, SpringLayout.EAST, this);
 
@@ -95,7 +100,7 @@ public class Login_Activity extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -150, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -103,7 +108,7 @@ public class Login_Activity extends JPanel {
         backButton = new MainButton("< Back");
         add(backButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -65, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
@@ -118,9 +123,13 @@ public class Login_Activity extends JPanel {
 
     }
     private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        WelcomeBack_Admin_Screen previousView = (WelcomeBack_Admin_Screen) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+
 
     }
-
 
 
 
