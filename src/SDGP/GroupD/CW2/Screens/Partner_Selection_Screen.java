@@ -130,7 +130,7 @@ public class Partner_Selection_Screen extends JPanel {
 
 
     private void navigateToRegisterScreen() {
-        Register_Screen register_Screen = new Register_Screen(this.mainFrame, this.uiFlow);
+        Register_Screen register_Screen = new Register_Screen(this.mainFrame, this.uiFlow, this.convoGPManager);
         uiFlow.add(register_Screen);
 
         mainFrame.setContentPane(register_Screen);
