@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Constants.SwingActionCommands;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
@@ -46,10 +47,12 @@ public class Register_Screen extends JPanel {
     private SpringLayout layout;
 
     private ArrayList uiFlow;
+    private ConversationGameplayManager convoGPManager;
 
-    public Register_Screen(JFrame mainFrame, ArrayList uiFlow) {
+    public Register_Screen(JFrame mainFrame, ArrayList uiFlow, ConversationGameplayManager convoGPManager) {
         this.mainFrame  = mainFrame;
         this.uiFlow = uiFlow;
+        this.convoGPManager = convoGPManager;
 
         // Configure the UI
         configureRootPanel();
@@ -283,14 +286,30 @@ public class Register_Screen extends JPanel {
             DatabaseAPI dbAPI = new DatabaseAPI();
             String writeError = dbAPI.createUser(user);
             if (writeError == "") {
-                // Write successful
+                // Write successful & login successful
 
-                // Persist the users sign in
-                AuthenticationUtilities.persistUserSignIn(user);
+                if (convoGPManager == null) {
+                    // The user is signing up at the start of the app
 
-                // Go to the next screen
-                WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
-                mainFrame.setContentPane(screen);
+                    // Persist the users sign in
+                    AuthenticationUtilities.persistUserSignIn(user);
+
+                    // Go to the next screen
+                    WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                    mainFrame.setContentPane(screen);
+                } else {
+                    // The user is signing up throughout the conversation gameplay
+
+                    // Set the second user in the manager
+                    convoGPManager.setPlayer2(user);
+
+                    // TEMP
+                    convoGPManager.printState();
+
+                    // Go to gameplay start screen
+                    GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame, this.convoGPManager);
+                    mainFrame.setContentPane(screen);
+                }
                 mainFrame.setVisible(true);
             }
             else {

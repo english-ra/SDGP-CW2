@@ -46,7 +46,6 @@ public class GP_Context_Select_Screen extends JPanel {
         configureLabels();
         configureBackButton();
         configureContextList();
-
         configureButtonListeners();
     }
 
@@ -118,12 +117,6 @@ public class GP_Context_Select_Screen extends JPanel {
     }
 
 
-
-
-
-
-
-
     private void configureButtonListeners() {
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -135,16 +128,19 @@ public class GP_Context_Select_Screen extends JPanel {
         });
     }
 
+
     private void nextButtonClicked() {
         if (listHasItemSelected()) {
             // There is an option selected
+
+            // Hide the error label
             errorLabel.setVisible(false);
 
             // Get the selected context
             int selectedIndex = contextList.list.getSelectedIndex();
             String selectedContext = contexts[selectedIndex];
 
-            // Get the conversation with conversation texts
+            // Get the conversation with conversations
             ArrayList<Conversation> conversations = db.getConversations(selectedContext);
 
             // Get a random conversation
@@ -160,7 +156,7 @@ public class GP_Context_Select_Screen extends JPanel {
             // Now let's create the manager
             ConversationGameplayManager convoGPManager = new ConversationGameplayManager(mainframe, conversation);
 
-            // We will navigate to player 2's signin / up screen
+            // We will navigate to player 2's sign in / up screen
             Partner_Selection_Screen partnerSelectionScreen = new Partner_Selection_Screen(this.mainframe, this.uiFlow, convoGPManager);
             uiFlow.add(partnerSelectionScreen);
             mainframe.setContentPane(partnerSelectionScreen);

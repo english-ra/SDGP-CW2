@@ -150,18 +150,6 @@ public class SignIn_Screen extends JPanel {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
     private void configureButtonListeners() {
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -175,6 +163,7 @@ public class SignIn_Screen extends JPanel {
             }
         });
     }
+
 
     private void submitButtonClicked() {
         // Perform form validation
