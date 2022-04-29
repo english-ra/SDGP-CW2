@@ -1,35 +1,34 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+
 import javax.swing.*;
-import javax.swing.border.Border;
-import javax.swing.border.LineBorder;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Choose_user extends JPanel {
+public class Track_Your_Progress extends JPanel {
     private JFrame mainFrame;
-
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    private MainButton backButton;
-    private SpringLayout layout;
 
+    private MainButton backButtonClicked;
+    private SpringLayout layout;
     private ArrayList uiFlow;
 
 
-
-    public Choose_user(JFrame mainFrame, ArrayList uiFlow) {
+    public Track_Your_Progress(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
 
-        // Configure the UI
         configureRootPanel();
         configureLabels();
+        backButtonClicked();
         configureJtable();
-        configureBackButton();
-        configureButtonListener();
-
         //configureErrorLabel();
+
 
 
     }
@@ -41,13 +40,12 @@ public class Choose_user extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Choose_user r = new Choose_user(mainframe, new ArrayList());
+        Track_Your_Progress r = new Track_Your_Progress(mainframe, new ArrayList());
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
 
     }
 
-    // MARK - Configure the UI
     private void configureRootPanel() {
         this.setBackground(Colours.mainBG);
         this.setPreferredSize(new Dimension(350, 750));
@@ -55,12 +53,12 @@ public class Choose_user extends JPanel {
         this.layout = new SpringLayout();
         this.setLayout(layout);
 
-    }
 
+    }
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new TitleLabel("Choose a user!");
+        titleLabel = new TitleLabel("Track Your Progress!");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -69,7 +67,7 @@ public class Choose_user extends JPanel {
 
 
         // Configuring the subtitle label
-        subtitleLabel = new SubtitleLabel("fname, lname, (Admin)");
+        subtitleLabel = new SubtitleLabel("fname, lname, (usertype)");
         add(subtitleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
@@ -77,16 +75,14 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
     }
 
-    private void configureJtable() {
+    private void configureJtable(){
 
         String data[][] = {};
-        String column[] = {"User", "ID"};
+        String column[] = {"Level", "Language", "Context"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
         this.add(sp);
-        Border roundedBorder = new LineBorder(Color.gray, 5, true);
-        sp.setBorder(roundedBorder);
 //        this.setSize(300, -200);
 
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
@@ -94,28 +90,9 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
         layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
     }
-
-    private void configureBackButton() {
-
-        backButton = new MainButton("< Back");
-        add(backButton);
-
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
-        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
-    }
-
-    private void configureButtonListener() {
-        backButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                backButtonClicked();
-            }
-        });
-
-    }
     private void backButtonClicked() {
 
     }
+
 }
 

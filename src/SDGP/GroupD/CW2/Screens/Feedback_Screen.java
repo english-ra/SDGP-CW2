@@ -1,5 +1,12 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TernarytitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -83,7 +90,7 @@ public class Feedback_Screen extends JPanel {
         JTextArea feedbackBox = new JTextArea(5, 20);
         feedbackBox.setLineWrap(true);
         feedbackBox.setWrapStyleWord(true);
-        feedbackBox.setBackground(Colours.feedBack);
+        feedbackBox.setBackground(Colours.mainBG);
         feedbackBox.setForeground(Colours.mainText);
         feedbackBox.setFont(new Font("Arial", Font.ITALIC, 20));
         feedbackBox.setBorder(BorderFactory.createLineBorder(Colours.mainBG));
@@ -99,7 +106,7 @@ public class Feedback_Screen extends JPanel {
         String[] scoreToChoose = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"};
         JComboBox scoreBox = new JComboBox(scoreToChoose);
         scoreBox.setBounds(80, 50, 140, 20);
-        scoreBox.setBackground(Colours.feedBack);
+        scoreBox.setBackground(Colours.mainBG);
         scoreBox.setForeground(Colours.mainText);
         scoreBox.setFont(new Font("Arial", Font.ITALIC, 20));
         scoreBox.setBorder(BorderFactory.createLineBorder(Colours.mainBG));

@@ -14,7 +14,10 @@ public class DatabaseAPI {
         DatabaseAPI db = new DatabaseAPI();
 //        User u = db.getUser("reece");
 //        System.out.println(u.getFirstName());
-        db.clearLocalAppDB();
+        ArrayList<User> us =  db.getAllUsers();
+        for (int i = 0; i < us.size(); i++) {
+            System.out.println(us.get(i).getFirstName());
+        }
     }
 
     public String createUser(User user) {
@@ -587,5 +590,58 @@ public class DatabaseAPI {
         }
         return true;
     }
+
+
+
+    public ArrayList<User> getAllUsers() {
+        Connection con = ConnectDB.getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        ArrayList<User> users = new ArrayList<>();
+
+        String sqlString = "SELECT * FROM users WHERE userType = 'student'";
+        try {
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sqlString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("userID"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setPasswordSalt(rs.getString("passwordSalt"));
+                user.setUserType(rs.getString("userType"));
+                user.setTeacherID(rs.getInt("teacherID"));
+                users.add(user);
+            }
+            rs.close();
+            stmt.close();
+            con.commit();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+
+        return users;
+    }
+
 }
 

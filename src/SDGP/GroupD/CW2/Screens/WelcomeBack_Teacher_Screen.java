@@ -1,3 +1,10 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -83,7 +90,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         //Configure the three buttons
 
         //Configure Student "Track your progress" button
-        teachertrackprogressButton = new MainButton("Track Student Progress");
+        teachertrackprogressButton = new MainButton("Track Student Progress", Colours.mainBG);
         add(teachertrackprogressButton);
 
         layout.putConstraint(SpringLayout.NORTH, teachertrackprogressButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -92,7 +99,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 
         //Configure Student "View your login activity" button
-        teacherviewloginactivityButton = new MainButton("View Your login Activity");
+        teacherviewloginactivityButton = new MainButton("View Your login Activity", Colours.mainBG);
         add(teacherviewloginactivityButton);
 
         layout.putConstraint(SpringLayout.NORTH, teacherviewloginactivityButton, 10, SpringLayout.SOUTH, teachertrackprogressButton);
@@ -101,11 +108,11 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 
         //Configure Student "Get Started Learning!" button
-        teachergetstartedlearningButton = new MainButton("Get Started Teaching!");
+        teachergetstartedlearningButton = new MainButton("Get Started Teaching!", Colours.mainBG);
         add(teachergetstartedlearningButton);
-        teachergetstartedlearningButton.setColor(Colours.LighterButton);
-        teachergetstartedlearningButton.setBorderColor(Colours.LighterButton);
-        teachergetstartedlearningButton.setColorOver(Colours.LighterButton);
+        teachergetstartedlearningButton.setColor(Colours.mainBG);
+        teachergetstartedlearningButton.setBorderColor(Colours.mainBG);
+        teachergetstartedlearningButton.setColorOver(Colours.mainBG);
 
 
         layout.putConstraint(SpringLayout.NORTH, teachergetstartedlearningButton, 50, SpringLayout.SOUTH, teacherviewloginactivityButton);

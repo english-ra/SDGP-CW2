@@ -1,3 +1,10 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -81,7 +88,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         //Configure the two buttons
 
         //Configure Admin "Reset password" button
-        resetpasswordButton = new MainButton("Rest Passwords");
+        resetpasswordButton = new MainButton("Rest Passwords", Colours.mainBG);
         add(resetpasswordButton);
 
         layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -90,7 +97,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
 
         //Configure Admin "View login activity" button
-        adminviewloginactivityButton = new MainButton("View All Login Activity");
+        adminviewloginactivityButton = new MainButton("View All Login Activity", Colours.mainBG);
         add(adminviewloginactivityButton);
 
         layout.putConstraint(SpringLayout.NORTH, adminviewloginactivityButton, 10, SpringLayout.SOUTH, resetpasswordButton);

@@ -1,3 +1,11 @@
+package SDGP.GroupD.CW2.Screens;
+
+import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.UIComponents.PlainButton;
+import SDGP.GroupD.CW2.UIComponents.QuaternarytitleLabel;
+import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
+import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.LineBorder;
