@@ -4,6 +4,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Entity.UserFeedback;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
@@ -19,6 +20,7 @@ import java.util.Date;
 
 public class GP_Logging_Feedback extends JPanel {
 
+    private ConversationGameplayManager convoGPManager;
     private SpringLayout layout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
     private TitleLabel titleLabel;
@@ -32,7 +34,8 @@ public class GP_Logging_Feedback extends JPanel {
 
     private MainButton nextButton;
 
-    public GP_Logging_Feedback() {
+    public GP_Logging_Feedback(ConversationGameplayManager convoGPManager) {
+        this.convoGPManager = convoGPManager;
         uiFlow.add(this);
 
         // Configure the UI
@@ -189,7 +192,7 @@ public class GP_Logging_Feedback extends JPanel {
 
             // Create the user feedback object
             //EVENTUALLY implement all the FKs properly
-            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, 0, 0, 0);
+            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, convoGPManager.getConversation().getConversationID(), convoGPManager.getCurrentUser().getUserID(), convoGPManager.getTargetUser().getUserID());
 
             //add the user feedback to the database
             DatabaseAPI db = new DatabaseAPI();
