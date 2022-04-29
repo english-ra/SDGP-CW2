@@ -7,5 +7,7 @@ public interface Colours {
     Color lightFG = Color.decode("#DAD2D8");
     Color feedBack= Color.decode("#DAD2D8");
     Color mainText= Color.decode("#020202");
-    Color fiftyPercent = ;
+    Color fiftyPercent  = new Color(0, 0, 0, 50);
 }
+
+
