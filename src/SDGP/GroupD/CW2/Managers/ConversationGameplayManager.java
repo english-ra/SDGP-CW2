@@ -47,7 +47,7 @@ public class ConversationGameplayManager {
             // TODO: Create a session in the database
 
             // Create the alternating screens
-            changePlayerScreen = new GP_Change_Player_Screen();
+            changePlayerScreen = new GP_Change_Player_Screen(this);
             conversationScreen = new GP_Conversation_Screen(this);
 
             // Display the first change player screen
