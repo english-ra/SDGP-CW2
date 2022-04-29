@@ -18,7 +18,7 @@ import java.util.Date;
 
 
 public class GP_Logging_Feedback extends JPanel {
-    private JFrame mainframe;
+
     private SpringLayout layout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
     private TitleLabel titleLabel;
@@ -32,8 +32,7 @@ public class GP_Logging_Feedback extends JPanel {
 
     private MainButton nextButton;
 
-    public GP_Logging_Feedback(JFrame mainframe) {
-        this.mainframe = mainframe;
+    public GP_Logging_Feedback() {
         uiFlow.add(this);
 
         // Configure the UI
@@ -49,21 +48,20 @@ public class GP_Logging_Feedback extends JPanel {
     }
 
 
-    public static void main(String[] args) {
 
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Logging_Feedback r = new GP_Logging_Feedback(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
-
-
-    // MARK: - Configure the UI
+    // MARK: - Configure the UI//
+    ////    public static void main(String[] args) {
+    ////
+    ////        JFrame mainframe = new JFrame();
+    ////
+    ////        mainframe.setTitle("PerriLingo");
+    ////        mainframe.setSize(350, 750);
+    ////        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    ////
+    ////        GP_Logging_Feedback r = new GP_Logging_Feedback(mainframe);
+    ////        mainframe.setContentPane(r);
+    ////        mainframe.setVisible(true);
+    ////    }
     private void configureRootPanel() {
         this.setBackground(Colours.mainBG);
         this.setPreferredSize(new Dimension(350, 750));
