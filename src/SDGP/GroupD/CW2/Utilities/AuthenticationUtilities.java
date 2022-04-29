@@ -32,4 +32,9 @@ public interface AuthenticationUtilities {
         }
     }
 
+
+    static void signOut() {
+        // Clear the currently signed in user
+        db.clearLocalAppDB();
+    }
 }
