@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Screens;
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Entity.Conversation;
 import SDGP.GroupD.CW2.Entity.ConversationText;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 
@@ -34,6 +35,7 @@ public class GP_Conversation_Screen extends JPanel {
         configureTitleLabels();
         configurePromptLabels();
         configureButtons();
+        configureButtonListeners();
     }
 
 
@@ -68,7 +70,7 @@ public class GP_Conversation_Screen extends JPanel {
 
     private void configurePromptLabels() {
         // Configuring the title label
-        promptTitleLabel = new BodyLabel("Prompt");
+        promptTitleLabel = new BodyLabel("");
         add(promptTitleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, promptTitleLabel, 100, SpringLayout.NORTH, convoTextLabel);
@@ -111,9 +113,9 @@ public class GP_Conversation_Screen extends JPanel {
     }
 
 
-    public void setConversationData(String usersFirstName, ConversationText conversationText) {
+    public void setConversationData(User user, ConversationText conversationText) {
         // Set the users name label
-        userNameLabel.setText(usersFirstName);
+        userNameLabel.setText(user.getUserName());
 
         // Set the conversation labels
         convoTextLabel.setText(conversationText.getText());

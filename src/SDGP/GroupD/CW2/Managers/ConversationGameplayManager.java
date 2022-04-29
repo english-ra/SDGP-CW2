@@ -6,6 +6,8 @@ import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Screens.GP_Change_Player_Screen;
 import SDGP.GroupD.CW2.Screens.GP_Conversation_Screen;
+import SDGP.GroupD.CW2.Screens.GP_Logging_Feedback;
+import SDGP.GroupD.CW2.Screens.WelcomeBack_Student_Screen;
 
 import javax.swing.*;
 import java.util.ArrayList;
@@ -23,7 +25,11 @@ public class ConversationGameplayManager {
     GP_Conversation_Screen conversationScreen;
 
     // Conversation gameplay logic
-    int currentTextIndex = 0;
+    private int currentTextIndex = 0;
+    private User currentUser;
+    private User targetUser;
+
+    boolean firstFeedbackLogged = false;
 
 
     public ConversationGameplayManager(JFrame mainframe, Conversation conversation) {
@@ -50,21 +56,69 @@ public class ConversationGameplayManager {
             changePlayerScreen = new GP_Change_Player_Screen(this);
             conversationScreen = new GP_Conversation_Screen(this);
 
-            // Display the first change player screen
+            // Set the current and target users
+            currentUser = player2;
+            targetUser = player1;
 
+            // Display the first change player screen
+            changePlayerScreen.displayUserData(currentUser, targetUser);
+            mainframe.setContentPane(changePlayerScreen);
+            mainframe.setVisible(true);
         }
     }
 
 
     // The change player screen continue button has been tapped
     public void cpsButtonClicked() {
-        // Display the next conversation screen, with the next conversation text
+        // Switch the current and target users
+        User temp = currentUser;
+        currentUser = targetUser;
+        targetUser = temp;
+
+        if (currentTextIndex != conversation.getTexts().size() - 1) {
+            // There are still texts remaining
+
+            // Display the next conversation screen, with the next conversation text
+            conversationScreen.setConversationData(currentUser, conversation.getTexts().get(currentTextIndex));
+            mainframe.setContentPane(conversationScreen);
+
+            // Increment the current text index
+            currentTextIndex++;
+        } else {
+            // There are no more texts left
+
+            // Go to the feedback screen
+            GP_Logging_Feedback feedbackScreen = new GP_Logging_Feedback(this);
+            mainframe.setContentPane(feedbackScreen);
+        }
+        mainframe.setVisible(true);
+    }
+
+
+    public void feedbackLogButtonClicked() {
+        if (firstFeedbackLogged) {
+            // All the feedbacks are logged
+            // So we can go home
+            WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainframe, new ArrayList());
+            mainframe.setContentPane(screen);
+        } else {
+            // Display the next change player screen
+            changePlayerScreen.displayUserData(currentUser, targetUser);
+            mainframe.setContentPane(changePlayerScreen);
+
+            firstFeedbackLogged = true;
+        }
+        mainframe.setVisible(true);
     }
 
 
     // The conversation screen continue button has been tapped
     public void convoButtonClicked() {
+
         // Display the next change player screen
+        changePlayerScreen.displayUserData(currentUser, targetUser);
+        mainframe.setContentPane(changePlayerScreen);
+        mainframe.setVisible(true);
     }
 
 
@@ -83,4 +137,7 @@ public class ConversationGameplayManager {
     public User getPlayer1() { return player1; }
     public User getPlayer2() { return player2; }
     public Conversation getConversation() { return conversation; }
+
+    public User getCurrentUser() { return currentUser; };
+    public User getTargetUser() { return targetUser; }
 }

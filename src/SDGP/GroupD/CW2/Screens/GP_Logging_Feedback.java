@@ -192,22 +192,18 @@ public class GP_Logging_Feedback extends JPanel {
 
             // Create the user feedback object
             //EVENTUALLY implement all the FKs properly
-            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, convoGPManager.getConversation().getConversationID(), convoGPManager.getCurrentUser().getUserID(), convoGPManager.getTargetUser().getUserID());
+            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, convoGPManager.getConversation().getConversationID(), convoGPManager.getTargetUser().getUserID(), convoGPManager.getCurrentUser().getUserID());
 
             //add the user feedback to the database
             DatabaseAPI db = new DatabaseAPI();
             if (db.createUserFeedback(userFeedback)) {
                 //if we are in here then write has been succesfully saved
                 System.out.println("User feedback saved");
+                convoGPManager.feedbackLogButtonClicked();
             }else{
                 //if we are in here then write has not been succesfully saved
                 System.out.println("User feedback not saved");
             }
-
-
-
-
-
         }
     }
 }
