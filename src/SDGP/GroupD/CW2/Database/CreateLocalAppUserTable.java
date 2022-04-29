@@ -4,20 +4,16 @@ import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 
-public class CreateLoginAnalyticsTable {
+public class CreateLocalAppUserTable {
 
-    public CreateLoginAnalyticsTable(){
+    public CreateLocalAppUserTable(){
         Connection con = ConnectDB.getConnection();
         Statement stmt = null;
         String createString;
-
-        // Creates the LoginAnalytics table
-        createString = "CREATE TABLE if not exists LoginAnalytics ( \n"
-                + " loginAnalyticsID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
-                + " date VARCHAR(50),\n"
-                + " action VARCHAR(50) ,\n"
-                + " userID INTEGER, \n"
-                + " CONSTRAINT fk_USER_ANALYTICS FOREIGN KEY(userID) references users(userID)  \n" + ") ;";
+        //creates the level table
+        createString = "CREATE TABLE if not exists LocalAppData ( \n"
+                + " userID INTEGER PRIMARY KEY\n"
+                + ") ;";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);
@@ -41,7 +37,6 @@ public class CreateLoginAnalyticsTable {
             }
 
         }
-    }
 
     }
-
+}

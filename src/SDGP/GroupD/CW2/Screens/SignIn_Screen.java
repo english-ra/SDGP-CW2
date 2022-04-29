@@ -3,7 +3,9 @@ package SDGP.GroupD.CW2.Screens;
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 
 public class SignIn_Screen extends JPanel {
     private JFrame mainFrame;
+
+    ConversationGameplayManager convoGPManager;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -28,14 +32,15 @@ public class SignIn_Screen extends JPanel {
 
     private SpringLayout layout;
 
-    private ArrayList uiFlow;
+    private ArrayList<JPanel> uiFlow;
 
     private DatabaseAPI db;
 
 
-    public SignIn_Screen(JFrame mainFrame, ArrayList uiFlow) {
+    public SignIn_Screen(JFrame mainFrame, ArrayList uiFlow, ConversationGameplayManager convoGPManager) {
         this.mainFrame  = mainFrame;
         this.uiFlow = uiFlow;
+        this.convoGPManager = convoGPManager;
         this.db = new DatabaseAPI();
 
         // Configure the UI
@@ -145,20 +150,6 @@ public class SignIn_Screen extends JPanel {
     }
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private void configureButtonListeners() {
         submitButton.addActionListener(new ActionListener() {
             @Override
@@ -173,6 +164,7 @@ public class SignIn_Screen extends JPanel {
         });
     }
 
+
     private void submitButtonClicked() {
         // Perform form validation
         if (usernameTextField.getText().equals("") || passwordTextField.getText().equals("")) {
@@ -186,11 +178,11 @@ public class SignIn_Screen extends JPanel {
             String username = usernameTextField.getText();
             String password = passwordTextField.getText();
 
-        //call database to check if user exists
-        //if user exists, check if password is correct
-        //if password is correct, go to main menu
-        //if password is incorrect, show error message
-        //if user does not exist, show error message
+            //call database to check if user exists
+            //if user exists, check if password is correct
+            //if password is correct, go to main menu
+            //if password is incorrect, show error message
+            //if user does not exist, show error message
             User user = db.getUser(username);
             if (user == null) {
                 errorLabel.setText("This user does not exist in the database.");
@@ -202,28 +194,43 @@ public class SignIn_Screen extends JPanel {
                 if (PasswordHasher.verifyPassword(password, user.getPassword(), user.getPasswordSalt())) {
                     //login successful
                     //System.out.println("Login successful");
-                    WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
-                    mainFrame.setContentPane(screen);
+                    if (convoGPManager == null) {
+
+                        // Save the userID to the LocalAppDB
+                        AuthenticationUtilities.persistUserSignIn(user);
+
+                        // TODO: Determine whether it's a student or teacher and navigate accordingly
+
+                        // Navigate to the welcome back screen
+                        WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                        mainFrame.setContentPane(screen);
+                    } else {
+                        // It is a second player signing in, inside the gameplay flow
+
+                        // Set the second user in the manager
+                        convoGPManager.setPlayer2(user);
+
+                        // TEMP
+                        convoGPManager.printState();
+
+                        // Go to gameplay start screen
+                        GP_Start_Screen screen = new GP_Start_Screen(this.mainFrame, this.convoGPManager);
+                        mainFrame.setContentPane(screen);
+                    }
                     mainFrame.setVisible(true);
                 }
                 else{
                     errorLabel.setText("Incorrect password.");
                     errorLabel.setVisible(true);
                 }
-
-                }
             }
-
-
-
-
-
+        }
    }
 
 
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
-        Landing_Screen previousView = (Landing_Screen) uiFlow.get(uiFlow.size() - 1);
+        JPanel previousView = uiFlow.get(uiFlow.size() - 1);
         mainFrame.setContentPane(previousView);
         mainFrame.setVisible(true);
     }

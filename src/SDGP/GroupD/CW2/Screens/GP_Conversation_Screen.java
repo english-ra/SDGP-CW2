@@ -1,16 +1,22 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.ConversationText;
+import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class GP_Conversation_Screen extends JPanel {
-    private JFrame mainframe;
     private SpringLayout layout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
+    private ConversationGameplayManager convoGPManager;
 
     private TitleLabel userNameLabel;
     private SubtitleLabel convoTextLabel;
@@ -21,26 +27,15 @@ public class GP_Conversation_Screen extends JPanel {
     private MainButton nextButton;
     private PlainButton quitButton;
 
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Conversation_Screen r = new GP_Conversation_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
-
-    public GP_Conversation_Screen(JFrame mainframe) {
-        this.mainframe = mainframe;
+    public GP_Conversation_Screen(ConversationGameplayManager convoGPManager) {
+        this.convoGPManager = convoGPManager;
 
         // Configure the UI
         configureRootPanel();
         configureTitleLabels();
         configurePromptLabels();
         configureButtons();
+        configureButtonListeners();
     }
 
 
@@ -75,7 +70,7 @@ public class GP_Conversation_Screen extends JPanel {
 
     private void configurePromptLabels() {
         // Configuring the title label
-        promptTitleLabel = new BodyLabel("Prompt");
+        promptTitleLabel = new BodyLabel("");
         add(promptTitleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, promptTitleLabel, 100, SpringLayout.NORTH, convoTextLabel);
@@ -108,4 +103,25 @@ public class GP_Conversation_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, quitButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, quitButton, -20, SpringLayout.EAST, this);
     }
+
+
+    private void configureButtonListeners() {
+        nextButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
+        });
+    }
+
+
+    public void setConversationData(User user, ConversationText conversationText) {
+        // Set the users name label
+        userNameLabel.setText(user.getUserName());
+
+        // Set the conversation labels
+        convoTextLabel.setText(conversationText.getText());
+        promptLabel.setText(conversationText.getPrompt());
+    }
+
+
+    private void nextButtonClicked() { convoGPManager.convoButtonClicked(); }
 }

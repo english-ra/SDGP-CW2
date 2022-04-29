@@ -4,6 +4,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Entity.UserFeedback;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
@@ -18,7 +19,8 @@ import java.util.Date;
 
 
 public class GP_Logging_Feedback extends JPanel {
-    private JFrame mainframe;
+
+    private ConversationGameplayManager convoGPManager;
     private SpringLayout layout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
     private TitleLabel titleLabel;
@@ -32,8 +34,8 @@ public class GP_Logging_Feedback extends JPanel {
 
     private MainButton nextButton;
 
-    public GP_Logging_Feedback(JFrame mainframe) {
-        this.mainframe = mainframe;
+    public GP_Logging_Feedback(ConversationGameplayManager convoGPManager) {
+        this.convoGPManager = convoGPManager;
         uiFlow.add(this);
 
         // Configure the UI
@@ -49,21 +51,20 @@ public class GP_Logging_Feedback extends JPanel {
     }
 
 
-    public static void main(String[] args) {
 
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Logging_Feedback r = new GP_Logging_Feedback(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
-
-
-    // MARK: - Configure the UI
+    // MARK: - Configure the UI//
+    ////    public static void main(String[] args) {
+    ////
+    ////        JFrame mainframe = new JFrame();
+    ////
+    ////        mainframe.setTitle("PerriLingo");
+    ////        mainframe.setSize(350, 750);
+    ////        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+    ////
+    ////        GP_Logging_Feedback r = new GP_Logging_Feedback(mainframe);
+    ////        mainframe.setContentPane(r);
+    ////        mainframe.setVisible(true);
+    ////    }
     private void configureRootPanel() {
         this.setBackground(Colours.mainBG);
         this.setPreferredSize(new Dimension(350, 750));
@@ -183,6 +184,7 @@ public class GP_Logging_Feedback extends JPanel {
             }
 
 
+
             //GETTING CURRENT DATE AND SETTING IT AS DATELOGGED
             Date date = new Date();
             SimpleDateFormat formatter = new SimpleDateFormat("dd/mm/yyyy");
@@ -190,22 +192,18 @@ public class GP_Logging_Feedback extends JPanel {
 
             // Create the user feedback object
             //EVENTUALLY implement all the FKs properly
-            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, 0, 0, 0);
+            UserFeedback userFeedback = new UserFeedback(dateLogged, notes, score, convoGPManager.getConversation().getConversationID(), convoGPManager.getTargetUser().getUserID(), convoGPManager.getCurrentUser().getUserID());
 
             //add the user feedback to the database
             DatabaseAPI db = new DatabaseAPI();
             if (db.createUserFeedback(userFeedback)) {
                 //if we are in here then write has been succesfully saved
                 System.out.println("User feedback saved");
+                convoGPManager.feedbackLogButtonClicked();
             }else{
                 //if we are in here then write has not been succesfully saved
                 System.out.println("User feedback not saved");
             }
-
-
-
-
-
         }
     }
 }

@@ -1,6 +1,8 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -11,7 +13,8 @@ import java.util.ArrayList;
 
 
 public class GP_Change_Player_Screen extends JPanel {
-    private JFrame mainframe;
+
+    private ConversationGameplayManager convoGPManager;
     private SpringLayout layout;
     private SpringLayout changePanelLayout;
     private ArrayList uiFlow = new ArrayList<JPanel>();
@@ -23,9 +26,14 @@ public class GP_Change_Player_Screen extends JPanel {
 
     private MainButton nextButton;
 
-    public GP_Change_Player_Screen(JFrame mainframe) {
-        this.mainframe = mainframe;
+
+    public GP_Change_Player_Screen(ConversationGameplayManager convoGPManager) {
+        this.convoGPManager = convoGPManager;
         uiFlow.add(this);
+
+
+
+
 
         // Configure the UI
 
@@ -38,18 +46,18 @@ public class GP_Change_Player_Screen extends JPanel {
         configureButtonListeners();
     }
 
-
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Change_Player_Screen r = new GP_Change_Player_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
-    }
+//
+//    public static void main(String[] args) {
+//        JFrame mainframe = new JFrame();
+//
+//        mainframe.setTitle("PerriLingo");
+//        mainframe.setSize(350, 750);
+//        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+//
+//        GP_Change_Player_Screen r = new GP_Change_Player_Screen();
+//        mainframe.setContentPane(r);
+//        mainframe.setVisible(true);
+//    }
 
 
     // MARK: - Configure the UI
@@ -135,6 +143,19 @@ public class GP_Change_Player_Screen extends JPanel {
 
     private void nextButtonClicked() {
         // TODO: Check to ensure that an option is selected
+        convoGPManager.cpsButtonClicked();
 
     }
+
+    //create a function that takes a user as a parameter
+    //used to set content and labels.
+    public void displayUserData(User currentUser, User targetUser) {
+        //set the title label to the user's name
+        titleLabel.setText(currentUser.getUserName());
+        //set the subtitle label to the user's name
+        subtitleLabel.setText("Give device to " + targetUser.getUserName());
+    }
+
 }
+
+
