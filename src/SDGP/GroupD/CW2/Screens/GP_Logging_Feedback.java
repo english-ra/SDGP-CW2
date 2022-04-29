@@ -199,6 +199,7 @@ public class GP_Logging_Feedback extends JPanel {
             if (db.createUserFeedback(userFeedback)) {
                 //if we are in here then write has been succesfully saved
                 System.out.println("User feedback saved");
+                convoGPManager.feedbackLogButtonClicked();
             }else{
                 //if we are in here then write has not been succesfully saved
                 System.out.println("User feedback not saved");
