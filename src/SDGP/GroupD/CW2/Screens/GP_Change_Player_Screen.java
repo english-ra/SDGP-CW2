@@ -143,6 +143,7 @@ public class GP_Change_Player_Screen extends JPanel {
 
     private void nextButtonClicked() {
         // TODO: Check to ensure that an option is selected
+        convoGPManager.cpsButtonClicked();
 
     }
 
