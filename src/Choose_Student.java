@@ -13,8 +13,8 @@ public class Choose_Student extends JPanel {
     private SubtitleLabel subtitleLabel;
     private QuaternarytitleLabel quaternarytitleLabel;
 
-    private MainButton backButton;
-    private MainButton backButtonClicked;
+    private PlainButton backButton;
+    private PlainButton backButtonClicked;
     private SpringLayout layout;
     private ArrayList uiFlow;
 
@@ -99,11 +99,10 @@ public class Choose_Student extends JPanel {
     }
 
     private void configureBackButton() {
+        backButton = new PlainButton("Back");
+        this.add(backButton);
 
-        backButton = new MainButton("< Back");
-        add(backButton);
-
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 10, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -10, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
@@ -111,14 +110,16 @@ public class Choose_Student extends JPanel {
     private void configureButtonListener() {
         backButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                backButtonClicked();
-            }
+            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
         });
 
     }
     private void backButtonClicked() {
-
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+        System.out.println("Back button clicked");
     }
 
 
