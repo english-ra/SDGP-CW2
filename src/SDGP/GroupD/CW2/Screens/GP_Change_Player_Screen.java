@@ -148,11 +148,11 @@ public class GP_Change_Player_Screen extends JPanel {
 
     //create a function that takes a user as a parameter
     //used to set content and labels.
-    public void displayUserData(User user){
+    public void displayUserData(User currentUser, User targetUser) {
         //set the title label to the user's name
-        titleLabel.setText(user.getUserName());
+        titleLabel.setText(currentUser.getUserName());
         //set the subtitle label to the user's name
-        subtitleLabel.setText("Give device to " + user.getUserName());
+        subtitleLabel.setText("Give device to " + targetUser.getUserName());
     }
 
 }
