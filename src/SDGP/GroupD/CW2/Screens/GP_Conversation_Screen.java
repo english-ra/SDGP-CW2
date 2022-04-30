@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Entity.ConversationText;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.UIComponents.TextArea;
 
 import javax.swing.*;
 import java.awt.*;
@@ -19,7 +20,7 @@ public class GP_Conversation_Screen extends JPanel {
     private ConversationGameplayManager convoGPManager;
 
     private TitleLabel userNameLabel;
-    private SubtitleLabel convoTextLabel;
+    private TextArea convoTextLabel;
 
     private BodyLabel promptTitleLabel;
     private BodyLabel promptLabel;
@@ -33,8 +34,8 @@ public class GP_Conversation_Screen extends JPanel {
         // Configure the UI
         configureRootPanel();
         configureTitleLabels();
-        configurePromptLabels();
         configureButtons();
+        configurePromptLabels();
         configureButtonListeners();
     }
 
@@ -59,7 +60,7 @@ public class GP_Conversation_Screen extends JPanel {
 
 
         // Configuring the subtitle label
-        convoTextLabel = new SubtitleLabel("Hello there, have you made a reservation?");
+        convoTextLabel = new TextArea("Hello there, have you made a reservation?");
         add(convoTextLabel);
 
         layout.putConstraint(SpringLayout.NORTH, convoTextLabel, 2, SpringLayout.SOUTH, userNameLabel);
@@ -69,22 +70,24 @@ public class GP_Conversation_Screen extends JPanel {
 
 
     private void configurePromptLabels() {
-        // Configuring the title label
-        promptTitleLabel = new BodyLabel("");
-        add(promptTitleLabel);
-
-        layout.putConstraint(SpringLayout.NORTH, promptTitleLabel, 100, SpringLayout.NORTH, convoTextLabel);
-        layout.putConstraint(SpringLayout.WEST, promptTitleLabel, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, promptTitleLabel, -20, SpringLayout.EAST, this);
-
-
         // Configuring the subtitle label
-        promptLabel = new BodyLabel("Hi");
+        promptLabel = new BodyLabel("");
+        promptLabel.setHorizontalAlignment(SwingConstants.CENTER);
         add(promptLabel);
 
-        layout.putConstraint(SpringLayout.NORTH, promptLabel, 2, SpringLayout.SOUTH, promptTitleLabel);
+        layout.putConstraint(SpringLayout.SOUTH, promptLabel, -50, SpringLayout.NORTH, nextButton);
         layout.putConstraint(SpringLayout.WEST, promptLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, promptLabel, -20, SpringLayout.EAST, this);
+
+        // Configuring the title label
+        promptTitleLabel = new BodyLabel("Prompt");
+        promptTitleLabel.setFont(new Font("", Font.BOLD, 12));
+        promptTitleLabel.setHorizontalAlignment(SwingConstants.CENTER);
+        add(promptTitleLabel);
+
+        layout.putConstraint(SpringLayout.SOUTH, promptTitleLabel, -5, SpringLayout.NORTH, promptLabel);
+        layout.putConstraint(SpringLayout.WEST, promptTitleLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, promptTitleLabel, -20, SpringLayout.EAST, this);
     }
 
 
