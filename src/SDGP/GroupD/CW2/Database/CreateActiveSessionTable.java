@@ -12,12 +12,14 @@ public class CreateActiveSessionTable {
         String createString;
         // Creates the ActiveSession table
         createString = "CREATE TABLE if not exists ActiveSession ( \n"
-                + " activeSessionID INTEGER PRIMARY KEY,\n"
+                + " activeSessionID INTEGER PRIMARY KEY AUTOINCREMENT,\n"
                 + " dateCreated DATETIME,\n"
-                + "userAID INTEGER, \n"
-                + "userBID INTEGER, \n"
-                + " CONSTRAINT fk_USER_A FOREIGN KEY(userAID) references users(userID)"
-                + " CONSTRAINT fk_USER_B FOREIGN KEY(userBID) references users(userID)  \n" + ") ;";
+                + " userAID INTEGER, \n"
+                + " userBID INTEGER, \n"
+                + " conversationID INTEGER, \n"
+                + " CONSTRAINT fk_USER_A FOREIGN KEY(userAID) references users(userID),"
+                + " CONSTRAINT fk_USER_B FOREIGN KEY(userBID) references users(userID),"
+                + " CONSTRAINT fk_CONVO FOREIGN KEY(conversationID) references Conversation(conversationID) \n" + ");";
         try {
             stmt = con.createStatement();
             stmt.executeUpdate(createString);

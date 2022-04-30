@@ -4,7 +4,6 @@ import SDGP.GroupD.CW2.Entity.*;
 
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.Date;
 
 
 public class DatabaseAPI {
@@ -560,6 +559,49 @@ public class DatabaseAPI {
             stmt.setString(2, loginAnalytic.getDateLogged());
             stmt.setString(3, loginAnalytic.getAction());
             stmt.setInt(4, loginAnalytic.getUserID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            return false;
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                    return false;
+                }
+            }
+        }
+        return true;
+    }
+
+    public Boolean createConversationSession(Session session) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            java.sql.Date sqlDate = new java.sql.Date(session.getDateCreated().getTime());
+
+            stmt = con.prepareStatement("INSERT INTO ActiveSession VALUES(?, ?, ?, ?, ?)");
+            stmt.setDate(2, sqlDate);
+            stmt.setInt(3, session.getPlayer1ID());
+            stmt.setInt(4, session.getPlayer2ID());
+            stmt.setInt(5, session.getConversationID());
 
             stmt.executeUpdate();
 

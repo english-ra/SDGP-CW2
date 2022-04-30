@@ -15,8 +15,6 @@ public class CreateDatabase {
           new CreateLoginAnalyticsTable();
           new CreatePracticeFeedbackTable();
           new CreateUserTable();
-
-          //New Local "Database" to store active users info.
           new CreateLocalAppUserTable();
      }
 }
