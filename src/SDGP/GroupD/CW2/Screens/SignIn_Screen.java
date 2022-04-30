@@ -23,7 +23,7 @@ public class SignIn_Screen extends JPanel {
     private SubtitleLabel subtitleLabel;
     private MainTextField usernameTextField;
     private BodyLabel usernameTextFieldLabel;
-    private MainTextField passwordTextField;
+    private MainPasswordTextField passwordTextField;
     private BodyLabel passwordTextFieldLabel;
 
     private ErrorLabel errorLabel;
@@ -112,7 +112,7 @@ public class SignIn_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
 
         // Configure the password textfield below the password textfieldlabel
-        passwordTextField = new MainTextField("");
+        passwordTextField = new MainPasswordTextField();
         add(passwordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);

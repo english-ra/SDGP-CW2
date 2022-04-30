@@ -26,9 +26,9 @@ public class Register_Screen extends JPanel {
     private BodyLabel usernameTextFieldLabel;
     private MainTextField usernameTextField;
     private BodyLabel passwordTextFieldLabel;
-    private MainTextField passwordTextField;
+    private MainPasswordTextField passwordTextField;
     private BodyLabel confirmPasswordTextFieldLabel;
-    private MainTextField confirmPasswordTextField;
+    private MainPasswordTextField confirmPasswordTextField;
 
     private BodyLabel fnameTextFieldLabel;
     private MainTextField fnameTextField;
@@ -120,7 +120,7 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, passwordTextFieldLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
 
-        passwordTextField = new MainTextField("");
+        passwordTextField = new MainPasswordTextField();
         add(passwordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);
@@ -135,7 +135,7 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, confirmPasswordTextFieldLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, confirmPasswordTextFieldLabel, -20, SpringLayout.EAST, this);
 
-        confirmPasswordTextField = new MainTextField("");
+        confirmPasswordTextField = new MainPasswordTextField();
         add(confirmPasswordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, confirmPasswordTextField, 5, SpringLayout.SOUTH, confirmPasswordTextFieldLabel);
