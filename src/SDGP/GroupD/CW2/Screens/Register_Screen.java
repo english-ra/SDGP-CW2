@@ -9,6 +9,7 @@ import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
+import SDGP.GroupD.CW2.Utilities.LoggingUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -287,6 +288,12 @@ public class Register_Screen extends JPanel {
             String writeError = dbAPI.createUser(user);
             if (writeError == "") {
                 // Write successful & login successful
+
+                // Log the users registration
+                LoggingUtilities.logRegistration(user);
+
+                // Log the users sign in
+                LoggingUtilities.logSignIn(user);
 
                 if (convoGPManager == null) {
                     // The user is signing up at the start of the app

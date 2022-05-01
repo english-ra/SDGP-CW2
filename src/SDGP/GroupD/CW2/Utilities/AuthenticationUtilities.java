@@ -38,12 +38,20 @@ public interface AuthenticationUtilities {
         Integer userID = db.getUserIDFromLocalAppDB();
 
         // Get the user
-        return db.getUser(userID);
+        User user = db.getUser(userID);
+        return user;
     }
 
 
-    static void signOut() {
+    static Boolean signOut() {
+        // Log the users sign out
+        LoggingUtilities.logSignOut(getCurrentlySignedInUser());
+
         // Clear the currently signed in user
-        db.clearLocalAppDB();
+        if (db.clearLocalAppDB()) {
+            return true;
+        } else {
+            return false;
+        }
     }
 }

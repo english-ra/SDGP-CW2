@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
+import SDGP.GroupD.CW2.Utilities.LoggingUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -193,7 +194,10 @@ public class SignIn_Screen extends JPanel {
                 errorLabel.setVisible(false);
                 if (PasswordHasher.verifyPassword(password, user.getPassword(), user.getPasswordSalt())) {
                     //login successful
-                    //System.out.println("Login successful");
+
+                    // Log the users sign in
+                    LoggingUtilities.logSignIn(user);
+
                     if (convoGPManager == null) {
 
                         // Save the userID to the LocalAppDB

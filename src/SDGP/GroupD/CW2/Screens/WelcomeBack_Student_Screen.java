@@ -171,7 +171,7 @@ public class WelcomeBack_Student_Screen extends JPanel {
 
     private void signOutButtonClicked() {
         // Clear the local app database
-        if (db.clearLocalAppDB()) {
+        if (AuthenticationUtilities.signOut()) {
             // Local database is cleared successfully
 
             // Navigate back to the landing screen
