@@ -8,32 +8,24 @@ import java.util.ArrayList;
 
 public class DatabaseAPI {
 
-    //USE THIS TO TEST
-    public static void main(String[] args) {
-        DatabaseAPI db = new DatabaseAPI();
-//        User u = db.getUser("reece");
-//        System.out.println(u.getFirstName());
-        db.clearLocalAppDB();
-    }
-
     public String createUser(User user) {
         Connection con = ConnectDB.getConnection();
-        Statement stmt = null;
+        PreparedStatement stmt = null;
 
-        String sqlString = "INSERT INTO users (firstName,lastName,username,password,passwordSalt,userType,teacherID)\n" +
-                "VALUES (" +
-                "'" + user.getFirstName() + "'," +
-                "'" + user.getLastName() + "'," +
-                "'" + user.getUserName() + "'," +
-                "'" + user.getPassword() + "'," +
-                "'" + user.getPasswordSalt() + "'," +
-                "'" + user.getUserType() + "'," +
-                "" + user.getTeacherID() +
-                ")";
         try {
+            con = ConnectDB.getConnection();
             con.setAutoCommit(false);
-            stmt = con.createStatement();
-            stmt.executeUpdate(sqlString);
+
+            stmt = con.prepareStatement("INSERT INTO users VALUES(?,?,?,?,?,?,?,?)");
+            stmt.setString(2, user.getFirstName());
+            stmt.setString(3, user.getLastName());
+            stmt.setString(4, user.getUserName());
+            stmt.setString(5, user.getPassword());
+            stmt.setString(6, user.getPasswordSalt());
+            stmt.setString(7, user.getUserType());
+            stmt.setInt(8, user.getTeacherID());
+
+            stmt.executeUpdate();
 
             // Add the generated primary key to the object
             int primaryKey = stmt.getGeneratedKeys().getInt(1);
