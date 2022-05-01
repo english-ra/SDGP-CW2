@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
+import SDGP.GroupD.CW2.Utilities.LoggingUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -23,7 +24,7 @@ public class SignIn_Screen extends JPanel {
     private SubtitleLabel subtitleLabel;
     private MainTextField usernameTextField;
     private BodyLabel usernameTextFieldLabel;
-    private MainTextField passwordTextField;
+    private MainPasswordTextField passwordTextField;
     private BodyLabel passwordTextFieldLabel;
 
     private ErrorLabel errorLabel;
@@ -112,7 +113,7 @@ public class SignIn_Screen extends JPanel {
         layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
 
         // Configure the password textfield below the password textfieldlabel
-        passwordTextField = new MainTextField("");
+        passwordTextField = new MainPasswordTextField();
         add(passwordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);
@@ -193,7 +194,10 @@ public class SignIn_Screen extends JPanel {
                 errorLabel.setVisible(false);
                 if (PasswordHasher.verifyPassword(password, user.getPassword(), user.getPasswordSalt())) {
                     //login successful
-                    //System.out.println("Login successful");
+
+                    // Log the users sign in
+                    LoggingUtilities.logSignIn(user);
+
                     if (convoGPManager == null) {
 
                         // Save the userID to the LocalAppDB

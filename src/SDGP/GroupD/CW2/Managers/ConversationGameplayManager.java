@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Managers;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.Conversation;
 import SDGP.GroupD.CW2.Entity.ConversationText;
+import SDGP.GroupD.CW2.Entity.Session;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Screens.GP_Change_Player_Screen;
 import SDGP.GroupD.CW2.Screens.GP_Conversation_Screen;
@@ -11,6 +12,7 @@ import SDGP.GroupD.CW2.Screens.WelcomeBack_Student_Screen;
 
 import javax.swing.*;
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ConversationGameplayManager {
     private JFrame mainframe;
@@ -50,7 +52,9 @@ public class ConversationGameplayManager {
         if (player1 != null && player2 != null && conversation != null) {
             // All the data is available, let's proceed with the game
 
-            // TODO: Create a session in the database
+            // Create a session in the database
+            Session s = new Session(new Date(), player1.getUserID(), player2.getUserID(), conversation.getConversationID());
+            db.createConversationSession(s);
 
             // Create the alternating screens
             changePlayerScreen = new GP_Change_Player_Screen(this);

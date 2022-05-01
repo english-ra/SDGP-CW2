@@ -9,6 +9,7 @@ import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.Managers.ConversationGameplayManager;
 import SDGP.GroupD.CW2.UIComponents.*;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
+import SDGP.GroupD.CW2.Utilities.LoggingUtilities;
 import SDGP.GroupD.CW2.Utilities.PasswordHasher;
 
 import javax.swing.*;
@@ -26,9 +27,9 @@ public class Register_Screen extends JPanel {
     private BodyLabel usernameTextFieldLabel;
     private MainTextField usernameTextField;
     private BodyLabel passwordTextFieldLabel;
-    private MainTextField passwordTextField;
+    private MainPasswordTextField passwordTextField;
     private BodyLabel confirmPasswordTextFieldLabel;
-    private MainTextField confirmPasswordTextField;
+    private MainPasswordTextField confirmPasswordTextField;
 
     private BodyLabel fnameTextFieldLabel;
     private MainTextField fnameTextField;
@@ -120,14 +121,14 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, passwordTextFieldLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextFieldLabel, -20, SpringLayout.EAST, this);
 
-        passwordTextField = new MainTextField("");
+        passwordTextField = new MainPasswordTextField();
         add(passwordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, passwordTextField, 5, SpringLayout.SOUTH, passwordTextFieldLabel);
         layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
 
-        // Configure the confirm password textfield
+        // Configure the confirmation password text field
         confirmPasswordTextFieldLabel = new BodyLabel("Confirm Password:");
         add(confirmPasswordTextFieldLabel);
 
@@ -135,7 +136,7 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, confirmPasswordTextFieldLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, confirmPasswordTextFieldLabel, -20, SpringLayout.EAST, this);
 
-        confirmPasswordTextField = new MainTextField("");
+        confirmPasswordTextField = new MainPasswordTextField();
         add(confirmPasswordTextField);
 
         layout.putConstraint(SpringLayout.NORTH, confirmPasswordTextField, 5, SpringLayout.SOUTH, confirmPasswordTextFieldLabel);
@@ -287,6 +288,12 @@ public class Register_Screen extends JPanel {
             String writeError = dbAPI.createUser(user);
             if (writeError == "") {
                 // Write successful & login successful
+
+                // Log the users registration
+                LoggingUtilities.logRegistration(user);
+
+                // Log the users sign in
+                LoggingUtilities.logSignIn(user);
 
                 if (convoGPManager == null) {
                     // The user is signing up at the start of the app

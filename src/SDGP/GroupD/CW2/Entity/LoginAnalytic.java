@@ -12,7 +12,7 @@ public class LoginAnalytic {
 
         public LoginAnalytic() {}
 
-        public LoginAnalytic(int loginAnalyticID, String dateLogged, String action, int userID) {
+        public LoginAnalytic(String dateLogged, String action, int userID) {
             this.loginAnalyticID = 0;
             this.dateLogged = dateLogged;
             this.action = action;

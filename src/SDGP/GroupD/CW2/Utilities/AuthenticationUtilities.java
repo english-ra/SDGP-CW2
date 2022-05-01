@@ -32,4 +32,26 @@ public interface AuthenticationUtilities {
         }
     }
 
+
+    static User getCurrentlySignedInUser() {
+        // Get the currently signed in users ID
+        Integer userID = db.getUserIDFromLocalAppDB();
+
+        // Get the user
+        User user = db.getUser(userID);
+        return user;
+    }
+
+
+    static Boolean signOut() {
+        // Log the users sign out
+        LoggingUtilities.logSignOut(getCurrentlySignedInUser());
+
+        // Clear the currently signed in user
+        if (db.clearLocalAppDB()) {
+            return true;
+        } else {
+            return false;
+        }
+    }
 }

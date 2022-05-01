@@ -1,7 +1,10 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,18 +14,14 @@ import java.util.ArrayList;
 
 public class WelcomeBack_Student_Screen extends JPanel {
     private JFrame mainFrame;
+    private DatabaseAPI db;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    //private SDGP.GroupD.CW2.UIComponents.MainTextField usernameTextField;
-    //private SDGP.GroupD.CW2.UIComponents.MainTextField passwordTextField;
-
-    //private SDGP.GroupD.CW2.UIComponents.ErrorLabel errorLabel;
-    //private SDGP.GroupD.CW2.UIComponents.MainButton submitButton;
-    //private SDGP.GroupD.CW2.UIComponents.MainButton backButton;
     private MainButton studenttrackprogressButton;
     private MainButton studentviewloginactivityButton;
     private MainButton studentgetstartedlearningButton;
+    private PlainButton signOutButton;
 
     private SpringLayout layout;
 
@@ -32,14 +31,16 @@ public class WelcomeBack_Student_Screen extends JPanel {
     public WelcomeBack_Student_Screen(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
+        this.db = new DatabaseAPI();
 
         // Configure the UI
         configureRootPanel();
         configureLabels();
         configureThreeButtons();
-        //configureErrorLabel();
-
+        configureSignOutButton();
         configureButtonListeners();
+
+        displayUserDetails();
     }
 
     // MARK - Configure the UI
@@ -96,70 +97,20 @@ public class WelcomeBack_Student_Screen extends JPanel {
         //Configure Student "Get Started Learning!" button
         studentgetstartedlearningButton = new MainButton("Get Started Learning!", Colours.mainFG);
         add(studentgetstartedlearningButton);
-        studentgetstartedlearningButton.setColor(Colours.mainFGLight);
-        studentgetstartedlearningButton.setBorderColor(Colours.mainFGLight);
-        studentgetstartedlearningButton.setColorOver(Colours.mainFGLight);
-
 
         layout.putConstraint(SpringLayout.NORTH, studentgetstartedlearningButton, 50, SpringLayout.SOUTH, studentviewloginactivityButton);
         layout.putConstraint(SpringLayout.WEST, studentgetstartedlearningButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, studentgetstartedlearningButton, -20, SpringLayout.EAST, this);
-
-
     }
 
-//    private void configureTextFields() {
-//
-//        // Configure the user textfield
-//        usernameTextField = new SDGP.GroupD.CW2.UIComponents.MainTextField("");
-//        add(usernameTextField);
-//
-//        layout.putConstraint(SpringLayout.NORTH, usernameTextField, 20, SpringLayout.SOUTH, subtitleLabel);
-//        layout.putConstraint(SpringLayout.WEST, usernameTextField, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, usernameTextField, -20, SpringLayout.EAST, this);
-//        usernameTextField.setPreferredSize(new Dimension(0, 50));
-//
-//
-//        // Configure the password textfield
-//        passwordTextField = new SDGP.GroupD.CW2.UIComponents.MainTextField("");
-//        add(passwordTextField);
-//
-//        layout.putConstraint(SpringLayout.NORTH, passwordTextField, 20, SpringLayout.SOUTH, usernameTextField);
-//        layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
-//        passwordTextField.setPreferredSize(new Dimension(0, 50));
-//    }
-//
-//    private void configureBackButton() {
-//        submitButton = new SDGP.GroupD.CW2.UIComponents.MainButton("Sign In");
-//        add(submitButton);
-//
-//        backButton = new SDGP.GroupD.CW2.UIComponents.MainButton("Back");
-//        add(backButton);
-//
-//        layout.putConstraint(SpringLayout.SOUTH, submitButton, -10, SpringLayout.NORTH, backButton);
-//        layout.putConstraint(SpringLayout.WEST, submitButton, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, submitButton, -20, SpringLayout.EAST, this);
-//
-//        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
-//        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
-//    }
-//
-//    private void configureErrorLabel() {
-//        errorLabel = new SDGP.GroupD.CW2.UIComponents.ErrorLabel("Error");
-//        add(errorLabel);
-//
-//        layout.putConstraint(SpringLayout.SOUTH, errorLabel, -5, SpringLayout.NORTH, submitButton);
-//        layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
-//        layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
-//
-//        // Hide the error label by default
-//        errorLabel.setVisible(false);
-//    }
+    private void configureSignOutButton() {
+        signOutButton = new PlainButton("Sign Out");
+        add(signOutButton);
 
-
-// EMPTY BUTTON LISTENERS !!
+        layout.putConstraint(SpringLayout.SOUTH, signOutButton, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, signOutButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, signOutButton, -20, SpringLayout.EAST, this);
+    }
 
 
     private void configureButtonListeners() {
@@ -183,6 +134,21 @@ public class WelcomeBack_Student_Screen extends JPanel {
                 studentgetstartedlearningButtonClicked();
             }
         });
+
+        signOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                signOutButtonClicked();
+            }
+        });
+    }
+
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
     private void studenttrackprogressButtonClicked() {
@@ -194,13 +160,24 @@ public class WelcomeBack_Student_Screen extends JPanel {
     }
 
     private void studentgetstartedlearningButtonClicked() {
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
 
+        // Go to the language selection screen
+        GP_Language_Select_Screen languageSelectScreen = new GP_Language_Select_Screen(mainFrame, uiFlow);
+        mainFrame.setContentPane(languageSelectScreen);
+        mainFrame.setVisible(true);
+    }
+
+    private void signOutButtonClicked() {
+        // Clear the local app database
+        if (AuthenticationUtilities.signOut()) {
+            // Local database is cleared successfully
+
+            // Navigate back to the landing screen
+            Landing_Screen landingScreen = new Landing_Screen(mainFrame);
+            mainFrame.setContentPane(landingScreen);
+            mainFrame.setVisible(true);
+        }
     }
 }
-//    private void backButtonClicked() {
-//        uiFlow.remove(uiFlow.size() - 1);
-//        SDGP.GroupD.CW2.Screens.Landing_Screen previousView = (SDGP.GroupD.CW2.Screens.Landing_Screen) uiFlow.get(uiFlow.size() - 1);
-//        mainFrame.setContentPane(previousView);
-//        mainFrame.setVisible(true);
-//    }
-//}
