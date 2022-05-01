@@ -127,7 +127,7 @@ public class Register_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, passwordTextField, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, passwordTextField, -20, SpringLayout.EAST, this);
 
-        // Configure the confirm password textfield
+        // Configure the confirmation password text field
         confirmPasswordTextFieldLabel = new BodyLabel("Confirm Password:");
         add(confirmPasswordTextFieldLabel);
 
