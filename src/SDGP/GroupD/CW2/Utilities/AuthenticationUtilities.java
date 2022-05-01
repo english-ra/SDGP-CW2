@@ -33,6 +33,15 @@ public interface AuthenticationUtilities {
     }
 
 
+    static User getCurrentlySignedInUser() {
+        // Get the currently signed in users ID
+        Integer userID = db.getUserIDFromLocalAppDB();
+
+        // Get the user
+        return db.getUser(userID);
+    }
+
+
     static void signOut() {
         // Clear the currently signed in user
         db.clearLocalAppDB();

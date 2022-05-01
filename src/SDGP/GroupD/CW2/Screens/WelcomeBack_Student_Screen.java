@@ -2,7 +2,9 @@ package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -37,6 +39,8 @@ public class WelcomeBack_Student_Screen extends JPanel {
         configureThreeButtons();
         configureSignOutButton();
         configureButtonListeners();
+
+        displayUserDetails();
     }
 
     // MARK - Configure the UI
@@ -93,16 +97,11 @@ public class WelcomeBack_Student_Screen extends JPanel {
         //Configure Student "Get Started Learning!" button
         studentgetstartedlearningButton = new MainButton("Get Started Learning!", Colours.mainFG);
         add(studentgetstartedlearningButton);
-        studentgetstartedlearningButton.setColor(Colours.mainFGLight);
-        studentgetstartedlearningButton.setBorderColor(Colours.mainFGLight);
-        studentgetstartedlearningButton.setColorOver(Colours.mainFGLight);
-
 
         layout.putConstraint(SpringLayout.NORTH, studentgetstartedlearningButton, 50, SpringLayout.SOUTH, studentviewloginactivityButton);
         layout.putConstraint(SpringLayout.WEST, studentgetstartedlearningButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, studentgetstartedlearningButton, -20, SpringLayout.EAST, this);
     }
-
 
     private void configureSignOutButton() {
         signOutButton = new PlainButton("Sign Out");
@@ -142,6 +141,14 @@ public class WelcomeBack_Student_Screen extends JPanel {
                 signOutButtonClicked();
             }
         });
+    }
+
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
     private void studenttrackprogressButtonClicked() {
