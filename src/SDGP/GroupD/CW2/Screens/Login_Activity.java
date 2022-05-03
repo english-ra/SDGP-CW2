@@ -44,7 +44,7 @@ public class Login_Activity extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        Login_Activity r = new Login_Activity(mainframe, new ArrayList());
+        Login_Activity r = new Login_Activity(mainframe, new ArrayList(), new User());
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
 

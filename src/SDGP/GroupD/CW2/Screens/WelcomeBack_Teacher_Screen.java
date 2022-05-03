@@ -1,9 +1,11 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.MainButton;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
 import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -30,7 +32,6 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
     private ArrayList uiFlow;
     private SDGP.GroupD.CW2.Screens.Login_Activity Login_Activity;
-    private SDGP.GroupD.CW2.Screens.Track_Your_Progress Track_Your_Progress;
 
 
     public WelcomeBack_Teacher_Screen(JFrame mainFrame, ArrayList uiFlow) {
@@ -199,8 +200,8 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         uiFlow.add(this);
 
         // Go to the track progress screen
-        Track_Your_Progress  = new Track_Your_Progress(mainFrame, uiFlow);
-        mainFrame.setContentPane(Track_Your_Progress);
+        Track_Your_Progress screen = new Track_Your_Progress(mainFrame, uiFlow);
+        mainFrame.setContentPane(screen);
         mainFrame.setVisible(true);
 
     }
@@ -209,11 +210,12 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         ArrayList<JPanel> uiFlow = new ArrayList<>();
         uiFlow.add(this);
 
+        // TODO: Get the current user that is signed in
+
         // Go to the login activity screen
-        Login_Activity  = new Login_Activity(mainFrame, uiFlow);
+        Login_Activity  = new Login_Activity(mainFrame, uiFlow, new User());
         mainFrame.setContentPane(Login_Activity);
         mainFrame.setVisible(true);
-
     }
 
     private void teachergetstartedlearningButtonClicked() {
