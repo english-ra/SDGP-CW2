@@ -1,6 +1,8 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.LoginAnalytic;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
 
@@ -14,6 +16,8 @@ import java.util.ArrayList;
 
 public class Login_Activity extends JPanel {
     private JFrame mainFrame;
+    private DatabaseAPI db;
+    private User user;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -23,12 +27,15 @@ public class Login_Activity extends JPanel {
     private PlainButton backButtonClicked;
     private SpringLayout layout;
     private ArrayList uiFlow;
+    private ArrayList<LoginAnalytic> loginAnalytics;
     //TODO: Pass user through constructor to know whos progress is being tracked
 
 
     public Login_Activity(JFrame mainFrame, ArrayList uiFlow, User user) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
+        this.user = user;
+        this.db = new DatabaseAPI();
 
         configureRootPanel();
         configureLabels();
@@ -89,9 +96,10 @@ public class Login_Activity extends JPanel {
     }
 
     private void configureJtable(){
+        loginAnalytics = db.getLoginAnalytics(user);
 
-        String data[][] = {};
-        String column[] = {"Login Time", "Logout Time"};
+        String data[][] = loginAnalytics.stream().map(s -> new String[]{String.valueOf(s.getLoginAnalyticID()), s.getDateLogged(), s.getAction(), String.valueOf(s.getUserID())}).toArray(String[][]::new);
+        String column[] = {"Login AnalyticsID", "Date", "Action", "UserID"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
