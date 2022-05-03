@@ -1,6 +1,8 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.MainButton;
 import SDGP.GroupD.CW2.UIComponents.PlainButton;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
@@ -16,14 +18,18 @@ import java.util.ArrayList;
 
 public class Choose_user extends JPanel {
     private JFrame mainFrame;
+    private DatabaseAPI db;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
     private PlainButton backButton;
     private PlainButton backButtonClicked;
+    private MainButton continueButton;
+    private MainButton continueButtonClicked;
     private SpringLayout layout;
 
     private ArrayList uiFlow;
+    private ArrayList<User> users;
 
 
 
@@ -31,6 +37,7 @@ public class Choose_user extends JPanel {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
         this.uiFlow.add(this);
+        this.db = new DatabaseAPI();
 
         // Configure the UI
         configureRootPanel();
@@ -38,6 +45,7 @@ public class Choose_user extends JPanel {
         configureJtable();
         configureBackButton();
         configureButtonListener();
+        configureContinueButton();
 
         //configureErrorLabel();
 
@@ -88,9 +96,10 @@ public class Choose_user extends JPanel {
     }
 
     private void configureJtable() {
+        users = db.getAllUsers();
 
-        String data[][] = {};
-        String column[] = {"User", "ID"};
+        String data[][] = users.stream().map(s -> new String[]{s.getFirstName(), s.getLastName(), s.getUserName()}).toArray(String[][]::new);
+        String column[] = {"First name", "Last name", "Username"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
@@ -102,7 +111,7 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -120, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -140, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -115,11 +124,26 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
 
+    private void configureContinueButton() {
+        continueButton = new MainButton("Continue",Colours.mainFG);
+        add(continueButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, continueButton, -80, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, continueButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, continueButton, -20, SpringLayout.EAST, this);
+    }
+
     private void configureButtonListener() {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 backButtonClicked();
+            }
+        });
+        continueButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                continueButtonClicked();
             }
         });
 
@@ -130,6 +154,10 @@ public class Choose_user extends JPanel {
         mainFrame.setContentPane(previousView);
         mainFrame.setVisible(true);
         System.out.println("Back button clicked");
+
+    }
+
+    private void continueButtonClicked(){
 
     }
 }
