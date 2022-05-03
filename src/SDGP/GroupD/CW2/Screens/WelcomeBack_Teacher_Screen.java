@@ -207,6 +207,13 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     }
 
     private void teachergetstartedlearningButtonClicked() {
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
+
+        // Go to the language selection screen
+        GP_Language_Select_Screen languageSelectScreen = new GP_Language_Select_Screen(mainFrame, uiFlow);
+        mainFrame.setContentPane(languageSelectScreen);
+        mainFrame.setVisible(true);
 
     }
 
