@@ -3,6 +3,7 @@ package SDGP.GroupD.CW2.Screens;
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.PlainButton;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
 import SDGP.GroupD.CW2.UIComponents.TitleLabel;
 import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
@@ -28,6 +29,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     private MainButton teacherviewloginactivityButton;
     private MainButton teachergetstartedlearningButton;
 
+    private PlainButton signOutButton;
     private SpringLayout layout;
 
     private ArrayList uiFlow;
@@ -43,7 +45,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         configureLabels();
         configureThreeButtons();
         //configureErrorLabel();
-
+        configureSignOutButton();
         configureButtonListeners();
     }
 
@@ -172,6 +174,15 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 // EMPTY BUTTON LISTENERS !!
 
+    private void configureSignOutButton() {
+        signOutButton = new PlainButton("Sign Out");
+        add(signOutButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, signOutButton, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, signOutButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, signOutButton, -20, SpringLayout.EAST, this);
+    }
+
     private void configureButtonListeners() {
         teachertrackprogressButton.addActionListener(new ActionListener() {
             @Override
@@ -230,14 +241,19 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
     }
 
+    private void signOutButtonClicked() {
+        // Clear the local app database
+        if (AuthenticationUtilities.signOut()) {
+            // Local database is cleared successfully
+
+            // Navigate back to the landing screen
+            Landing_Screen landingScreen = new Landing_Screen(mainFrame);
+            mainFrame.setContentPane(landingScreen);
+            mainFrame.setVisible(true);
+        }
+    }
+
 }
 
-//    private void backButtonClicked() {
-//        uiFlow.remove(uiFlow.size() - 1);
-//        Landing_Screen previousView = (Landing_Screen) uiFlow.get(uiFlow.size() - 1);
-//        mainFrame.setContentPane(previousView);
-//        mainFrame.setVisible(true);
-//    }
-//}
 
 
