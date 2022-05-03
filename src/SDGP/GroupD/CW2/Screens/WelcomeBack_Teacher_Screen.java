@@ -29,6 +29,8 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     private SpringLayout layout;
 
     private ArrayList uiFlow;
+    private SDGP.GroupD.CW2.Screens.Login_Activity Login_Activity;
+    private SDGP.GroupD.CW2.Screens.Track_Your_Progress Track_Your_Progress;
 
 
     public WelcomeBack_Teacher_Screen(JFrame mainFrame, ArrayList uiFlow) {
@@ -193,10 +195,24 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     }
 
     private void teachertrackprogressButtonClicked() {
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
+
+        // Go to the track progress screen
+        Track_Your_Progress  = new Track_Your_Progress(mainFrame, uiFlow);
+        mainFrame.setContentPane(Track_Your_Progress);
+        mainFrame.setVisible(true);
 
     }
 
     private void teacherviewloginactivityButtonClicked() {
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
+
+        // Go to the login activity screen
+        Login_Activity  = new Login_Activity(mainFrame, uiFlow);
+        mainFrame.setContentPane(Login_Activity);
+        mainFrame.setVisible(true);
 
     }
 
