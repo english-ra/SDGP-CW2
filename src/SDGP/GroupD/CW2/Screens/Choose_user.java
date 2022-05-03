@@ -99,7 +99,7 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -120, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -107,7 +107,7 @@ public class Choose_user extends JPanel {
         backButton = new MainButton("Back", Colours.mainFG);
         add(backButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }

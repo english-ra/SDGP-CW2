@@ -82,7 +82,7 @@ public class Login_Activity extends JPanel {
         quaternarytitleLabel = new QuaternarytitleLabel("Your Teacher is - (teacher name)");
         add(quaternarytitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , 50, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , -40, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, quaternarytitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, quaternarytitleLabel, -20, SpringLayout.EAST, this);
 
@@ -103,7 +103,7 @@ public class Login_Activity extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -120, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -111,7 +111,7 @@ public class Login_Activity extends JPanel {
         backButton = new MainButton("Back", Colours.mainFG);
         add(backButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
