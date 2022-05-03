@@ -11,6 +11,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
+
+
 public class WelcomeBack_Admin_Screen extends JPanel {
     private JFrame mainFrame;
 
@@ -26,12 +28,13 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
     private SpringLayout layout;
 
-    private ArrayList uiFlow;
+    private ArrayList<JPanel> uiFlow;
 
 
-    public WelcomeBack_Admin_Screen(JFrame mainFrame, ArrayList uiFlow) {
+    public WelcomeBack_Admin_Screen(JFrame mainFrame) {
         this.mainFrame = mainFrame;
-        this.uiFlow = uiFlow;
+        this.uiFlow = new ArrayList();
+        this.uiFlow.add(this);
 
         // Configure the UI
         configureRootPanel();
@@ -49,7 +52,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        WelcomeBack_Admin_Screen r = new WelcomeBack_Admin_Screen(mainframe, new ArrayList());
+        WelcomeBack_Admin_Screen r = new WelcomeBack_Admin_Screen(mainframe);
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
     }
@@ -88,7 +91,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         //Configure the two buttons
 
         //Configure Admin "Reset password" button
-        resetpasswordButton = new MainButton("Rest Passwords", Colours.mainFG);
+        resetpasswordButton = new MainButton("Reset Passwords", Colours.mainFG);
         add(resetpasswordButton);
 
         layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -156,19 +159,21 @@ public class WelcomeBack_Admin_Screen extends JPanel {
     }
 
     private void resetpasswordButtonClicked() {
+            Choose_user Chooseuser = new Choose_user(mainFrame, uiFlow);
+            mainFrame.setContentPane(Chooseuser);
+            mainFrame.setVisible(true);
+
 
     }
 
     private void adminviewloginactivityButtonClicked() {
+        Choose_user Chooseuser = new Choose_user(mainFrame, uiFlow);
+        mainFrame.setContentPane(Chooseuser);
+        mainFrame.setVisible(true);
+
 
     }
 
 
 }
-//    private void backButtonClicked() {
-//        uiFlow.remove(uiFlow.size() - 1);
-//        Landing_Screen previousView = (Landing_Screen) uiFlow.get(uiFlow.size() - 1);
-//        mainFrame.setContentPane(previousView);
-//        mainFrame.setVisible(true);
-//    }
-//}
+

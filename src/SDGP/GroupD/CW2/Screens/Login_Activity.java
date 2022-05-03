@@ -1,10 +1,7 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
-import SDGP.GroupD.CW2.UIComponents.MainButton;
-import SDGP.GroupD.CW2.UIComponents.QuaternarytitleLabel;
-import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
-import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -21,8 +18,8 @@ public class Login_Activity extends JPanel {
     private SubtitleLabel subtitleLabel;
     private QuaternarytitleLabel quaternarytitleLabel;
 
-    private MainButton backButton;
-    private MainButton backButtonClicked;
+    private PlainButton backButton;
+    private PlainButton backButtonClicked;
     private SpringLayout layout;
     private ArrayList uiFlow;
 
@@ -108,8 +105,8 @@ public class Login_Activity extends JPanel {
 
     private void configureBackButton() {
 
-        backButton = new MainButton("Back", Colours.mainFG);
-        add(backButton);
+        backButton = new PlainButton("Back");
+        this.add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
@@ -126,7 +123,11 @@ public class Login_Activity extends JPanel {
 
     }
     private void backButtonClicked() {
-
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+        System.out.println("Back button clicked");
     }
 
 
