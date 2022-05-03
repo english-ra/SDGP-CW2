@@ -51,7 +51,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         mainframe.setSize(350, 750);
         mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-        WelcomeBack_Student_Screen r = new WelcomeBack_Student_Screen(mainframe, new ArrayList());
+        WelcomeBack_Teacher_Screen r = new WelcomeBack_Teacher_Screen(mainframe, new ArrayList());
         mainframe.setContentPane(r);
         mainframe.setVisible(true);
     }
@@ -68,7 +68,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new TitleLabel("Welcome!");
+        titleLabel = new TitleLabel("Welcome Teacher!");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -90,7 +90,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         //Configure the three buttons
 
         //Configure Student "Track your progress" button
-        teachertrackprogressButton = new MainButton("Track Student Progress", Colours.mainBG);
+        teachertrackprogressButton = new MainButton("Track Student Progress", Colours.mainFG);
         add(teachertrackprogressButton);
 
         layout.putConstraint(SpringLayout.NORTH, teachertrackprogressButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -99,7 +99,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 
         //Configure Student "View your login activity" button
-        teacherviewloginactivityButton = new MainButton("View Your login Activity", Colours.mainBG);
+        teacherviewloginactivityButton = new MainButton("View Your login Activity", Colours.mainFG);
         add(teacherviewloginactivityButton);
 
         layout.putConstraint(SpringLayout.NORTH, teacherviewloginactivityButton, 10, SpringLayout.SOUTH, teachertrackprogressButton);
@@ -108,18 +108,12 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 
         //Configure Student "Get Started Learning!" button
-        teachergetstartedlearningButton = new MainButton("Get Started Teaching!", Colours.mainBG);
+        teachergetstartedlearningButton = new MainButton("Get Started Teaching!", Colours.mainFG);
         add(teachergetstartedlearningButton);
-        teachergetstartedlearningButton.setColor(Colours.mainBG);
-        teachergetstartedlearningButton.setBorderColor(Colours.mainBG);
-        teachergetstartedlearningButton.setColorOver(Colours.mainBG);
-
 
         layout.putConstraint(SpringLayout.NORTH, teachergetstartedlearningButton, 50, SpringLayout.SOUTH, teacherviewloginactivityButton);
         layout.putConstraint(SpringLayout.WEST, teachergetstartedlearningButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, teachergetstartedlearningButton, -20, SpringLayout.EAST, this);
-
-
     }
 
 //    private void configureTextFields() {
@@ -207,6 +201,13 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     }
 
     private void teachergetstartedlearningButtonClicked() {
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
+
+        // Go to the language selection screen
+        GP_Language_Select_Screen languageSelectScreen = new GP_Language_Select_Screen(mainFrame, uiFlow);
+        mainFrame.setContentPane(languageSelectScreen);
+        mainFrame.setVisible(true);
 
     }
 

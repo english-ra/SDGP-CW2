@@ -13,7 +13,7 @@ import java.util.ArrayList;
 public class GP_Language_Select_Screen extends JPanel {
     private JFrame mainframe;
     private SpringLayout layout;
-    private ArrayList uiFlow = new ArrayList<JPanel>();
+    private ArrayList<JPanel> uiFlow;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
@@ -25,8 +25,9 @@ public class GP_Language_Select_Screen extends JPanel {
     private MainButton nextButton;
     private PlainButton backButton;
 
-    public GP_Language_Select_Screen(JFrame mainframe) {
+    public GP_Language_Select_Screen(JFrame mainframe, ArrayList uiFlow) {
         this.mainframe = mainframe;
+        this.uiFlow = uiFlow;
         uiFlow.add(this);
 
         // Configure the UI
@@ -36,19 +37,6 @@ public class GP_Language_Select_Screen extends JPanel {
         configureLanguageList();
 
         configureButtonListeners();
-    }
-
-
-    public static void main(String[] args) {
-        JFrame mainframe = new JFrame();
-
-        mainframe.setTitle("PerriLingo");
-        mainframe.setSize(350, 750);
-        mainframe.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
-
-        GP_Language_Select_Screen r = new GP_Language_Select_Screen(mainframe);
-        mainframe.setContentPane(r);
-        mainframe.setVisible(true);
     }
 
 
@@ -133,6 +121,10 @@ public class GP_Language_Select_Screen extends JPanel {
             @Override
             public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
         });
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
+        });
     }
 
 
@@ -154,6 +146,14 @@ public class GP_Language_Select_Screen extends JPanel {
         uiFlow.add(levelSelectScreen);
 
         mainframe.setContentPane(levelSelectScreen);
+        mainframe.setVisible(true);
+    }
+
+
+    private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = uiFlow.get(uiFlow.size() - 1);
+        mainframe.setContentPane(previousView);
         mainframe.setVisible(true);
     }
 
