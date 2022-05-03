@@ -203,11 +203,22 @@ public class SignIn_Screen extends JPanel {
                         // Save the userID to the LocalAppDB
                         AuthenticationUtilities.persistUserSignIn(user);
 
-                        // TODO: Determine whether it's a student or teacher and navigate accordingly
-
-                        // Navigate to the welcome back screen
-                        WelcomeBack_Student_Screen screen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
-                        mainFrame.setContentPane(screen);
+                        // Determine whether it's a student or teacher and navigate accordingly
+                        if (user.getUserType().equals("student")) {
+                            // Navigate to the welcome back screen
+                            WelcomeBack_Student_Screen studentScreen = new WelcomeBack_Student_Screen(mainFrame, uiFlow);
+                            mainFrame.setContentPane(studentScreen);
+                        }
+                        else if (user.getUserType().equals("teacher")) {
+                            // Navigate to the teacher screen
+                            WelcomeBack_Teacher_Screen teacherScreen = new WelcomeBack_Teacher_Screen(mainFrame, uiFlow);
+                            mainFrame.setContentPane(teacherScreen);
+                        }
+                        else if (user.getUserType().equals("admin")) {
+                            // Navigate to the admin screen
+                            WelcomeBack_Admin_Screen adminScreen = new WelcomeBack_Admin_Screen(mainFrame);
+                            mainFrame.setContentPane(adminScreen);
+                        }
                     } else {
                         // It is a second player signing in, inside the gameplay flow
 
