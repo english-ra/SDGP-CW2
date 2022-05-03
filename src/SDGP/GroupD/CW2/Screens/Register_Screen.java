@@ -334,3 +334,4 @@ public class Register_Screen extends JPanel {
         mainFrame.setVisible(true);
     }
 }
+
