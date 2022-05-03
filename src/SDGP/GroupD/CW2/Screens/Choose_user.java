@@ -24,11 +24,13 @@ public class Choose_user extends JPanel {
     private SubtitleLabel subtitleLabel;
     private PlainButton backButton;
     private PlainButton backButtonClicked;
+    private MainButton nextButton;
    
     private SpringLayout layout;
 
     private ArrayList uiFlow;
     private ArrayList<User> users;
+    private JTable jt;
 
 
 
@@ -121,6 +123,13 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
+
+        nextButton = new MainButton("Next", Colours.mainFG);
+        add(nextButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, nextButton, -5, SpringLayout.NORTH, backButton);
+        layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, nextButton, -20, SpringLayout.EAST, this);
     }
 
 
@@ -132,6 +141,30 @@ public class Choose_user extends JPanel {
             }
         });
 
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
+        });
+
+
+    }
+
+    private void nextButtonClicked() {
+        int selectedIndex = jt.getSelectedRow();
+        User selectedUser = users.get(selectedIndex);
+        System.out.println(selectedUser.getUserName());
+
+        Login_Activity loginActivity = new Login_Activity(mainFrame, uiFlow, selectedUser);
+        uiFlow.add(loginActivity);
+
+        mainFrame.setContentPane(loginActivity);
+        mainFrame.setVisible(true);
+    }
+
+    private boolean listHasItemSelected() {
+//        int selectedIndex = languageList.list.getSelectedIndex();
+//        if (selectedIndex != -1) { return true; }
+        return false;
     }
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
