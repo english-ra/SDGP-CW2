@@ -43,6 +43,27 @@ public interface AuthenticationUtilities {
     }
 
 
+    static Boolean resetPassword(User user, String newPassword) {
+
+        // Hash the new password
+        String salt = PasswordHasher.getSalt(100);
+        String securePassword = PasswordHasher.generateSecurePassword(newPassword, salt);
+
+        // Update the user object
+        user.setPassword(securePassword);
+        user.setPasswordSalt(salt);
+
+        // Update in the database
+        if (db.updatePassword(user)) {
+            // Password successfully reset
+            return true;
+        } else {
+            // Reset failed
+            return false;
+        }
+    }
+
+
     static Boolean signOut() {
         // Log the users sign out
         LoggingUtilities.logSignOut(getCurrentlySignedInUser());
