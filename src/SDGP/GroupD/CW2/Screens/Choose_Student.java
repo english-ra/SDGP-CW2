@@ -157,10 +157,10 @@ public class Choose_Student extends JPanel {
         int selectedIndex = jt.getSelectedRow();
         User selectedUser = students.get(selectedIndex);
 
-        Login_Activity loginActivity = new Login_Activity(mainframe, uiFlow, selectedUser);
-        uiFlow.add(loginActivity);
+        Track_Your_Progress trackprogress = new Track_Your_Progress(mainframe, uiFlow);
+        uiFlow.add(trackprogress);
 
-        mainframe.setContentPane(loginActivity);
+        mainframe.setContentPane(trackprogress);
         mainframe.setVisible(true);
     }
 
