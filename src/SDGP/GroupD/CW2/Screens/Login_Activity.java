@@ -36,6 +36,7 @@ public class Login_Activity extends JPanel {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
         this.db = new DatabaseAPI();
+        this.uiFlow.add(this);
         this.User = user;
 
         configureRootPanel();
