@@ -25,6 +25,7 @@ public class Login_Activity extends JPanel {
     private ArrayList uiFlow;
     //TODO: Pass user through constructor to know whos progress is being tracked
 
+
     public Login_Activity(JFrame mainFrame, ArrayList uiFlow, User user) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
