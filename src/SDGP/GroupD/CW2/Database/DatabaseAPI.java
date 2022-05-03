@@ -768,5 +768,37 @@ public class DatabaseAPI {
         }
         return loginAnalytics;
     }
+
+    public Boolean updatePassword(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("UPDATE Users SET password = ?, passwordSalt = ? WHERE userID = ?");
+            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getPasswordSalt());
+            stmt.setInt(3, user.getUserID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return true;
+    }
 }
 

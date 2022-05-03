@@ -1,8 +1,6 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
-import SDGP.GroupD.CW2.Database.DatabaseAPI;
-import SDGP.GroupD.CW2.Entity.LoginAnalytic;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
 
@@ -16,26 +14,21 @@ import java.util.ArrayList;
 
 public class Login_Activity extends JPanel {
     private JFrame mainFrame;
-    private DatabaseAPI db;
-    private User user;
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
     private QuaternarytitleLabel quaternarytitleLabel;
 
     private PlainButton backButton;
-    private PlainButton backButtonClicked;
+
     private SpringLayout layout;
     private ArrayList uiFlow;
-    private ArrayList<LoginAnalytic> loginAnalytics;
     //TODO: Pass user through constructor to know whos progress is being tracked
 
 
     public Login_Activity(JFrame mainFrame, ArrayList uiFlow, User user) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
-        this.user = user;
-        this.db = new DatabaseAPI();
 
         configureRootPanel();
         configureLabels();
@@ -45,6 +38,7 @@ public class Login_Activity extends JPanel {
         configureButtonListener();
 
     }
+
     public static void main(String[] args) {
         JFrame mainframe = new JFrame();
 
@@ -89,17 +83,16 @@ public class Login_Activity extends JPanel {
         quaternarytitleLabel = new QuaternarytitleLabel("Your Teacher is - (teacher name)");
         add(quaternarytitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , -40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.NORTH, quaternarytitleLabel, -40, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, quaternarytitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, quaternarytitleLabel, -20, SpringLayout.EAST, this);
 
     }
 
-    private void configureJtable(){
-        loginAnalytics = db.getLoginAnalytics(user);
+    private void configureJtable() {
 
-        String data[][] = loginAnalytics.stream().map(s -> new String[]{String.valueOf(s.getLoginAnalyticID()), s.getDateLogged(), s.getAction(), String.valueOf(s.getUserID())}).toArray(String[][]::new);
-        String column[] = {"Login AnalyticsID", "Date", "Action", "UserID"};
+        String data[][] = {};
+        String column[] = {"Login Time", "Logout Time"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
@@ -117,7 +110,7 @@ public class Login_Activity extends JPanel {
     private void configureBackButton() {
 
         backButton = new PlainButton("Back");
-        this.add(backButton);
+        add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
@@ -127,12 +120,11 @@ public class Login_Activity extends JPanel {
     private void configureButtonListener() {
         backButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                backButtonClicked();
-            }
+            public void actionPerformed(ActionEvent e) {backButtonClicked(); }
         });
 
     }
+
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
         JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
@@ -140,9 +132,6 @@ public class Login_Activity extends JPanel {
         mainFrame.setVisible(true);
         System.out.println("Back button clicked");
     }
-
-
-
 
 }
 
