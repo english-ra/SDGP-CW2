@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
@@ -22,8 +23,9 @@ public class Login_Activity extends JPanel {
     private PlainButton backButtonClicked;
     private SpringLayout layout;
     private ArrayList uiFlow;
+    //TODO: Pass user through constructor to know whos progress is being tracked
 
-    public Login_Activity(JFrame mainFrame, ArrayList uiFlow) {
+    public Login_Activity(JFrame mainFrame, ArrayList uiFlow, User user) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
 

@@ -24,8 +24,7 @@ public class Choose_user extends JPanel {
     private SubtitleLabel subtitleLabel;
     private PlainButton backButton;
     private PlainButton backButtonClicked;
-    private MainButton continueButton;
-    private MainButton continueButtonClicked;
+   
     private SpringLayout layout;
 
     private ArrayList uiFlow;
@@ -45,7 +44,7 @@ public class Choose_user extends JPanel {
         configureJtable();
         configureBackButton();
         configureButtonListener();
-        configureContinueButton();
+
 
         //configureErrorLabel();
 
@@ -124,26 +123,12 @@ public class Choose_user extends JPanel {
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
 
-    private void configureContinueButton() {
-        continueButton = new MainButton("Continue",Colours.mainFG);
-        add(continueButton);
-
-        layout.putConstraint(SpringLayout.SOUTH, continueButton, -80, SpringLayout.SOUTH, this);
-        layout.putConstraint(SpringLayout.WEST, continueButton, 20, SpringLayout.WEST, this);
-        layout.putConstraint(SpringLayout.EAST, continueButton, -20, SpringLayout.EAST, this);
-    }
 
     private void configureButtonListener() {
         backButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 backButtonClicked();
-            }
-        });
-        continueButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                continueButtonClicked();
             }
         });
 
@@ -157,8 +142,6 @@ public class Choose_user extends JPanel {
 
     }
 
-    private void continueButtonClicked(){
 
-    }
 }
 
