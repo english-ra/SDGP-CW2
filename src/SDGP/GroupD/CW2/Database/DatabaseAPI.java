@@ -1,6 +1,7 @@
 package SDGP.GroupD.CW2.Database;
 
 import SDGP.GroupD.CW2.Entity.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -11,9 +12,6 @@ public class DatabaseAPI {
     //USE THIS TO TEST
     public static void main(String[] args) {
         DatabaseAPI db = new DatabaseAPI();
-//        User u = db.getUser("reece");
-//        System.out.println(u.getFirstName());
-        db.clearLocalAppDB();
     }
 
     public String createUser(User user) {
@@ -730,6 +728,45 @@ public class DatabaseAPI {
         }
 
         return users;
+    }
+
+    public ArrayList<LoginAnalytic> getLoginAnalytics(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<LoginAnalytic> loginAnalytics = new ArrayList<LoginAnalytic>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT * FROM LoginAnalytics WHERE userID = ?");
+            stmt.setInt(1, user.getUserID());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                LoginAnalytic loginAnalytic = new LoginAnalytic();
+                loginAnalytic.setLoginAnalyticID(rs.getInt("loginAnalyticsID"));
+                loginAnalytic.setDateLogged(rs.getString("date"));
+                loginAnalytic.setAction(rs.getString("action"));
+                loginAnalytic.setUserID(rs.getInt("userID"));
+                loginAnalytics.add(loginAnalytic);
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return loginAnalytics;
     }
 }
 
