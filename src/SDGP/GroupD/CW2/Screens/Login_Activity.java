@@ -20,7 +20,7 @@ public class Login_Activity extends JPanel {
     private QuaternarytitleLabel quaternarytitleLabel;
 
     private PlainButton backButton;
-    private PlainButton backButtonClicked;
+
     private SpringLayout layout;
     private ArrayList uiFlow;
     //TODO: Pass user through constructor to know whos progress is being tracked
@@ -38,6 +38,7 @@ public class Login_Activity extends JPanel {
         configureButtonListener();
 
     }
+
     public static void main(String[] args) {
         JFrame mainframe = new JFrame();
 
@@ -82,13 +83,13 @@ public class Login_Activity extends JPanel {
         quaternarytitleLabel = new QuaternarytitleLabel("Your Teacher is - (teacher name)");
         add(quaternarytitleLabel);
 
-        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , -40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.NORTH, quaternarytitleLabel, -40, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, quaternarytitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, quaternarytitleLabel, -20, SpringLayout.EAST, this);
 
     }
 
-    private void configureJtable(){
+    private void configureJtable() {
 
         String data[][] = {};
         String column[] = {"Login Time", "Logout Time"};
@@ -109,7 +110,7 @@ public class Login_Activity extends JPanel {
     private void configureBackButton() {
 
         backButton = new PlainButton("Back");
-        this.add(backButton);
+        add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
@@ -119,12 +120,11 @@ public class Login_Activity extends JPanel {
     private void configureButtonListener() {
         backButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) {
-                backButtonClicked();
-            }
+            public void actionPerformed(ActionEvent e) {backButtonClicked(); }
         });
 
     }
+
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
         JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
@@ -132,9 +132,6 @@ public class Login_Activity extends JPanel {
         mainFrame.setVisible(true);
         System.out.println("Back button clicked");
     }
-
-
-
 
 }
 
