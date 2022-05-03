@@ -111,7 +111,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
 
 
         //Configure Student "Get Started Learning!" button
-        teachergetstartedlearningButton = new MainButton("Get Started Teaching!", Colours.mainFG);
+        teachergetstartedlearningButton = new MainButton("Get Started Learning!", Colours.mainFG);
         add(teachergetstartedlearningButton);
 
         layout.putConstraint(SpringLayout.NORTH, teachergetstartedlearningButton, 50, SpringLayout.SOUTH, teacherviewloginactivityButton);
