@@ -32,6 +32,7 @@ public class Track_Your_Progress extends JPanel {
         this.uiFlow = uiFlow;
         this.uiFlow.add(this);
         this.db = new DatabaseAPI();
+        this.conversations = new ArrayList<>();
 
         configureRootPanel();
         configureLabels();
@@ -96,7 +97,7 @@ public class Track_Your_Progress extends JPanel {
 
     private void configureJtable(){
         //TODO:Have completed the screen but having trouble implanting the database for this table
-        conversations = db.getConversations(String context);
+       // conversations = db.getConversations(string context);
 
         String data[][] = conversations.stream().map(s -> new String[]{String.valueOf(s.getConversationID()), s.getLevel(), s.getLanguage(), s.getContext()}).toArray(String[][]::new);
         String column[] = {"conversationID", "Level", "Language", "Context"};
