@@ -200,7 +200,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         uiFlow.add(this);
 
         // Go to the track progress screen
-        Track_Your_Progress screen = new Track_Your_Progress(mainFrame, uiFlow);
+        Choose_Student screen = new Choose_Student(mainFrame, uiFlow);
         mainFrame.setContentPane(screen);
         mainFrame.setVisible(true);
 
@@ -210,10 +210,11 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         ArrayList<JPanel> uiFlow = new ArrayList<>();
         uiFlow.add(this);
 
-        // TODO: Get the current user that is signed in
+        // Get the current user that is signed in
+        User currentUser = AuthenticationUtilities.getCurrentlySignedInUser();
 
         // Go to the login activity screen
-        Login_Activity  = new Login_Activity(mainFrame, uiFlow, new User());
+        Login_Activity  = new Login_Activity(mainFrame, uiFlow, currentUser);
         mainFrame.setContentPane(Login_Activity);
         mainFrame.setVisible(true);
     }

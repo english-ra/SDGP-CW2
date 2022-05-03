@@ -14,7 +14,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Choose_Student extends JPanel {
-    private JFrame mainFrame;
+    private JFrame mainframe;
 
     private DatabaseAPI db;
     private TitleLabel titleLabel;
@@ -31,10 +31,9 @@ public class Choose_Student extends JPanel {
     private MainButton nextButton;
 
     private JTable jt;
-    private JFrame mainframe;
 
-    public Choose_Student(JFrame mainFrame, ArrayList uiFlow) {
-        this.mainFrame = mainFrame;
+    public Choose_Student(JFrame mainframe, ArrayList uiFlow) {
+        this.mainframe = mainframe;
         this.uiFlow = uiFlow;
         this.db = new DatabaseAPI();
 
@@ -153,9 +152,10 @@ public class Choose_Student extends JPanel {
     }
 
     private void nextButtonClicked() {
+
+        // Get the selected user
         int selectedIndex = jt.getSelectedRow();
         User selectedUser = students.get(selectedIndex);
-        System.out.println(selectedUser.getUserName());
 
         Login_Activity loginActivity = new Login_Activity(mainframe, uiFlow, selectedUser);
         uiFlow.add(loginActivity);
@@ -172,8 +172,8 @@ public class Choose_Student extends JPanel {
     private void backButtonClicked() {
         uiFlow.remove(uiFlow.size() - 1);
         JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
-        mainFrame.setContentPane(previousView);
-        mainFrame.setVisible(true);
+        mainframe.setContentPane(previousView);
+        mainframe.setVisible(true);
         System.out.println("Back button clicked");
     }
 
