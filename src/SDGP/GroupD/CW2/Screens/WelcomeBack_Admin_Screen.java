@@ -88,7 +88,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
         //Configure the two buttons
 
         //Configure Admin "Reset password" button
-        resetpasswordButton = new MainButton("Rest Passwords", Colours.mainBG);
+        resetpasswordButton = new MainButton("Rest Passwords", Colours.mainFG);
         add(resetpasswordButton);
 
         layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, 100, SpringLayout.SOUTH, subtitleLabel);
@@ -97,7 +97,7 @@ public class WelcomeBack_Admin_Screen extends JPanel {
 
 
         //Configure Admin "View login activity" button
-        adminviewloginactivityButton = new MainButton("View All Login Activity", Colours.mainBG);
+        adminviewloginactivityButton = new MainButton("View All Login Activity", Colours.mainFG);
         add(adminviewloginactivityButton);
 
         layout.putConstraint(SpringLayout.NORTH, adminviewloginactivityButton, 10, SpringLayout.SOUTH, resetpasswordButton);
