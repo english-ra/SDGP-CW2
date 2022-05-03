@@ -204,6 +204,12 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
                 teachergetstartedlearningButtonClicked();
             }
         });
+        signOutButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                signOutButtonClicked();
+            }
+        });
     }
 
     private void teachertrackprogressButtonClicked() {
