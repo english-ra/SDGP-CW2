@@ -2,6 +2,7 @@ package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.UIComponents.MainButton;
+import SDGP.GroupD.CW2.UIComponents.PlainButton;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
 import SDGP.GroupD.CW2.UIComponents.TitleLabel;
 
@@ -18,7 +19,8 @@ public class Choose_user extends JPanel {
 
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
-    private MainButton backButton;
+    private PlainButton backButton;
+    private PlainButton backButtonClicked;
     private SpringLayout layout;
 
     private ArrayList uiFlow;
@@ -28,6 +30,7 @@ public class Choose_user extends JPanel {
     public Choose_user(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
+        this.uiFlow.add(this);
 
         // Configure the UI
         configureRootPanel();
@@ -104,8 +107,8 @@ public class Choose_user extends JPanel {
 
     private void configureBackButton() {
 
-        backButton = new MainButton("Back", Colours.mainFG);
-        add(backButton);
+        backButton = new PlainButton("Back");
+        this.add(backButton);
 
         layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
@@ -122,6 +125,11 @@ public class Choose_user extends JPanel {
 
     }
     private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+        System.out.println("Back button clicked");
 
     }
 }
