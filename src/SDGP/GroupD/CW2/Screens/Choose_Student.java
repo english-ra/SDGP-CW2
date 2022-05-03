@@ -1,6 +1,8 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.PlainButton;
 import SDGP.GroupD.CW2.UIComponents.QuaternarytitleLabel;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
@@ -17,6 +19,7 @@ import java.util.ArrayList;
 public class Choose_Student extends JPanel {
     private JFrame mainFrame;
 
+    private DatabaseAPI db;
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
     private QuaternarytitleLabel quaternarytitleLabel;
@@ -26,9 +29,12 @@ public class Choose_Student extends JPanel {
     private SpringLayout layout;
     private ArrayList uiFlow;
 
+    private ArrayList<User> students;
+
     public Choose_Student(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
+        this.db = new DatabaseAPI();
 
         configureRootPanel();
         configureLabels();
@@ -89,9 +95,11 @@ public class Choose_Student extends JPanel {
     }
 
     private void configureJtable(){
+        students = db.getAllStudents();
 
-        String data[][] = {};
-        String column[] = {"Student", "Student ID"};
+
+        String data[][] = students.stream().map(s -> new String[]{s.getFirstName(), s.getLastName(), s.getUserName()}).toArray(String[][]::new);
+        String column[] = {"First name", "Last name", "Username"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
