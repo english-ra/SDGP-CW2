@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -46,6 +47,7 @@ public class Choose_Student extends JPanel {
         //configureErrorLabel();
         configureBackButton();
         configureButtonListener();
+        displayUserDetails();
 
     }
     public static void main(String[] args) {
@@ -178,6 +180,14 @@ public class Choose_Student extends JPanel {
         mainframe.setContentPane(previousView);
         mainframe.setVisible(true);
         System.out.println("Back button clicked");
+    }
+
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
 
