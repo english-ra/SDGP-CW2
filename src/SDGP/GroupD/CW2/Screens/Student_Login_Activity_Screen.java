@@ -1,5 +1,6 @@
+package SDGP.GroupD.CW2.Screens;
+
 import javax.swing.*;
-import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.UIComponents.*;
