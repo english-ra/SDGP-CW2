@@ -199,11 +199,3 @@ public class GP_Logging_Feedback extends JPanel {
         }
     }
 }
-
-
-
-
-
-//
-//            // Create the user
-//            User user = new User(0, firstNameText, lastNameText, usernameText, securePassword, salt, accountType, 0);
