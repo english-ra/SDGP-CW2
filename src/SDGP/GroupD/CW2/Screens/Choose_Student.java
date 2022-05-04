@@ -38,6 +38,7 @@ public class Choose_Student extends JPanel {
         this.mainframe = mainframe;
         this.uiFlow = uiFlow;
         this.db = new DatabaseAPI();
+        this.uiFlow.add(this);
 
         configureRootPanel();
         configureLabels();
