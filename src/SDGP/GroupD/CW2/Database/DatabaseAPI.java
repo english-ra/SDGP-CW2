@@ -1,12 +1,20 @@
+// Authored by Reece English, John-Alex Yannoulias & Gabriel Buhagiar
+
 package SDGP.GroupD.CW2.Database;
 
 import SDGP.GroupD.CW2.Entity.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import java.sql.*;
 import java.util.ArrayList;
 
 
 public class DatabaseAPI {
+
+    //USE THIS TO TEST
+    public static void main(String[] args) {
+        DatabaseAPI db = new DatabaseAPI();
+    }
 
     public String createUser(User user) {
         Connection con = ConnectDB.getConnection();
@@ -617,6 +625,179 @@ public class DatabaseAPI {
                     System.err.println("SQLException: " + e.getMessage());
                     return false;
                 }
+            }
+        }
+        return true;
+    }
+
+
+
+    public ArrayList<User> getAllStudents() {
+        Connection con = ConnectDB.getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        ArrayList<User> users = new ArrayList<>();
+
+        String sqlString = "SELECT * FROM users WHERE userType = 'student'";
+        try {
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sqlString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("userID"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setPasswordSalt(rs.getString("passwordSalt"));
+                user.setUserType(rs.getString("userType"));
+                user.setTeacherID(rs.getInt("teacherID"));
+                users.add(user);
+            }
+            rs.close();
+            stmt.close();
+            con.commit();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+
+        return users;
+    }
+
+    public ArrayList<User> getAllUsers() {
+        Connection con = ConnectDB.getConnection();
+        Statement stmt = null;
+        ResultSet rs = null;
+        ArrayList<User> users = new ArrayList<>();
+
+        String sqlString = "SELECT * FROM users";
+        try {
+            con.setAutoCommit(false);
+            stmt = con.createStatement();
+            rs = stmt.executeQuery(sqlString);
+            ResultSetMetaData rsmd = rs.getMetaData();
+            int columnsNumber = rsmd.getColumnCount();
+            while (rs.next()) {
+                User user = new User();
+                user.setUserID(rs.getInt("userID"));
+                user.setFirstName(rs.getString("firstName"));
+                user.setLastName(rs.getString("lastName"));
+                user.setUserName(rs.getString("username"));
+                user.setPassword(rs.getString("password"));
+                user.setPasswordSalt(rs.getString("passwordSalt"));
+                user.setUserType(rs.getString("userType"));
+                user.setTeacherID(rs.getInt("teacherID"));
+                users.add(user);
+            }
+            rs.close();
+            stmt.close();
+            con.commit();
+        } catch (SQLException ex) {
+            System.err.println("SQLException: " + ex.getMessage());
+        } finally {
+            if (stmt != null) {
+                try {
+                    stmt.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException e) {
+                    System.err.println("SQLException: " + e.getMessage());
+                }
+            }
+        }
+
+        return users;
+    }
+
+    public ArrayList<LoginAnalytic> getLoginAnalytics(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+        ArrayList<LoginAnalytic> loginAnalytics = new ArrayList<LoginAnalytic>();
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("SELECT * FROM LoginAnalytics WHERE userID = ?");
+            stmt.setInt(1, user.getUserID());
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                LoginAnalytic loginAnalytic = new LoginAnalytic();
+                loginAnalytic.setLoginAnalyticID(rs.getInt("loginAnalyticsID"));
+                loginAnalytic.setDateLogged(rs.getString("date"));
+                loginAnalytic.setAction(rs.getString("action"));
+                loginAnalytic.setUserID(rs.getInt("userID"));
+                loginAnalytics.add(loginAnalytic);
+            }
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+        }
+        return loginAnalytics;
+    }
+
+    public Boolean updatePassword(User user) {
+        Connection con = null;
+        PreparedStatement stmt = null;
+
+        try {
+            con = ConnectDB.getConnection();
+            con.setAutoCommit(false);
+
+            stmt = con.prepareStatement("UPDATE Users SET password = ?, passwordSalt = ? WHERE userID = ?");
+            stmt.setString(1, user.getPassword());
+            stmt.setString(2, user.getPasswordSalt());
+            stmt.setInt(3, user.getUserID());
+
+            stmt.executeUpdate();
+
+            stmt.close();
+            con.commit();
+        } catch (SQLException e) {
+            System.out.println(e);
+        } finally {
+            if (stmt != null) {
+                try { stmt.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
+            }
+            if (con != null) {
+                try { con.close(); }
+                catch (SQLException e) { System.err.println("SQLException: " + e.getMessage()); }
             }
         }
         return true;

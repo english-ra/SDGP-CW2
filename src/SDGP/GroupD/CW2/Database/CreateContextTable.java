@@ -1,3 +1,5 @@
+// Authored by Ayub Warsame & Reece English
+
 package SDGP.GroupD.CW2.Database;
 
 import java.sql.Connection;

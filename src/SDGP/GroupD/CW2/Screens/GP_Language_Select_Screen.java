@@ -1,3 +1,5 @@
+// Authored by Reece English
+
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
@@ -106,14 +108,6 @@ public class GP_Language_Select_Screen extends JPanel {
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
-
-
-
-
-
-
-
-
 
 
     private void configureButtonListeners() {

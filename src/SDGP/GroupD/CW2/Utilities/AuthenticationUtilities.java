@@ -1,3 +1,5 @@
+// Authored by Reece English
+
 package SDGP.GroupD.CW2.Utilities;
 
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
@@ -40,6 +42,27 @@ public interface AuthenticationUtilities {
         // Get the user
         User user = db.getUser(userID);
         return user;
+    }
+
+
+    static Boolean resetPassword(User user, String newPassword) {
+
+        // Hash the new password
+        String salt = PasswordHasher.getSalt(100);
+        String securePassword = PasswordHasher.generateSecurePassword(newPassword, salt);
+
+        // Update the user object
+        user.setPassword(securePassword);
+        user.setPasswordSalt(salt);
+
+        // Update in the database
+        if (db.updatePassword(user)) {
+            // Password successfully reset
+            return true;
+        } else {
+            // Reset failed
+            return false;
+        }
     }
 
 
