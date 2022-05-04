@@ -7,6 +7,7 @@ import SDGP.GroupD.CW2.UIComponents.MainButton;
 import SDGP.GroupD.CW2.UIComponents.PlainButton;
 import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
 import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -25,11 +26,13 @@ public class Choose_user extends JPanel {
     private PlainButton backButton;
     private PlainButton backButtonClicked;
     private MainButton nextButton;
+    private MainButton resetpasswordButton;
    
     private SpringLayout layout;
 
     private ArrayList uiFlow;
     private ArrayList<User> users;
+    private SDGP.GroupD.CW2.Screens.Login_Activity Login_Activity;
     private JTable jt;
 
 
@@ -109,10 +112,10 @@ public class Choose_user extends JPanel {
         sp.setBorder(roundedBorder);
 //        this.setSize(300, -200);
 
-        layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
+        layout.putConstraint(SpringLayout.NORTH, sp, 10, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -140, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -250, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -127,9 +130,16 @@ public class Choose_user extends JPanel {
         nextButton = new MainButton("Next", Colours.mainFG);
         add(nextButton);
 
-        layout.putConstraint(SpringLayout.SOUTH, nextButton, -5, SpringLayout.NORTH, backButton);
+        layout.putConstraint(SpringLayout.SOUTH, nextButton, -80, SpringLayout.NORTH, backButton);
         layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, nextButton, -20, SpringLayout.EAST, this);
+
+        resetpasswordButton = new MainButton("Reset Passwords", Colours.mainFG);
+        add(resetpasswordButton);
+
+        layout.putConstraint(SpringLayout.NORTH, resetpasswordButton, -150, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, resetpasswordButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, resetpasswordButton, -20, SpringLayout.EAST, this);
     }
 
 
@@ -141,23 +151,29 @@ public class Choose_user extends JPanel {
             }
         });
 
-        backButton.addActionListener(new ActionListener() {
+        nextButton.addActionListener(new ActionListener() {
             @Override
-            public void actionPerformed(ActionEvent e) { backButtonClicked(); }
+            public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
         });
+
+       /* resetpasswordButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                resetpasswordButtonClicked();
+            }
+        });*/
 
 
     }
 
     private void nextButtonClicked() {
-        int selectedIndex = jt.getSelectedRow();
-        User selectedUser = users.get(selectedIndex);
-        System.out.println(selectedUser.getUserName());
+        ArrayList<JPanel> uiFlow = new ArrayList<>();
+        uiFlow.add(this);
 
-        Login_Activity loginActivity = new Login_Activity(mainFrame, uiFlow, selectedUser);
-        uiFlow.add(loginActivity);
+        User currentUser = AuthenticationUtilities.getCurrentlySignedInUser();
 
-        mainFrame.setContentPane(loginActivity);
+        Login_Activity  = new Login_Activity(mainFrame, uiFlow, currentUser);
+        mainFrame.setContentPane(Login_Activity);
         mainFrame.setVisible(true);
     }
 
@@ -174,6 +190,16 @@ public class Choose_user extends JPanel {
         System.out.println("Back button clicked");
 
     }
+
+    /*private void resetpasswordButtonClicked(){
+        //TODO: Having trouble passing arguments through
+        if (AuthenticationUtilities.resetPassword(User user, String newPassword)){
+            JOptionPane.showMessageDialog(this, "Password reset successfully");
+            Landing_Screen landingScreen = new Landing_Screen(mainFrame);
+            mainFrame.setContentPane(landingScreen);
+            mainFrame.setVisible(true);
+        }
+    }*/
 
 
 }

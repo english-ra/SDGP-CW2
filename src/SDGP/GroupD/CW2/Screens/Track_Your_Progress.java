@@ -1,31 +1,43 @@
 package SDGP.GroupD.CW2.Screens;
 
 import SDGP.GroupD.CW2.Constants.Colours;
-import SDGP.GroupD.CW2.UIComponents.MainButton;
-import SDGP.GroupD.CW2.UIComponents.SubtitleLabel;
-import SDGP.GroupD.CW2.UIComponents.TitleLabel;
+import SDGP.GroupD.CW2.Database.DatabaseAPI;
+import SDGP.GroupD.CW2.Entity.Conversation;
+import SDGP.GroupD.CW2.Entity.User;
+import SDGP.GroupD.CW2.UIComponents.*;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Track_Your_Progress extends JPanel {
     private JFrame mainFrame;
+    private DatabaseAPI db;
+
     private TitleLabel titleLabel;
     private SubtitleLabel subtitleLabel;
+    private QuaternarytitleLabel quaternarytitleLabel;
 
-    private MainButton backButtonClicked;
+    private PlainButton backButton;
+    private PlainButton backButtonClicked;
     private SpringLayout layout;
     private ArrayList uiFlow;
+    private ArrayList<Conversation> conversations;
 
 
     public Track_Your_Progress(JFrame mainFrame, ArrayList uiFlow) {
         this.mainFrame = mainFrame;
         this.uiFlow = uiFlow;
+        this.uiFlow.add(this);
+        this.db = new DatabaseAPI();
+        this.conversations = new ArrayList<>();
 
         configureRootPanel();
         configureLabels();
-        backButtonClicked();
+        configureBackButton();
+        configureButtonListener();
         configureJtable();
         //configureErrorLabel();
 
@@ -73,12 +85,22 @@ public class Track_Your_Progress extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, subtitleLabel, 2, SpringLayout.SOUTH, titleLabel);
         layout.putConstraint(SpringLayout.WEST, subtitleLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, subtitleLabel, -20, SpringLayout.EAST, this);
+
+        quaternarytitleLabel = new QuaternarytitleLabel("Your Teacher is - (teacher name)");
+        add(quaternarytitleLabel);
+
+        layout.putConstraint(SpringLayout.NORTH,quaternarytitleLabel , -40, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, quaternarytitleLabel, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, quaternarytitleLabel, -20, SpringLayout.EAST, this);
+
     }
 
     private void configureJtable(){
+        //TODO:Have completed the screen but having trouble implanting the database for this table
+       // conversations = db.getConversations(string context);
 
-        String data[][] = {};
-        String column[] = {"Level", "Language", "Context"};
+        String data[][] = conversations.stream().map(s -> new String[]{String.valueOf(s.getConversationID()), s.getLevel(), s.getLanguage(), s.getContext()}).toArray(String[][]::new);
+        String column[] = {"conversationID", "Level", "Language", "Context"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
@@ -88,9 +110,35 @@ public class Track_Your_Progress extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 20, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -140, SpringLayout.SOUTH, this);
+    }
+
+    private void configureBackButton() {
+
+        backButton = new PlainButton("Back");
+        this.add(backButton);
+
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -50, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
+        layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
+
+    }
+
+    private void configureButtonListener(){
+        backButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                backButtonClicked();
+            }
+        });
     }
     private void backButtonClicked() {
+        uiFlow.remove(uiFlow.size() - 1);
+        JPanel previousView = (JPanel) uiFlow.get(uiFlow.size() - 1);
+        mainFrame.setContentPane(previousView);
+        mainFrame.setVisible(true);
+        System.out.println("Back button clicked");
+
 
     }
 
