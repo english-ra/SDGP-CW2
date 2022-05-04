@@ -31,10 +31,6 @@ public class GP_Change_Player_Screen extends JPanel {
         this.convoGPManager = convoGPManager;
         uiFlow.add(this);
 
-
-
-
-
         // Configure the UI
 
         configureRootPanel();
@@ -46,7 +42,7 @@ public class GP_Change_Player_Screen extends JPanel {
         configureButtonListeners();
     }
 
-//
+//USED TO RUN JUST THIS SCREEN TO TEST IT
 //    public static void main(String[] args) {
 //        JFrame mainframe = new JFrame();
 //
@@ -123,16 +119,7 @@ public class GP_Change_Player_Screen extends JPanel {
 
 
 
-
-
-
-
-
-
-
-
-
-//EMPTY BUTTON LISTENERS
+    //"Continue" BUTTON LISTENER
     private void configureButtonListeners() {
         nextButton.addActionListener(new ActionListener() {
             @Override
@@ -140,14 +127,14 @@ public class GP_Change_Player_Screen extends JPanel {
         });
     }
 
-
+    //Calling the ConversationGameplayManager
     private void nextButtonClicked() {
         // TODO: Check to ensure that an option is selected
         convoGPManager.cpsButtonClicked();
 
     }
 
-    //create a function that takes a user as a parameter
+    //A function that takes a user as a parameter
     //used to set content and labels.
     public void displayUserData(User currentUser, User targetUser) {
         //set the title label to the user's name
