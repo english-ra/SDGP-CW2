@@ -114,7 +114,7 @@ public class Choose_Student extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 10, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -30, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -100, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -131,11 +131,11 @@ public class Choose_Student extends JPanel {
         layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
 
-        layout.putConstraint(SpringLayout.SOUTH, nextButton, 20, SpringLayout.NORTH, backButton);
+        layout.putConstraint(SpringLayout.SOUTH, nextButton, 0, SpringLayout.NORTH, backButton);
         layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, nextButton, -20, SpringLayout.EAST, this);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -10, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
