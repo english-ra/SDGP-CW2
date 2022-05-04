@@ -51,8 +51,7 @@ public class GP_Logging_Feedback extends JPanel {
     }
 
 
-
-    // MARK: - Configure the UI//
+    // USE THIS TO RUN AND TEST JUST THIS SCREEN
     ////    public static void main(String[] args) {
     ////
     ////        JFrame mainframe = new JFrame();
@@ -65,6 +64,7 @@ public class GP_Logging_Feedback extends JPanel {
     ////        mainframe.setContentPane(r);
     ////        mainframe.setVisible(true);
     ////    }
+
     private void configureRootPanel() {
         this.setBackground(Colours.mainBG);
         this.setPreferredSize(new Dimension(350, 750));
@@ -72,8 +72,6 @@ public class GP_Logging_Feedback extends JPanel {
         this.layout = new SpringLayout();
         this.setLayout(layout);
     }
-
-
 
 
     private void configureLabels() {
@@ -148,19 +146,13 @@ public class GP_Logging_Feedback extends JPanel {
 
     }
 
-
+    //Configuring the Listener of the "Continue" button
     private void configureButtonListeners() {
         nextButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) { nextButtonClicked(); }
         });
 
-//        nextButton.addActionListener(new ActionListener() {
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//                nextButtonClicked();
-//            }
-//        });
 
     }
     private void nextButtonClicked() {
