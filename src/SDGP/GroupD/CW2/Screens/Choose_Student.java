@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -38,6 +39,7 @@ public class Choose_Student extends JPanel {
         this.mainframe = mainframe;
         this.uiFlow = uiFlow;
         this.db = new DatabaseAPI();
+        this.uiFlow.add(this);
 
         configureRootPanel();
         configureLabels();
@@ -45,6 +47,7 @@ public class Choose_Student extends JPanel {
         //configureErrorLabel();
         configureBackButton();
         configureButtonListener();
+        displayUserDetails();
 
     }
     public static void main(String[] args) {
@@ -114,7 +117,7 @@ public class Choose_Student extends JPanel {
         layout.putConstraint(SpringLayout.NORTH, sp, 10, SpringLayout.SOUTH, subtitleLabel);
         layout.putConstraint(SpringLayout.WEST, sp, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, sp, -20, SpringLayout.EAST, this);
-        layout.putConstraint(SpringLayout.SOUTH, sp, -30, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, sp, -100, SpringLayout.SOUTH, this);
     }
 
     private void configureBackButton() {
@@ -131,11 +134,11 @@ public class Choose_Student extends JPanel {
         layout.putConstraint(SpringLayout.WEST, errorLabel, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, errorLabel, -20, SpringLayout.EAST, this);
 
-        layout.putConstraint(SpringLayout.SOUTH, nextButton, 20, SpringLayout.NORTH, backButton);
+        layout.putConstraint(SpringLayout.SOUTH, nextButton, 0, SpringLayout.NORTH, backButton);
         layout.putConstraint(SpringLayout.WEST, nextButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, nextButton, -20, SpringLayout.EAST, this);
 
-        layout.putConstraint(SpringLayout.SOUTH, backButton, 20, SpringLayout.SOUTH, this);
+        layout.putConstraint(SpringLayout.SOUTH, backButton, -10, SpringLayout.SOUTH, this);
         layout.putConstraint(SpringLayout.WEST, backButton, 20, SpringLayout.WEST, this);
         layout.putConstraint(SpringLayout.EAST, backButton, -20, SpringLayout.EAST, this);
     }
@@ -177,6 +180,14 @@ public class Choose_Student extends JPanel {
         mainframe.setContentPane(previousView);
         mainframe.setVisible(true);
         System.out.println("Back button clicked");
+    }
+
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
 

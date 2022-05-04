@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.Conversation;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,6 +42,7 @@ public class Track_Your_Progress extends JPanel {
         configureButtonListener();
         configureJtable();
         //configureErrorLabel();
+        displayUserDetails();
 
 
 
@@ -140,7 +142,13 @@ public class Track_Your_Progress extends JPanel {
         mainFrame.setVisible(true);
         System.out.println("Back button clicked");
 
+    }
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
 
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
 }

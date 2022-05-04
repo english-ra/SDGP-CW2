@@ -48,6 +48,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
         //configureErrorLabel();
         configureSignOutButton();
         configureButtonListeners();
+        displayUserDetails();
     }
 
     public static void main(String[] args) {
@@ -74,7 +75,7 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new TitleLabel("Welcome Teacher!");
+        titleLabel = new TitleLabel("Welcome!");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -258,6 +259,14 @@ public class WelcomeBack_Teacher_Screen extends JPanel {
             mainFrame.setContentPane(landingScreen);
             mainFrame.setVisible(true);
         }
+    }
+
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
     }
 
 }

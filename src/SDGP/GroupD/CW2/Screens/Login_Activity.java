@@ -6,6 +6,7 @@ import SDGP.GroupD.CW2.Database.DatabaseAPI;
 import SDGP.GroupD.CW2.Entity.LoginAnalytic;
 import SDGP.GroupD.CW2.Entity.User;
 import SDGP.GroupD.CW2.UIComponents.*;
+import SDGP.GroupD.CW2.Utilities.AuthenticationUtilities;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -46,6 +47,7 @@ public class Login_Activity extends JPanel {
         //configureErrorLabel();
         configureBackButton();
         configureButtonListener();
+        displayUserDetails();
 
     }
 
@@ -73,7 +75,7 @@ public class Login_Activity extends JPanel {
     private void configureLabels() {
 
         // Configuring the title label
-        titleLabel = new TitleLabel("Your Login Activity!");
+        titleLabel = new TitleLabel("Login Activity!");
         add(titleLabel);
 
         layout.putConstraint(SpringLayout.NORTH, titleLabel, 20, SpringLayout.NORTH, this);
@@ -103,7 +105,7 @@ public class Login_Activity extends JPanel {
         loginAnalytics = db.getLoginAnalytics(User);
 
         String data[][] = loginAnalytics.stream().map(s -> new String[]{String.valueOf(s.getLoginAnalyticID()), s.getDateLogged(), s.getAction(), String.valueOf(s.getUserID())}).toArray(String[][]::new);
-        String column[] = {"Login AnalyticsID", "Date", "Action", "UserID"};
+        String column[] = {"Login Analytics", "Date", "Action"};
         JTable jt = new JTable(data, column);
 //        jt.setBounds(500, 500, 200, 300);
         JScrollPane sp = new JScrollPane(jt);
@@ -144,5 +146,12 @@ public class Login_Activity extends JPanel {
         System.out.println("Back button clicked");
     }
 
+    private void displayUserDetails() {
+        // Get the user
+        User user = AuthenticationUtilities.getCurrentlySignedInUser();
+
+        // Display the users details
+        subtitleLabel.setText(user.getFirstName() + " " + user.getLastName() + " (" + user.getUserName() + ")");
+    }
 }
 
