@@ -1,3 +1,5 @@
+// Authored by Reece English
+
 package SDGP.GroupD.CW2.Managers;
 
 import SDGP.GroupD.CW2.Database.DatabaseAPI;

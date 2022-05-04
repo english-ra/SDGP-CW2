@@ -1,3 +1,5 @@
+// Authored by Reece English & John-Alex Yannoulias
+
 package SDGP.GroupD.CW2.Constants;
 
 import java.awt.*;

@@ -1,3 +1,5 @@
+// Authored by Reece English
+
 package SDGP.GroupD.CW2.Entity;
 
 public class ConversationText {

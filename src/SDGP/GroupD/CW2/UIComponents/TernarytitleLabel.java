@@ -1,3 +1,5 @@
+// Authored by Nathan Nganga
+
 package SDGP.GroupD.CW2.UIComponents;
 
 import javax.swing.*;

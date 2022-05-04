@@ -1,6 +1,6 @@
+// Authored by Reece English
+
 package SDGP.GroupD.CW2.Screens;
-
-
 
 import SDGP.GroupD.CW2.Constants.Colours;
 import SDGP.GroupD.CW2.Constants.SwingActionCommands;

@@ -1,3 +1,5 @@
+// Authored by John-Alex Yannoulias
+
 package SDGP.GroupD.CW2.Entity;
 
 import java.util.Date;

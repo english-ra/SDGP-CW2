@@ -1,3 +1,5 @@
+// Authored by Reece English, John-Alex Yannoulias & Gabriel Buhagiar
+
 package SDGP.GroupD.CW2.Database;
 
 import SDGP.GroupD.CW2.Entity.*;
